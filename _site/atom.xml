@@ -4,13 +4,35 @@
  <title>keep it simple</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-05-06T09:36:32+08:00</updated>
+ <updated>2012-05-06T14:23:07+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>gary zhang</name>
    <email>gary.zzhang@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Hello World</title>
+   <link href="http://zhangzhe.github.com/2012/05/06/hello-world"/>
+   <updated>2012-05-06T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/2012/05/06/hello-world</id>
+   <content type="html">&lt;p&gt;My name is Gary Zhang(zhangzhe). I live in BeiJing, China.&lt;/p&gt;
+
+&lt;p&gt;I am a programmer, right now work for Focus Solutions Inc.&lt;/p&gt;
+
+&lt;p&gt;I love my job and believe my work is meaningful for people and is making the world a better place. I love beautiful codes and try my best writing them.&lt;/p&gt;
+
+&lt;p&gt;In spare time I like exercise. Basketball is my favorite. I am also crazy about cycling, running and swimming. I took part in marathon three times, triathlons four times, one time 70.3 ironman and lots of other games.&lt;/p&gt;
+
+&lt;p&gt;I also like travelling and reading. &amp;#8220;A Song of Ice and Fire&amp;#8221; is my favorite.&lt;/p&gt;
+
+&lt;p&gt;I worked for openTV in 2007( internship), Idapted from 2007 to 2010, Sunrise telecom in 2010. Right now I am using Ruby On Rails building application Zurich for Focus Solutions Inc .&lt;/p&gt;
+
+&lt;p&gt;Visit here to check my apps and codes. Anything unclear please email me at gary.zzhang@gmail.com.&lt;/p&gt;
+
+&lt;p&gt;I will share in this blog most of technique things I met, also part of my personal life. Enjoy:)&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Jekyll Introduction</title>
