@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>Jekyll Bootstrap</title>
- <link href="http://username.github.com/atom.xml" rel="self"/>
- <link href="http://username.github.com"/>
- <updated>2012-05-05T22:46:24+08:00</updated>
- <id>http://username.github.com</id>
+ <title>keep it simple</title>
+ <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
+ <link href="http://zhangzhe.github.com"/>
+ <updated>2012-05-06T09:36:32+08:00</updated>
+ <id>http://zhangzhe.github.com</id>
  <author>
-   <name>Name Lastname</name>
-   <email>blah@email.test</email>
+   <name>gary zhang</name>
+   <email>gary.zzhang@gmail.com</email>
  </author>
 
  
  <entry>
-   <title>Hello World</title>
-   <link href="http://username.github.com/2012/05/05/hello-world"/>
-   <updated>2012-05-05T00:00:00+08:00</updated>
-   <id>http://username.github.com/2012/05/05/hello-world</id>
-   <content type="html">&lt;p&gt;去你妈的！&lt;/p&gt;</content>
- </entry>
- 
- <entry>
    <title>Jekyll Introduction</title>
-   <link href="http://username.github.com/lessons/2011/12/29/jekyll-introduction"/>
+   <link href="http://zhangzhe.github.com/lessons/2011/12/29/jekyll-introduction"/>
    <updated>2011-12-29T00:00:00+08:00</updated>
-   <id>http://username.github.com/lessons/2011/12/29/jekyll-introduction</id>
+   <id>http://zhangzhe.github.com/lessons/2011/12/29/jekyll-introduction</id>
    <content type="html">&lt;p&gt;This Jekyll introduction will outline specifically what Jekyll is and why you would want to use it. Directly following the intro we&amp;#8217;ll learn exactly &lt;em&gt;how&lt;/em&gt; Jekyll does what it does.&lt;/p&gt;
 
 &lt;h2 id='overview'&gt;Overview&lt;/h2&gt;
