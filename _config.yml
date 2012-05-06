@@ -10,13 +10,11 @@ pygments: true
 # so be sure to set them if your theme uses them.
 #
 title : keep it simple 
-tagline: Site Tagline
 author :
-  name : gary zhang
+  name : zhangzhe
   email : gary.zzhang@gmail.com
   github : zhangzhe
-  twitter : username
-  feedburner : feedname
+
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
