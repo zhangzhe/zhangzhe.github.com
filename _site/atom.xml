@@ -4,13 +4,193 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-05-16T18:44:49+08:00</updated>
+ <updated>2012-05-16T22:26:39+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
    <email>gary.zzhang@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>设计模式之‘模版方法’</title>
+   <link href="http://zhangzhe.github.com/代码/2012/05/16/design-patten-template"/>
+   <updated>2012-05-16T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/代码/2012/05/16/design-patten-template</id>
+   <content type="html">&lt;h1 id='id95'&gt;模式描述&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;模版方法&lt;/code&gt; 是一种行为型模式。&lt;/p&gt;
+
+&lt;p&gt;基本描述：在一个方法里定义算法的骨架，将具体实现方法延迟到其子类。一次性实现算法的不变部分，将可变的行为留给子类。&lt;/p&gt;
+
+&lt;p&gt;更多描述：通过继承把变和不变的部分分开。抽象类应当拥有的是行为组合和尽可能少的具体实现。算法骨架类的公共行为被提取出来集中到父类，要扩展新的功能，就创建新的子类并实现相应功能。&lt;/p&gt;
+&lt;hr /&gt;&lt;br /&gt;
+&lt;h1 id='1'&gt;实例1：各种格式的报表生成&lt;/h1&gt;
+
+&lt;p&gt;案例描述：报表包括 开头、主干、结尾，但需要各种格式，如xml, yaml, json等。实现各类报表，要求各部分内容一致，但是输出格式不同。 例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;文本格式:
+head: &amp;quot;hello&amp;quot;
+body: &amp;quot;keep it simple&amp;quot;
+end: &amp;quot;I am strong&amp;quot;
+
+xml格式:
+&amp;lt;head&amp;gt;
+  hello
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+  keep it simple
+&amp;lt;/body&amp;gt;
+&amp;lt;end&amp;gt;
+  I am strong
+&amp;lt;/end&amp;gt;
+
+yaml格式:
+head: hello
+body: keep it simple
+end: I am strong
+
+json格式:
+{&amp;quot;head&amp;quot;: &amp;quot;hello&amp;quot;, &amp;quot;body&amp;quot;: &amp;quot;keep it simple&amp;quot;, &amp;quot;end&amp;quot;: &amp;quot;I am strong&amp;quot;}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;代码实现：&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Report&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;initialize&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;head&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;body&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;r_end&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+    &lt;span class='vi'&gt;@head&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;head&lt;/span&gt;
+    &lt;span class='vi'&gt;@body&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;body&lt;/span&gt;
+    &lt;span class='vi'&gt;@end&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;r_end&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+  
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output&lt;/span&gt;
+    &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;output_head&lt;/span&gt;&lt;span class='si'&gt;}#{&lt;/span&gt;&lt;span class='n'&gt;output_body&lt;/span&gt;&lt;span class='si'&gt;}#{&lt;/span&gt;&lt;span class='n'&gt;output_end&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;TextReport&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;Report&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_head&lt;/span&gt;
+    &lt;span class='s2'&gt;&amp;quot;head: &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@head&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+  
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_body&lt;/span&gt;
+    &lt;span class='s2'&gt;&amp;quot;body: &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@body&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+  
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_end&lt;/span&gt;
+    &lt;span class='s2'&gt;&amp;quot;end: &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@end&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;XmlReport&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;Report&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_head&lt;/span&gt;
+    &lt;span class='s2'&gt;&amp;quot;&amp;lt;head&amp;gt;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@head&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+  
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_body&lt;/span&gt;
+    &lt;span class='s2'&gt;&amp;quot;&amp;lt;body&amp;gt;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@body&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+  
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_end&lt;/span&gt;
+    &lt;span class='s2'&gt;&amp;quot;&amp;lt;end&amp;gt;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@end&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;/end&amp;gt;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;JsonReport&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;Report&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_head&lt;/span&gt;
+    &lt;span class='sx'&gt;%Q{\{&amp;quot;head&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@head&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='sx'&gt;&amp;quot;, }&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+  
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_body&lt;/span&gt;
+    &lt;span class='sx'&gt;%Q{&amp;quot;body&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@body&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='sx'&gt;&amp;quot;, }&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+  
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_end&lt;/span&gt;
+    &lt;span class='sx'&gt;%Q{&amp;quot;end&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@end&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='sx'&gt;&amp;quot;\}}&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='n'&gt;describe&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;TextReport&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+  &lt;span class='n'&gt;it&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;should output well&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+    &lt;span class='no'&gt;TextReport&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;keep it simple&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;output&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;should&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; 
+&lt;span class='s2'&gt;&amp;quot;head: hello&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;body: keep it simple&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;end: I am strong&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt; 
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='n'&gt;describe&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;XmlReport&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+  &lt;span class='n'&gt;it&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;should output well&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+    &lt;span class='no'&gt;XmlReport&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;keep it simple&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;output&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;should&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt;
+&lt;span class='s2'&gt;&amp;quot;&amp;lt;head&amp;gt;hello&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;body&amp;gt;keep it simple&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;end&amp;gt;I am strong&amp;lt;/end&amp;gt;&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt; 
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='n'&gt;describe&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;JsonReport&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+  &lt;span class='n'&gt;it&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;should output well&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
+    &lt;span class='no'&gt;JsonReport&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;keep it simple&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;output&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;should&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; 
+&lt;span class='s1'&gt;&amp;#39;{&amp;quot;head&amp;quot;: &amp;quot;hello&amp;quot;, &amp;quot;body&amp;quot;: &amp;quot;keep it simple&amp;quot;, &amp;quot;end&amp;quot;: &amp;quot;I am strong&amp;quot;}&amp;#39;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt; 
+&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;br /&gt;&lt;hr /&gt;&lt;br /&gt;
+&lt;h1 id='2'&gt;实例2：制作电子产品&lt;/h1&gt;
+
+&lt;p&gt;案例描述：电子产品的生产都要包括硬件、软件的设计和集成起来的调试步骤。但各具体产品的软硬件的具体生产方式和调试方法各不相同。&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;ElectronicProduct&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate&lt;/span&gt;
+    &lt;span class='n'&gt;generate_hardware&lt;/span&gt;
+    &lt;span class='n'&gt;generate_software&lt;/span&gt;
+    &lt;span class='n'&gt;debug&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+ 
+  &lt;span class='kp'&gt;private&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_hardware&lt;/span&gt;
+    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_hardware&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+ 
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_software&lt;/span&gt;
+    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_software&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+ 
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;debug&lt;/span&gt;
+    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;debug&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Iphone&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;ElectronicProduct&lt;/span&gt;
+  &lt;span class='kp'&gt;private&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_hardware&lt;/span&gt;
+    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_hardware for Iphone&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+ 
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_software&lt;/span&gt;
+    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_software for Iphone&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+ 
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;debug&lt;/span&gt;
+    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;debugging Iphone&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='no'&gt;Iphone&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;generate&lt;/span&gt;
+
+&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Ipad&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;ElectronicProduct&lt;/span&gt;
+  &lt;span class='kp'&gt;private&lt;/span&gt;
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_hardware&lt;/span&gt;
+    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_hardware for Ipad&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+ 
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_software&lt;/span&gt;
+    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_software for Ipad&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+ 
+  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;debug&lt;/span&gt;
+    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;debugging Ipad&amp;quot;&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+
+&lt;span class='no'&gt;Ipad&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;generate&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;br /&gt;&lt;hr /&gt;
+&lt;p&gt;总结：模板方法实际上是利用多态这种晚绑定机制来将一些执行动作的定义延迟到子类。子类可以在不改变算法结构的情况下，调整算法的细节实现。 除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你”的反向控制结构是模版方法的典型应用。&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>markItUp examples</title>

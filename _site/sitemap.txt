@@ -8,4 +8,5 @@ http://zhangzhe.github.com/pages.html
 http://zhangzhe.github.com/sitemap.txt
 http://zhangzhe.github.com/tags.html
 
+http://zhangzhe.github.com/代码/2012/05/16/design-patten-template
 http://zhangzhe.github.com/2012/05/06/markItUp-examples
