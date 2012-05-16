@@ -4,13 +4,106 @@
  <title>keep it simple</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-05-06T15:06:24+08:00</updated>
+ <updated>2012-05-07T23:21:55+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
    <email>gary.zzhang@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>test md</title>
+   <link href="http://zhangzhe.github.com/2012/05/06/test-md"/>
+   <updated>2012-05-06T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/2012/05/06/test-md</id>
+   <content type="html">&lt;h2 id='markitup_universal_markup_editor'&gt;markItUp! Universal markup editor&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src='http://s3.buysellads.com/1255475/101528-1334004497.jpg' alt='markItUp! Logo' /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;markItUp!&lt;/strong&gt; is a javascript over &lt;a href='http://www.jquery.com' title='jQuery Website'&gt;jQuery&lt;/a&gt; plug-in which allow you to turn any textarea in a markup editor.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;markItUp!&lt;/strong&gt; is a lightweight fully customizable engine made to easily fit all developers needs in their CMS, blogs, forums or websites.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Html, Textile, Wiki Syntax, Markdown, BBcode&lt;/em&gt; or even your own Markup system can be easily implemented.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;integrate it easily&lt;/li&gt;
+
+&lt;li&gt;customize buttons and macros to fit all your need&lt;/li&gt;
+
+&lt;li&gt;customize keyboard shortcuts&lt;/li&gt;
+
+&lt;li&gt;customize toolbar and css look and feel&lt;/li&gt;
+
+&lt;li&gt;skins&lt;/li&gt;
+
+&lt;li&gt;icons&lt;/li&gt;
+
+&lt;li&gt;dropdown menus&lt;/li&gt;
+
+&lt;li&gt;separators&lt;/li&gt;
+
+&lt;li&gt;use the engine from anywhere in the page&lt;/li&gt;
+
+&lt;li&gt;implement any markup language even your own&lt;/li&gt;
+
+&lt;li&gt;implement your own javascript macros even the most advanced&lt;/li&gt;
+
+&lt;li&gt;allows multi-line edition&lt;/li&gt;
+
+&lt;li&gt;preview ajax result dynamically in any markup parser&lt;/li&gt;
+
+&lt;li&gt;offers userfriendly experience and effectiveness&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;class Array def iterate! self.each_with_index do |n, i| self&lt;span&gt;i&lt;/span&gt; = yield(n) end end end&lt;/p&gt;
+
+&lt;p&gt;array = &lt;span&gt;1, 2, 3, 4&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;array.iterate! do |n| n ** 2 end&lt;/p&gt;
+
+&lt;p&gt;puts array.inspect&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Email-style angle brackets are used for blockquotes.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And, they can be nested.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+&lt;h4 id='headers_in_blockquotes'&gt;Headers in blockquotes&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;You can quote a list.&lt;/li&gt;
+
+&lt;li&gt;Etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;code&amp;gt;&lt;/code&gt; spans are delimited by backticks.&lt;/p&gt;
+
+&lt;p&gt;You can include literal backticks like &lt;code&gt;`this`&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;ruby - Ruby&lt;/p&gt;
+
+&lt;p&gt;puts &amp;#8220;Hola Mundo&amp;#8221;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;pre&gt;&lt;code&gt;/* Neither markdown2latex.py nor htmltolatex.jar 
+cannot handle the left and right angles properly! */
+#include &amp;lt;cstdio&amp;gt;
+int main(void)
+{
+    printf(&amp;quot;Hello Markdown\n&amp;quot;);
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above was a &lt;code&gt;C99&lt;/code&gt; program listing.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Hello World</title>
@@ -31,7 +124,8 @@
 
 &lt;p&gt;Visit here to check my apps and codes. Anything unclear please email me at gary.zzhang@gmail.com.&lt;/p&gt;
 
-&lt;p&gt;I will share in this blog most of technique things I met, also part of my personal life. Enjoy:)&lt;/p&gt;</content>
+&lt;h1 id='i_will_share_in_this_blog_most_of_technique_things_i_met_also_part_of_my_personal_life_enjoy'&gt;I will share in this blog most of technique things I met, also part of my personal life. Enjoy:)&lt;/h1&gt;
+&lt;img src='/images/portrait.jpg' /&gt;</content>
  </entry>
  
  <entry>

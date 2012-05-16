@@ -22,4 +22,8 @@ Right now I am using Ruby On Rails building application Zurich for Focus Solutio
 
 Visit here to check my apps and codes. Anything unclear please email me at gary.zzhang@gmail.com.
 
-I will share in this blog most of technique things I met, also part of my personal life. Enjoy:)
+# I will share in this blog most of technique things I met, also part of my personal life. Enjoy:)
+
+<img src="/images/portrait.jpg" />
+
+
