@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-05-16T22:26:39+08:00</updated>
+ <updated>2012-05-16T22:31:42+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -14,10 +14,10 @@
  
  <entry>
    <title>设计模式之‘模版方法’</title>
-   <link href="http://zhangzhe.github.com/代码/2012/05/16/design-patten-template"/>
+   <link href="http://zhangzhe.github.com/design-patten/2012/05/16/design-patten-template"/>
    <updated>2012-05-16T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/代码/2012/05/16/design-patten-template</id>
-   <content type="html">&lt;h1 id='id95'&gt;模式描述&lt;/h1&gt;
+   <id>http://zhangzhe.github.com/design-patten/2012/05/16/design-patten-template</id>
+   <content type="html">&lt;h1 id='id96'&gt;模式描述&lt;/h1&gt;
 
 &lt;p&gt;&lt;code&gt;模版方法&lt;/code&gt; 是一种行为型模式。&lt;/p&gt;
 

@@ -2,7 +2,7 @@
 layout: post
 title: "设计模式之‘模版方法’"
 description: ""
-category: 代码
+category: design-patten
 tags: [设计模式, ruby]
 ---
 {% include JB/setup %}
