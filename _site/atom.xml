@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-05-18T15:14:58+08:00</updated>
+ <updated>2012-05-20T19:44:43+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -17,15 +17,15 @@
    <link href="http://zhangzhe.github.com/design_patten/2012/05/18/design-patten-strategy"/>
    <updated>2012-05-18T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/design_patten/2012/05/18/design-patten-strategy</id>
-   <content type="html">&lt;h1 id='id36'&gt;模式描述&lt;/h1&gt;
+   <content type="html">&lt;h1 id='id20'&gt;模式描述&lt;/h1&gt;
 
-&lt;p&gt;&lt;code&gt;策略模式&lt;/code&gt; 属于设计模式中对象行为型模式。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;策略模式&lt;/code&gt; 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
 
-&lt;p&gt;基本描述：策略模式是一个提倡“针对接口编程”的模式。定义好接口，接下来针对接口实现各类算法（策略）。&lt;/p&gt;
+&lt;p&gt;基本描述：策略模提倡“针对接口编程”，定义好接口，接下来针对接口实现对应算法（策略）。&lt;/p&gt;
 
-&lt;p&gt;详细描述：在软件构建过程中，某些对象使用的算法可能多种多样，经常发生变化。如果在对象内部实现这些算法，将会使对象变得异常复杂，甚至会造成性能上的负担。 策略模式是告诉上下文：我需要去做什么，至于使用怎么实现，需要上下文去使用当前对应的策略去实现。策略模式和模板方法模式很相似，它们都是定义了一个算法，都可以相互替换而不影响客户的使用；不同的是模板方法模式使用的是继承来实现不同的算法，而策略模式是使用组合的方式来实现算法的替换；模板方法模式是定义了一个结构，而策略模式只是定义了一个接口。&lt;/p&gt;
+&lt;p&gt;详细描述：在软件构建过程中，可使用的算法多种多样，且可能经常发生变化。如果在对象内部实现这些算法，将会使对象变得异常复杂。 策略模式是告诉接口：我要做什么，至于怎么做，则由接口自行选定策略。&lt;/p&gt;
 
-&lt;p&gt;举例来说：我想去上学。然后说我想坐自行车上学，就有人骑自行车带我去，具体怎么走我不知道，封装在那个人身上；我又说要坐汽车上学，就有人开车送我去，具体怎么开我不知道，封装在那个人身上； 所以说我只要 &amp;#8216;说&amp;#8217; 就好了，具体去法被封装起来了。 再比如说付款。我们可以定义几个付款类，然后根据用户的选择来决定用哪个付款类来付款，以达到在运行时切换付款方式，而不改变其他步骤的实现。&lt;/p&gt;
+&lt;p&gt;举例来说：我想去上学。然后说我想坐自行车上学，就有人骑自行车带我去，具体怎么骑我是不知道的，封装在那个人身上；我要说坐汽车上学，就有人开车送我去，具体怎么开我不知道，封装在那个人身上； 所以说我只要 &amp;#8216;说&amp;#8217; 就好了，具体去法被封装起来了。 再比如说付款。我们可以定义几个付款类，然后根据用户的选择来决定用哪个付款类来付款。&lt;/p&gt;
 &lt;hr /&gt;&lt;br /&gt;
 &lt;h1 id='1'&gt;实例1：付款有三种不同的付款方式：支票、信用卡、现金，但接口一致。模拟付款过程。&lt;/h1&gt;
 &lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Customer&lt;/span&gt;
@@ -106,7 +106,7 @@
 &lt;span class='no'&gt;ElectronicProduct&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='no'&gt;Ipad&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;generate&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;br /&gt;&lt;hr /&gt;
-&lt;p&gt;总结：策略模式和模板方法模式很相似，它们都是定义了一个算法，都可以相互替换而不影响客户的使用；不同的是模板方法模式使用的是继承来实现不同的算法，而策略模式是使用组合的方式来实现算法的替换；模板方法模式是定义了一个结构，而策略模式只是定义了一个接口。&lt;/p&gt;</content>
+&lt;p&gt;总结：策略模式和模板方法模式很相似，它们都是定义了多个算法，算法间可以相互替换而不影响客户的使用；不同的是模板方法模式使用的是继承来实现，而策略模式是使用组合来实现；模板方法模式定义了一个结构，而策略模式只定义了一个接口。&lt;/p&gt;</content>
  </entry>
  
  <entry>
@@ -114,9 +114,9 @@
    <link href="http://zhangzhe.github.com/design_patten/2012/05/16/design-patten-template"/>
    <updated>2012-05-16T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/design_patten/2012/05/16/design-patten-template</id>
-   <content type="html">&lt;h1 id='id35'&gt;模式描述&lt;/h1&gt;
+   <content type="html">&lt;h1 id='id19'&gt;模式描述&lt;/h1&gt;
 
-&lt;p&gt;&lt;code&gt;模版方法&lt;/code&gt; 是一种行为型模式。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;模版方法&lt;/code&gt; 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
 
 &lt;p&gt;基本描述：在一个方法里定义算法的骨架，将具体实现方法延迟到其子类。一次性实现算法的不变部分，将可变的行为留给子类。&lt;/p&gt;
 
