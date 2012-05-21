@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-05-21T14:44:40+08:00</updated>
+ <updated>2012-05-21T14:54:50+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -17,7 +17,7 @@
    <link href="http://zhangzhe.github.com/美文/2012/05/21/a-business-creed"/>
    <updated>2012-05-21T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/美文/2012/05/21/a-business-creed</id>
-   <content type="html">&lt;h2 id='id3'&gt;注：一位朋友翻译并推荐的。目前已成为部门工作信条。&lt;/h2&gt;
+   <content type="html">&lt;h2 id='id6'&gt;注：一位朋友翻译并推荐的。目前已成为部门工作信条。&lt;/h2&gt;
 
 &lt;p&gt;分享一个十年前的今天读到的一篇文章，虽时过境迁，读起来犹足以自砺，早上起来又翻译了一遍，分享以共勉。 注：未证出处，但这似乎是国外的高中读物。&lt;/p&gt;
 
@@ -61,7 +61,7 @@
    <link href="http://zhangzhe.github.com/design_patten/2012/05/18/design-patten-strategy"/>
    <updated>2012-05-18T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/design_patten/2012/05/18/design-patten-strategy</id>
-   <content type="html">&lt;h1 id='id2'&gt;模式描述&lt;/h1&gt;
+   <content type="html">&lt;h1 id='id5'&gt;模式描述&lt;/h1&gt;
 
 &lt;p&gt;&lt;code&gt;策略模式&lt;/code&gt; 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
 
@@ -158,7 +158,7 @@
    <link href="http://zhangzhe.github.com/design_patten/2012/05/16/design-patten-template"/>
    <updated>2012-05-16T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/design_patten/2012/05/16/design-patten-template</id>
-   <content type="html">&lt;h1 id='id1'&gt;模式描述&lt;/h1&gt;
+   <content type="html">&lt;h1 id='id4'&gt;模式描述&lt;/h1&gt;
 
 &lt;p&gt;&lt;code&gt;模版方法&lt;/code&gt; 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
 
@@ -331,49 +331,6 @@ json格式:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;br /&gt;&lt;hr /&gt;
 &lt;p&gt;总结：模板方法实际上是利用多态这种晚绑定机制来将一些执行动作的定义延迟到子类。子类可以在不改变算法结构的情况下，调整算法的细节实现。 除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你”的反向控制结构是模版方法的典型应用。&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>markItUp examples</title>
-   <link href="http://zhangzhe.github.com/2012/05/06/markItUp-examples"/>
-   <updated>2012-05-06T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/2012/05/06/markItUp-examples</id>
-   <content type="html">&lt;h2 id='markitup_universal_markup_editor'&gt;markItUp! Universal markup editor&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src='http://s3.buysellads.com/1255475/101528-1334004497.jpg' alt='markItUp! Logo' /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;markItUp!&lt;/strong&gt; is a javascript over &lt;a href='http://www.jquery.com' title='jQuery Website'&gt;jQuery&lt;/a&gt; plug-in which allow you to turn any textarea in a markup editor.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;markItUp!&lt;/strong&gt; is a lightweight fully customizable engine made to easily fit all developers needs in their CMS, blogs, forums or websites.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Html, Textile, Wiki Syntax, Markdown, BBcode&lt;/em&gt; or even your own Markup system can be easily implemented.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;integrate it easily&lt;/p&gt;
-&lt;/li&gt;
-
-&lt;li&gt;
-&lt;p&gt;customize toolbar and css look and feel&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;skins&lt;/li&gt;
-
-&lt;li&gt;icons&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-
-&lt;li&gt;
-&lt;p&gt;use the engine from anywhere in the page&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr /&gt;
-&lt;pre&gt;&lt;code&gt;some commands&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The above was a &lt;code&gt;C99&lt;/code&gt; program listing. You can include literal backticks like &lt;code&gt;`this`&lt;/code&gt;.&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='nb'&gt;puts&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;code&amp;quot;&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content>
  </entry>
  
  
