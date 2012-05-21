@@ -34,101 +34,136 @@
     18 May 2012 
     
   </p>
-  <h1 id='id5'>模式描述</h1>
+  <h1>模式描述</h1>
 
-<p><code>策略模式</code> 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）</p>
+<p><code>策略模式</code> 是一种行为型模式。
+（行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）</p>
 
 <p>基本描述：策略模提倡“针对接口编程”，定义好接口，接下来针对接口实现对应算法（策略）。</p>
 
-<p>详细描述：在软件构建过程中，可使用的算法多种多样，且可能经常发生变化。如果在对象内部实现这些算法，将会使对象变得异常复杂。 策略模式是告诉接口：我要做什么，至于怎么做，则由接口自行选定策略。</p>
+<p>详细描述：在软件构建过程中，可使用的算法多种多样，且可能经常发生变化。如果在对象内部实现这些算法，将会使对象变得异常复杂。
+策略模式是告诉接口：我要做什么，至于怎么做，则由接口自行选定策略。</p>
 
-<p>举例来说：我想去上学。然后说我想坐自行车上学，就有人骑自行车带我去，具体怎么骑我是不知道的，封装在那个人身上；我要说坐汽车上学，就有人开车送我去，具体怎么开我不知道，封装在那个人身上； 所以说我只要 &#8216;说&#8217; 就好了，具体去法被封装起来了。 再比如说付款。我们可以定义几个付款类，然后根据用户的选择来决定用哪个付款类来付款。</p>
-<hr /><br />
-<h1 id='1'>实例1：付款有三种不同的付款方式：支票、信用卡、现金，但接口一致。模拟付款过程。</h1>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Customer</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='nb'>name</span><span class='p'>,</span> <span class='n'>pay_way</span><span class='p'>)</span>
-    <span class='vi'>@name</span> <span class='o'>=</span> <span class='nb'>name</span>
-    <span class='vi'>@pay_way</span> <span class='o'>=</span> <span class='n'>pay_way</span>
-  <span class='k'>end</span>
+<p>举例来说：我想去上学。然后说我想坐自行车上学，就有人骑自行车带我去，具体怎么骑我是不知道的，封装在那个人身上；我要说坐汽车上学，就有人开车送我去，具体怎么开我不知道，封装在那个人身上；
+所以说我只要 '说' 就好了，具体去法被封装起来了。
+再比如说付款。我们可以定义几个付款类，然后根据用户的选择来决定用哪个付款类来付款。</p>
+
+<hr />
+
+<br>
+
+
+<h1>实例1：付款有三种不同的付款方式：支票、信用卡、现金，但接口一致。模拟付款过程。</h1>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Customer</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">pay_way</span><span class="p">)</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+    <span class="vi">@pay_way</span> <span class="o">=</span> <span class="n">pay_way</span>
+  <span class="k">end</span>
   
-  <span class='k'>def</span> <span class='nf'>name</span>
-    <span class='vi'>@name</span>
-  <span class='k'>end</span>
+  <span class="k">def</span> <span class="nf">name</span>
+    <span class="vi">@name</span>
+  <span class="k">end</span>
   
-  <span class='k'>def</span> <span class='nf'>pay</span><span class='p'>(</span><span class='n'>number</span><span class='p'>)</span>
-    <span class='vi'>@pay_way</span><span class='o'>.</span><span class='n'>pay</span><span class='p'>(</span><span class='nb'>self</span><span class='p'>,</span> <span class='n'>number</span><span class='p'>)</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
+  <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="vi">@pay_way</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-<span class='k'>class</span> <span class='nc'>Check</span>
-  <span class='k'>def</span> <span class='nf'>pay</span><span class='p'>(</span><span class='n'>customer</span><span class='p'>,</span> <span class='n'>number</span><span class='p'>)</span>
-    <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>customer</span><span class='o'>.</span><span class='n'>name</span><span class='si'>}</span><span class='s2'> writes a check of </span><span class='si'>#{</span><span class='n'>number</span><span class='si'>}</span><span class='s2'>!&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
+<span class="k">class</span> <span class="nc">Check</span>
+  <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+    <span class="s2">&quot;</span><span class="si">#{</span><span class="n">customer</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> writes a check of </span><span class="si">#{</span><span class="n">number</span><span class="si">}</span><span class="s2">!&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-<span class='k'>class</span> <span class='nc'>Cash</span>
-  <span class='k'>def</span> <span class='nf'>pay</span><span class='p'>(</span><span class='n'>customer</span><span class='p'>,</span> <span class='n'>number</span><span class='p'>)</span>
-    <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>customer</span><span class='o'>.</span><span class='n'>name</span><span class='si'>}</span><span class='s2'> pays </span><span class='si'>#{</span><span class='n'>number</span><span class='si'>}</span><span class='s2'> cash!&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
+<span class="k">class</span> <span class="nc">Cash</span>
+  <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+    <span class="s2">&quot;</span><span class="si">#{</span><span class="n">customer</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> pays </span><span class="si">#{</span><span class="n">number</span><span class="si">}</span><span class="s2"> cash!&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-<span class='k'>class</span> <span class='nc'>CreditCard</span>
-  <span class='k'>def</span> <span class='nf'>pay</span><span class='p'>(</span><span class='n'>customer</span><span class='p'>,</span> <span class='n'>number</span><span class='p'>)</span>
-    <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>customer</span><span class='o'>.</span><span class='n'>name</span><span class='si'>}</span><span class='s2'> pays </span><span class='si'>#{</span><span class='n'>number</span><span class='si'>}</span><span class='s2'> with Credit Card!&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
+<span class="k">class</span> <span class="nc">CreditCard</span>
+  <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="n">customer</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+    <span class="s2">&quot;</span><span class="si">#{</span><span class="n">customer</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> pays </span><span class="si">#{</span><span class="n">number</span><span class="si">}</span><span class="s2"> with Credit Card!&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-<span class='n'>describe</span> <span class='s2'>&quot;Customer&quot;</span> <span class='k'>do</span>
-  <span class='n'>it</span> <span class='s2'>&quot;should pay with check&quot;</span> <span class='k'>do</span>
-    <span class='no'>Customer</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;gary&quot;</span><span class='p'>,</span> <span class='no'>Check</span><span class='o'>.</span><span class='n'>new</span><span class='p'>)</span><span class='o'>.</span><span class='n'>pay</span><span class='p'>(</span><span class='mi'>500</span><span class='p'>)</span><span class='o'>.</span><span class='n'>should</span> <span class='o'>==</span> 
-<span class='s2'>&quot;gary writes a check of 500!&quot;</span>
-  <span class='k'>end</span>
+<span class="n">describe</span> <span class="s2">&quot;Customer&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;should pay with check&quot;</span> <span class="k">do</span>
+    <span class="no">Customer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;gary&quot;</span><span class="p">,</span> <span class="no">Check</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+<span class="s2">&quot;gary writes a check of 500!&quot;</span>
+  <span class="k">end</span>
   
-  <span class='n'>it</span> <span class='s2'>&quot;should pay with cash&quot;</span> <span class='k'>do</span>
-    <span class='no'>Customer</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;gary&quot;</span><span class='p'>,</span> <span class='no'>Cash</span><span class='o'>.</span><span class='n'>new</span><span class='p'>)</span><span class='o'>.</span><span class='n'>pay</span><span class='p'>(</span><span class='mi'>500</span><span class='p'>)</span><span class='o'>.</span><span class='n'>should</span> <span class='o'>==</span> 
-<span class='s2'>&quot;gary pays 500 cash!&quot;</span>
-  <span class='k'>end</span>
+  <span class="n">it</span> <span class="s2">&quot;should pay with cash&quot;</span> <span class="k">do</span>
+    <span class="no">Customer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;gary&quot;</span><span class="p">,</span> <span class="no">Cash</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+<span class="s2">&quot;gary pays 500 cash!&quot;</span>
+  <span class="k">end</span>
   
-  <span class='n'>it</span> <span class='s2'>&quot;should pay with credit card&quot;</span> <span class='k'>do</span>
-    <span class='no'>Customer</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='s2'>&quot;gary&quot;</span><span class='p'>,</span> <span class='no'>CreditCard</span><span class='o'>.</span><span class='n'>new</span><span class='p'>)</span><span class='o'>.</span><span class='n'>pay</span><span class='p'>(</span><span class='mi'>500</span><span class='p'>)</span><span class='o'>.</span><span class='n'>should</span> <span class='o'>==</span> 
-<span class='s2'>&quot;gary pays 500 with Credit Card!&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
+  <span class="n">it</span> <span class="s2">&quot;should pay with credit card&quot;</span> <span class="k">do</span>
+    <span class="no">Customer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;gary&quot;</span><span class="p">,</span> <span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+<span class="s2">&quot;gary pays 500 with Credit Card!&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
-</div><br /><hr /><br />
-<h1 id='2_iphone_ipad_ipod_'>实例2：创建 iphone、 ipad、 ipod 或者类似产品。具体创建过程不同，但创建接口一致。</h1>
-<div class='highlight'><pre><code class='ruby'><span class='k'>class</span> <span class='nc'>Iphone</span>
-  <span class='k'>def</span> <span class='nf'>generate</span>
-    <span class='nb'>p</span> <span class='s2'>&quot;generating iphone&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
+</div>
 
-<span class='k'>class</span> <span class='nc'>Ipad</span>
-  <span class='k'>def</span> <span class='nf'>generate</span>
-    <span class='nb'>p</span> <span class='s2'>&quot;generating ipad&quot;</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
 
-<span class='k'>class</span> <span class='nc'>ElectronicProduct</span>
-  <span class='k'>def</span> <span class='nf'>initialize</span><span class='p'>(</span><span class='n'>product</span><span class='p'>)</span>
-    <span class='vi'>@product</span> <span class='o'>=</span> <span class='n'>product</span><span class='o'>.</span><span class='n'>new</span>
-  <span class='k'>end</span>
+
+
+<br>
+
+
+<hr />
+
+<br>
+
+
+<h1>实例2：创建 iphone、 ipad、 ipod 或者类似产品。具体创建过程不同，但创建接口一致。</h1>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Iphone</span>
+  <span class="k">def</span> <span class="nf">generate</span>
+    <span class="nb">p</span> <span class="s2">&quot;generating iphone&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Ipad</span>
+  <span class="k">def</span> <span class="nf">generate</span>
+    <span class="nb">p</span> <span class="s2">&quot;generating ipad&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">ElectronicProduct</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+    <span class="vi">@product</span> <span class="o">=</span> <span class="n">product</span><span class="o">.</span><span class="n">new</span>
+  <span class="k">end</span>
   
-  <span class='k'>def</span> <span class='nf'>generate</span>
-    <span class='vi'>@product</span><span class='o'>.</span><span class='n'>generate</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
+  <span class="k">def</span> <span class="nf">generate</span>
+    <span class="vi">@product</span><span class="o">.</span><span class="n">generate</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-<span class='no'>ElectronicProduct</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='no'>Iphone</span><span class='p'>)</span><span class='o'>.</span><span class='n'>generate</span>
-<span class='no'>ElectronicProduct</span><span class='o'>.</span><span class='n'>new</span><span class='p'>(</span><span class='no'>Ipad</span><span class='p'>)</span><span class='o'>.</span><span class='n'>generate</span>
+<span class="no">ElectronicProduct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">Iphone</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span>
+<span class="no">ElectronicProduct</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">Ipad</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span>
 </code></pre>
-</div><br /><hr />
+</div>
+
+
+
+
+<br>
+
+
+<hr />
+
 <p>总结：策略模式和模板方法模式很相似，它们都是定义了多个算法，算法间可以相互替换而不影响客户的使用；不同的是模板方法模式使用的是继承来实现，而策略模式是使用组合来实现；模板方法模式定义了一个结构，而策略模式只定义了一个接口。</p>
+
 </div>
 
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">
+    
+      <li><span>21 May 2012</span> &raquo; <a href="/design_patten/2012/05/21/design-patten-observer">设计模式之'观察者模式'</a></li>
     
       <li><span>21 May 2012</span> &raquo; <a href="/美文/2012/05/21/a-business-creed">（转） A Business Creed 《职业信条》</a></li>
     

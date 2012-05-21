@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-05-21T14:54:50+08:00</updated>
+ <updated>2012-05-21T18:14:20+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -13,47 +13,280 @@
 
  
  <entry>
+   <title>设计模式之'观察者模式'</title>
+   <link href="http://zhangzhe.github.com/design_patten/2012/05/21/design-patten-observer"/>
+   <updated>2012-05-21T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/design_patten/2012/05/21/design-patten-observer</id>
+   <content type="html">&lt;h1&gt;模式描述&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;观察者模式&lt;/code&gt; 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
+
+&lt;p&gt;基本描述： 观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，让他们能够自动更新自己。&lt;/p&gt;
+
+&lt;p&gt;详细描述：观察者模式有时又被称为发布-订阅（Publish/Subscribe）模式、模型-视图（Model/View）模式、源-收听者（Source/Listener）模式或从属者（Dependents）模式。 在这种模式中，一个目标对象管理所有相依于它的观察者对象，在它自身状态改变时主动通知其观察者对象。观察者模式通常被用来作事件处理系统。&lt;/p&gt;
+
+&lt;h1&gt;Observer模式的典型应用&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;侦听/监视某个对象的状态变化&lt;/li&gt;
+&lt;li&gt;发布者/订阅者(publisher/subscriber)模型中，当一个外部事件被触发时，通知邮件列表中的订阅者&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;hr /&gt;
+
+&lt;br&gt;
+
+
+&lt;h1&gt;实例1 博客系统：&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;管理订阅者&lt;/li&gt;
+&lt;li&gt;可以被订阅&lt;/li&gt;
+&lt;li&gt;当有更新时，会自动通知订阅者&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;br&gt;
+
+
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Article&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;attr_accessor&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:title&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@subscribers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;notify_subscribers&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    
+  &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;
+    &lt;span class=&quot;kp&quot;&gt;attr_accessor&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:subscribers&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add_subscriber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;vi&quot;&gt;@subscribers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscriber&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;remove_subscriber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;vi&quot;&gt;@subscribers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delete&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscriber&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;notify_subscribers&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notify_new_article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;article&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:all&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Reader&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;notify_new_article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Yeah, there is a new article has been writen, &lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;               title with &amp;#39;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;#39;.&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GFW&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;notify_new_article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;I am here&amp;quot;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;a new article names &amp;#39;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;#39; has been writen. GFW knows.&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    
+  &lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;add_subscriber&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;add subscriber to Article&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_subscriber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; 
+            &lt;span class=&quot;n&quot;&gt;change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+ &lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;remove_subscriber&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;remove subscriber to Article&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+     &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove_subscriber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; 
+         &lt;span class=&quot;n&quot;&gt;change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+ 
+ &lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;if a new blog is created, all the subscribers get the message&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+     &lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_subscriber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Reader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+     &lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_subscriber&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;GFW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+     &lt;span class=&quot;no&quot;&gt;GFW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should_receive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:notify_new_article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;once&lt;/span&gt;
+     &lt;span class=&quot;no&quot;&gt;Reader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should_receive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:notify_new_article&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;once&lt;/span&gt;
+     &lt;span class=&quot;n&quot;&gt;article&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;Article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;I am Strong!!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;hr /&gt;
+
+&lt;br&gt;
+
+
+&lt;h1&gt;实例 2 微博：&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;用户间可以相互 follow&lt;/li&gt;
+&lt;li&gt;用户更新微博时通知其 followers&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;br&gt;
+
+
+
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;attr_accessor&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:followers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@followers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create_a_weibo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; created weibo titles &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;notify_followers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;follow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;someone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_follower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;unfollow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;someone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove_follower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add_follower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@followers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;someone&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;remove_follower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@followers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;notify_followers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;followers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;follower&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;follower&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notify_weibo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;notify_weibo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; konws &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;weibo&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;a User&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@gary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;gary&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@andy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;andy&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@seven&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;seven&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@andy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;follow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@gary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@seven&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;follow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@gary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;should follow someone and unfollow someone&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@gary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;followers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@andy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@seven&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@andy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unfollow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@gary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@gary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;followers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@seven&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;should notify followers after create a weibo&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@seven&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should_receive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:notify_weibo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;once&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@andy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should_receive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:notify_weibo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;once&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@gary&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create_a_weibo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;I am strong!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;hr /&gt;
+
+&lt;br&gt;
+
+
+&lt;p&gt;总结：观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象的状态发生改变时，会通知所有的观察者对象，使它们能够自己更新自己。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>（转） A Business Creed 《职业信条》</title>
    <link href="http://zhangzhe.github.com/美文/2012/05/21/a-business-creed"/>
    <updated>2012-05-21T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/美文/2012/05/21/a-business-creed</id>
-   <content type="html">&lt;h2 id='id6'&gt;注：一位朋友翻译并推荐的。目前已成为部门工作信条。&lt;/h2&gt;
+   <content type="html">&lt;h2&gt;注：一位朋友翻译并推荐的。目前已成为部门工作信条。&lt;/h2&gt;
 
-&lt;p&gt;分享一个十年前的今天读到的一篇文章，虽时过境迁，读起来犹足以自砺，早上起来又翻译了一遍，分享以共勉。 注：未证出处，但这似乎是国外的高中读物。&lt;/p&gt;
+&lt;p&gt;分享一个十年前的今天读到的一篇文章，虽时过境迁，读起来犹足以自砺，早上起来又翻译了一遍，分享以共勉。
+注：未证出处，但这似乎是国外的高中读物。&lt;/p&gt;
 
 &lt;p&gt;A Business Creed 《职业信条》&lt;/p&gt;
 
 &lt;p&gt;To respect my work, my associates andmyself. To be honest and fair with them as I expect them to be honest and fairwith me. To be a man whose word carries weight. To be a booster, not a knocker;a pusher, not a kicker; a motor, not a clog.&lt;/p&gt;
+
 &lt;hr /&gt;
+
 &lt;pre&gt;&lt;code&gt;尊重我的工作，我的同事和我自己。用诚实和公平来对待他们，因为我希望他们用诚实和公平对待我。
 做一个言出必信的人。成为一个助推器，不是一个吹毛求疵者；一个推动者，而不是一个抱怨者；成
-为引擎，不是刹车片。&lt;/code&gt;&lt;/pre&gt;
+为引擎，不是刹车片。
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;To base my expectations of reward on asolid foundation of service rendered; to be willing to pay the price of successin honest effort. To look upon my work as opportunity, to be seized with joyand made the most of, and not as painful drudgery to be reluctantly endured.&lt;/p&gt;
+
 &lt;hr /&gt;
+
 &lt;pre&gt;&lt;code&gt;没有付出就没有回报，付出诚实的努力是达至成功的必然代价。把工作看成一个契机，一个追求幸福
-快乐的契机，而不是卧薪尝胆的表面苦行。&lt;/code&gt;&lt;/pre&gt;
+快乐的契机，而不是卧薪尝胆的表面苦行。
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;To remember that success lies withinmyself; in my own brain, my own ambition, my own courage and determination. Toexpect difficulties and force my way through them, to turn hard experiencesinto capital for future struggles.&lt;/p&gt;
+
 &lt;hr /&gt;
+
 &lt;pre&gt;&lt;code&gt;要记住，成败只于在自己，在自己的大脑，自己的雄心，自己的勇气和决心。正视并直面困难，眼前的
-每一个小怪都在帮助我升级，帮助我为更艰难的boss战做准备。&lt;/code&gt;&lt;/pre&gt;
+每一个小怪都在帮助我升级，帮助我为更艰难的boss战做准备。
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;To interest my heart and soul in mywork, and aspire to the highest efficiency in the achievement of results. To bepatiently receptive of just criticism and profit from its teaching. To treatequals and superiors with respect, and subordinates with kindly encouragement..&lt;/p&gt;
+
 &lt;hr /&gt;
+
 &lt;pre&gt;&lt;code&gt;享受工作的乐趣，追求执行力带来的成就感。三人行，虽未必同道，亦必有我师。
-对待同事不卑不亢不倨。&lt;/code&gt;&lt;/pre&gt;
+对待同事不卑不亢不倨。
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;To make a study of my business duties;to know my work from the ground up. To mix brains with my efforts and usesystem and method in all I undertake. To find time to do everything needful bynever letting time find me or my subordinates doing nothing. To hoard days as amiser does dollars, to make every hour bring me dividends in specific resultsaccomplished. To steer clear of dissipation and guard my health of body andpeace of mind as my most precious stock in trade.&lt;/p&gt;
+
 &lt;hr /&gt;
+
 &lt;pre&gt;&lt;code&gt;研究所在行业，了解自己的工作在其中的意义。知行合一，在实践中寻求方法论和系统论。自己和自己
 下属的时间是自己手中的核心资源，珍惜善待这些资源。惜时如金，努力让每一个小时都以一个具体的
-成果来终结。节俭、身体健康和内心平和将是你所能掌握的最优质资产。&lt;/code&gt;&lt;/pre&gt;
+成果来终结。节俭、身体健康和内心平和将是你所能掌握的最优质资产。
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Finally, to take a good grip on the joyof life; to play the game like a gentleman; to fight against nothing so hard asmy own weakness, and endeavor to grow in business capacity, and as a man, withthe passage of every day of time.&lt;/p&gt;
+
 &lt;hr /&gt;
+
 &lt;pre&gt;&lt;code&gt;最后，快乐地活着，做个好人。没有什么敌人比自己的弱点更强大，努力提升自己做事情的能力，拿出
-个人样度过自己的每一天。&lt;/code&gt;&lt;/pre&gt;</content>
+个人样度过自己的每一天。
+&lt;/code&gt;&lt;/pre&gt;
+</content>
  </entry>
  
  <entry>
@@ -61,96 +294,129 @@
    <link href="http://zhangzhe.github.com/design_patten/2012/05/18/design-patten-strategy"/>
    <updated>2012-05-18T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/design_patten/2012/05/18/design-patten-strategy</id>
-   <content type="html">&lt;h1 id='id5'&gt;模式描述&lt;/h1&gt;
+   <content type="html">&lt;h1&gt;模式描述&lt;/h1&gt;
 
-&lt;p&gt;&lt;code&gt;策略模式&lt;/code&gt; 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;策略模式&lt;/code&gt; 是一种行为型模式。
+（行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
 
 &lt;p&gt;基本描述：策略模提倡“针对接口编程”，定义好接口，接下来针对接口实现对应算法（策略）。&lt;/p&gt;
 
-&lt;p&gt;详细描述：在软件构建过程中，可使用的算法多种多样，且可能经常发生变化。如果在对象内部实现这些算法，将会使对象变得异常复杂。 策略模式是告诉接口：我要做什么，至于怎么做，则由接口自行选定策略。&lt;/p&gt;
+&lt;p&gt;详细描述：在软件构建过程中，可使用的算法多种多样，且可能经常发生变化。如果在对象内部实现这些算法，将会使对象变得异常复杂。
+策略模式是告诉接口：我要做什么，至于怎么做，则由接口自行选定策略。&lt;/p&gt;
 
-&lt;p&gt;举例来说：我想去上学。然后说我想坐自行车上学，就有人骑自行车带我去，具体怎么骑我是不知道的，封装在那个人身上；我要说坐汽车上学，就有人开车送我去，具体怎么开我不知道，封装在那个人身上； 所以说我只要 &amp;#8216;说&amp;#8217; 就好了，具体去法被封装起来了。 再比如说付款。我们可以定义几个付款类，然后根据用户的选择来决定用哪个付款类来付款。&lt;/p&gt;
-&lt;hr /&gt;&lt;br /&gt;
-&lt;h1 id='1'&gt;实例1：付款有三种不同的付款方式：支票、信用卡、现金，但接口一致。模拟付款过程。&lt;/h1&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Customer&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;initialize&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;name&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;pay_way&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='vi'&gt;@name&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='nb'&gt;name&lt;/span&gt;
-    &lt;span class='vi'&gt;@pay_way&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;pay_way&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;p&gt;举例来说：我想去上学。然后说我想坐自行车上学，就有人骑自行车带我去，具体怎么骑我是不知道的，封装在那个人身上；我要说坐汽车上学，就有人开车送我去，具体怎么开我不知道，封装在那个人身上；
+所以说我只要 '说' 就好了，具体去法被封装起来了。
+再比如说付款。我们可以定义几个付款类，然后根据用户的选择来决定用哪个付款类来付款。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;br&gt;
+
+
+&lt;h1&gt;实例1：付款有三种不同的付款方式：支票、信用卡、现金，但接口一致。模拟付款过程。&lt;/h1&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Customer&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pay_way&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@pay_way&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pay_way&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;name&lt;/span&gt;
-    &lt;span class='vi'&gt;@name&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;name&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@name&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;pay&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;number&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='vi'&gt;@pay_way&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;pay&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;self&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;number&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@pay_way&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Check&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;pay&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;customer&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;number&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;customer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt; writes a check of &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;number&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;!&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Check&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; writes a check of &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;!&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Cash&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;pay&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;customer&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;number&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;customer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt; pays &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;number&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt; cash!&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Cash&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; pays &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; cash!&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;CreditCard&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;pay&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;customer&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;number&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;customer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;name&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt; pays &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;number&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt; with Credit Card!&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CreditCard&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; pays &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; with Credit Card!&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='n'&gt;describe&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;Customer&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-  &lt;span class='n'&gt;it&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;should pay with check&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-    &lt;span class='no'&gt;Customer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;gary&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='no'&gt;Check&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;pay&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;500&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;should&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; 
-&lt;span class='s2'&gt;&amp;quot;gary writes a check of 500!&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Customer&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;should pay with check&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;Customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;gary&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Check&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;gary writes a check of 500!&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='n'&gt;it&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;should pay with cash&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-    &lt;span class='no'&gt;Customer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;gary&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='no'&gt;Cash&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;pay&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;500&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;should&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; 
-&lt;span class='s2'&gt;&amp;quot;gary pays 500 cash!&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;should pay with cash&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;Customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;gary&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Cash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;gary pays 500 cash!&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='n'&gt;it&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;should pay with credit card&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-    &lt;span class='no'&gt;Customer&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;gary&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='no'&gt;CreditCard&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;pay&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='mi'&gt;500&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;should&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; 
-&lt;span class='s2'&gt;&amp;quot;gary pays 500 with Credit Card!&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;should pay with credit card&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;Customer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;gary&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;CreditCard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;gary pays 500 with Credit Card!&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;br /&gt;&lt;hr /&gt;&lt;br /&gt;
-&lt;h1 id='2_iphone_ipad_ipod_'&gt;实例2：创建 iphone、 ipad、 ipod 或者类似产品。具体创建过程不同，但创建接口一致。&lt;/h1&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Iphone&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generating iphone&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;/div&gt;
 
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Ipad&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generating ipad&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
 
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;ElectronicProduct&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;initialize&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;product&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='vi'&gt;@product&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;product&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+
+
+&lt;br&gt;
+
+
+&lt;hr /&gt;
+
+&lt;br&gt;
+
+
+&lt;h1&gt;实例2：创建 iphone、 ipad、 ipod 或者类似产品。具体创建过程不同，但创建接口一致。&lt;/h1&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Iphone&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;generating iphone&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Ipad&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;generating ipad&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ElectronicProduct&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@product&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate&lt;/span&gt;
-    &lt;span class='vi'&gt;@product&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;generate&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@product&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generate&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='no'&gt;ElectronicProduct&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='no'&gt;Iphone&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;generate&lt;/span&gt;
-&lt;span class='no'&gt;ElectronicProduct&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='no'&gt;Ipad&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;generate&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ElectronicProduct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Iphone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generate&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ElectronicProduct&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Ipad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generate&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;br /&gt;&lt;hr /&gt;
-&lt;p&gt;总结：策略模式和模板方法模式很相似，它们都是定义了多个算法，算法间可以相互替换而不影响客户的使用；不同的是模板方法模式使用的是继承来实现，而策略模式是使用组合来实现；模板方法模式定义了一个结构，而策略模式只定义了一个接口。&lt;/p&gt;</content>
+&lt;/div&gt;
+
+
+
+
+&lt;br&gt;
+
+
+&lt;hr /&gt;
+
+&lt;p&gt;总结：策略模式和模板方法模式很相似，它们都是定义了多个算法，算法间可以相互替换而不影响客户的使用；不同的是模板方法模式使用的是继承来实现，而策略模式是使用组合来实现；模板方法模式定义了一个结构，而策略模式只定义了一个接口。&lt;/p&gt;
+</content>
  </entry>
  
  <entry>
@@ -158,22 +424,29 @@
    <link href="http://zhangzhe.github.com/design_patten/2012/05/16/design-patten-template"/>
    <updated>2012-05-16T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/design_patten/2012/05/16/design-patten-template</id>
-   <content type="html">&lt;h1 id='id4'&gt;模式描述&lt;/h1&gt;
+   <content type="html">&lt;h1&gt;模式描述&lt;/h1&gt;
 
-&lt;p&gt;&lt;code&gt;模版方法&lt;/code&gt; 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;模版方法&lt;/code&gt; 是一种行为型模式。
+（行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
 
 &lt;p&gt;基本描述：在一个方法里定义算法的骨架，将具体实现方法延迟到其子类。一次性实现算法的不变部分，将可变的行为留给子类。&lt;/p&gt;
 
 &lt;p&gt;更多描述：通过继承把变和不变的部分分开。抽象类应当拥有的是行为组合和尽可能少的具体实现。算法骨架类的公共行为被提取出来集中到父类，要扩展新的功能，就创建新的子类并实现相应功能。&lt;/p&gt;
-&lt;hr /&gt;&lt;br /&gt;
-&lt;h1 id='1'&gt;实例1：各种格式的报表生成&lt;/h1&gt;
 
-&lt;p&gt;案例描述：报表包括 开头、主干、结尾，但需要各种格式，如xml, yaml, json等。实现各类报表，要求各部分内容一致，但是输出格式不同。 例如：&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;br&gt;
+
+
+&lt;h1&gt;实例1：各种格式的报表生成&lt;/h1&gt;
+
+&lt;p&gt;案例描述：报表包括 开头、主干、结尾，但需要各种格式，如xml, yaml, json等。实现各类报表，要求各部分内容一致，但是输出格式不同。
+例如：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;文本格式:
-head: &amp;quot;hello&amp;quot;
-body: &amp;quot;keep it simple&amp;quot;
-end: &amp;quot;I am strong&amp;quot;
+head: &quot;hello&quot;
+body: &quot;keep it simple&quot;
+end: &quot;I am strong&quot;
 
 xml格式:
 &amp;lt;head&amp;gt;
@@ -192,145 +465,171 @@ body: keep it simple
 end: I am strong
 
 json格式:
-{&amp;quot;head&amp;quot;: &amp;quot;hello&amp;quot;, &amp;quot;body&amp;quot;: &amp;quot;keep it simple&amp;quot;, &amp;quot;end&amp;quot;: &amp;quot;I am strong&amp;quot;}&lt;/code&gt;&lt;/pre&gt;
+{&quot;head&quot;: &quot;hello&quot;, &quot;body&quot;: &quot;keep it simple&quot;, &quot;end&quot;: &quot;I am strong&quot;}
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;代码实现：&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Report&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;initialize&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;head&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;body&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;r_end&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
-    &lt;span class='vi'&gt;@head&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;head&lt;/span&gt;
-    &lt;span class='vi'&gt;@body&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;body&lt;/span&gt;
-    &lt;span class='vi'&gt;@end&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;r_end&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-  
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;output_head&lt;/span&gt;&lt;span class='si'&gt;}#{&lt;/span&gt;&lt;span class='n'&gt;output_body&lt;/span&gt;&lt;span class='si'&gt;}#{&lt;/span&gt;&lt;span class='n'&gt;output_end&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
 
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;TextReport&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;Report&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_head&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;head: &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@head&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Report&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r_end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r_end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_body&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;body: &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@body&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-  
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_end&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;end: &lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@end&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output_head&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output_body&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output_end&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;XmlReport&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;Report&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_head&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;&amp;lt;head&amp;gt;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@head&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TextReport&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Report&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output_head&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;head: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@head&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_body&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;&amp;lt;body&amp;gt;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@body&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output_body&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;body: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@body&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_end&lt;/span&gt;
-    &lt;span class='s2'&gt;&amp;quot;&amp;lt;end&amp;gt;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@end&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;/end&amp;gt;&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output_end&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;end: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@end&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;JsonReport&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;Report&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_head&lt;/span&gt;
-    &lt;span class='sx'&gt;%Q{\{&amp;quot;head&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@head&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='sx'&gt;&amp;quot;, }&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;XmlReport&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Report&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output_head&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;head&amp;gt;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@head&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_body&lt;/span&gt;
-    &lt;span class='sx'&gt;%Q{&amp;quot;body&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@body&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='sx'&gt;&amp;quot;, }&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output_body&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;body&amp;gt;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@body&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
   
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;output_end&lt;/span&gt;
-    &lt;span class='sx'&gt;%Q{&amp;quot;end&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='vi'&gt;@end&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='sx'&gt;&amp;quot;\}}&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output_end&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;end&amp;gt;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@end&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;lt;/end&amp;gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='n'&gt;describe&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;TextReport&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-  &lt;span class='n'&gt;it&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;should output well&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-    &lt;span class='no'&gt;TextReport&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;keep it simple&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;output&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;should&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; 
-&lt;span class='s2'&gt;&amp;quot;head: hello&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;body: keep it simple&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;end: I am strong&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt; 
-&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JsonReport&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Report&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output_head&lt;/span&gt;
+    &lt;span class=&quot;sx&quot;&gt;%Q{\{&amp;quot;head&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@head&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;&amp;quot;, }&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output_body&lt;/span&gt;
+    &lt;span class=&quot;sx&quot;&gt;%Q{&amp;quot;body&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@body&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;&amp;quot;, }&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;output_end&lt;/span&gt;
+    &lt;span class=&quot;sx&quot;&gt;%Q{&amp;quot;end&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@end&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;&amp;quot;\}}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='n'&gt;describe&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;XmlReport&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-  &lt;span class='n'&gt;it&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;should output well&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-    &lt;span class='no'&gt;XmlReport&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;keep it simple&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;output&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;should&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt;
-&lt;span class='s2'&gt;&amp;quot;&amp;lt;head&amp;gt;hello&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;body&amp;gt;keep it simple&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span class='se'&gt;\n&lt;/span&gt;&lt;span class='s2'&gt;&amp;lt;end&amp;gt;I am strong&amp;lt;/end&amp;gt;&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt; 
-&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;TextReport&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;should output well&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;TextReport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;keep it simple&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;head: hello&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;body: keep it simple&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;end: I am strong&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='n'&gt;describe&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;JsonReport&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-  &lt;span class='n'&gt;it&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;should output well&amp;quot;&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt;
-    &lt;span class='no'&gt;JsonReport&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;keep it simple&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;output&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;should&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; 
-&lt;span class='s1'&gt;&amp;#39;{&amp;quot;head&amp;quot;: &amp;quot;hello&amp;quot;, &amp;quot;body&amp;quot;: &amp;quot;keep it simple&amp;quot;, &amp;quot;end&amp;quot;: &amp;quot;I am strong&amp;quot;}&amp;#39;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt; 
-&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;XmlReport&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;should output well&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;XmlReport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;keep it simple&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;head&amp;gt;hello&amp;lt;/head&amp;gt;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;lt;body&amp;gt;keep it simple&amp;lt;/body&amp;gt;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;lt;end&amp;gt;I am strong&amp;lt;/end&amp;gt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;JsonReport&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;should output well&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;JsonReport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;keep it simple&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; 
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;{&amp;quot;head&amp;quot;: &amp;quot;hello&amp;quot;, &amp;quot;body&amp;quot;: &amp;quot;keep it simple&amp;quot;, &amp;quot;end&amp;quot;: &amp;quot;I am strong&amp;quot;}&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;br /&gt;&lt;hr /&gt;&lt;br /&gt;
-&lt;h1 id='2'&gt;实例2：制作电子产品&lt;/h1&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;br&gt;
+
+
+&lt;hr /&gt;
+
+&lt;br&gt;
+
+
+&lt;h1&gt;实例2：制作电子产品&lt;/h1&gt;
 
 &lt;p&gt;案例描述：电子产品的生产都要包括硬件、软件的设计和集成起来的调试步骤。但各具体产品的软硬件的具体生产方式和调试方法各不相同。&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;ElectronicProduct&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate&lt;/span&gt;
-    &lt;span class='n'&gt;generate_hardware&lt;/span&gt;
-    &lt;span class='n'&gt;generate_software&lt;/span&gt;
-    &lt;span class='n'&gt;debug&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
- 
-  &lt;span class='kp'&gt;private&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_hardware&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_hardware&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
- 
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_software&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_software&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
- 
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;debug&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;debug&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
 
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Iphone&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;ElectronicProduct&lt;/span&gt;
-  &lt;span class='kp'&gt;private&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_hardware&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_hardware for Iphone&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ElectronicProduct&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;generate_hardware&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;generate_software&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
  
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_software&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_software for Iphone&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate_hardware&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;generate_hardware&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
  
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;debug&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;debugging Iphone&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate_software&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;generate_software&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+ 
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;debug&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='no'&gt;Iphone&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;generate&lt;/span&gt;
-
-&lt;span class='k'&gt;class&lt;/span&gt; &lt;span class='nc'&gt;Ipad&lt;/span&gt; &lt;span class='o'&gt;&amp;lt;&lt;/span&gt; &lt;span class='no'&gt;ElectronicProduct&lt;/span&gt;
-  &lt;span class='kp'&gt;private&lt;/span&gt;
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_hardware&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_hardware for Ipad&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Iphone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ElectronicProduct&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate_hardware&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;generate_hardware for Iphone&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
  
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;generate_software&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;generate_software for Ipad&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate_software&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;generate_software for Iphone&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
  
-  &lt;span class='k'&gt;def&lt;/span&gt; &lt;span class='nf'&gt;debug&lt;/span&gt;
-    &lt;span class='nb'&gt;p&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;debugging Ipad&amp;quot;&lt;/span&gt;
-  &lt;span class='k'&gt;end&lt;/span&gt;
-&lt;span class='k'&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;debugging Iphone&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class='no'&gt;Ipad&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;new&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;generate&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Iphone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generate&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Ipad&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ElectronicProduct&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate_hardware&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;generate_hardware for Ipad&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+ 
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate_software&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;generate_software for Ipad&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+ 
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;debug&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;debugging Ipad&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Ipad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generate&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;br /&gt;&lt;hr /&gt;
-&lt;p&gt;总结：模板方法实际上是利用多态这种晚绑定机制来将一些执行动作的定义延迟到子类。子类可以在不改变算法结构的情况下，调整算法的细节实现。 除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你”的反向控制结构是模版方法的典型应用。&lt;/p&gt;</content>
+&lt;/div&gt;
+
+
+
+
+&lt;br&gt;
+
+
+&lt;hr /&gt;
+
+&lt;p&gt;总结：模板方法实际上是利用多态这种晚绑定机制来将一些执行动作的定义延迟到子类。子类可以在不改变算法结构的情况下，调整算法的细节实现。
+除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你”的反向控制结构是模版方法的典型应用。&lt;/p&gt;
+</content>
  </entry>
  
  

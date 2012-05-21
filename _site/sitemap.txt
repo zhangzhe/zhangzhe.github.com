@@ -9,6 +9,7 @@ http://zhangzhe.github.com/pages.html
 http://zhangzhe.github.com/sitemap.txt
 http://zhangzhe.github.com/tags.html
 
+http://zhangzhe.github.com/design_patten/2012/05/21/design-patten-observer
 http://zhangzhe.github.com/美文/2012/05/21/a-business-creed
 http://zhangzhe.github.com/design_patten/2012/05/18/design-patten-strategy
 http://zhangzhe.github.com/design_patten/2012/05/16/design-patten-template
