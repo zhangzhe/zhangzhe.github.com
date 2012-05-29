@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>关于跨站攻击</title>
+   <meta name="author" content="zhangzhe" />
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/assets/themes/tom/css/syntax.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/assets/themes/tom/css/screen.css" type="text/css" media="screen, projection" />
+
+   <!-- Typekit -->
+   <script type="text/javascript" src="http://use.typekit.com/jpd0pfm.js"></script>
+   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+
+  <div class="site">
+    <div class="title">
+      <a href="/">Keep simple & live Strong</a>
+
+      <a class="extra" href="/archive.html">Archive</a>
+      <a class="extra" href="">Pages</a>
+      <a class="extra" href="/categories.html">Categories</a>
+      <a class="extra" href="/tags.html">Tags</a>
+    </div>
+  
+    
+<div id="post">
+  <h1>关于跨站攻击</h1>
+  <p class="meta">
+    29 May 2012 
+    
+  </p>
+  <p>公司网站自从上周开始使用<code>exception_notification</code> 实现错误报警。截止到今天（2012.5.29），user_registrations controller  的 create action 共上报了1098个错误。虽然错误信息是所谓的 ‘undefined method [] for nil:NilClass ‘，但代码排查后我们发现，这是一个典型的漏洞攻击。</p>
+
+<p>攻击者伪造了<code>name、company_name、nickname、password_confirmation、user_type、company_type、password、mobile_phone、email</code> 共9个属性，填写后越过Ajax验证提交表单。由于还缺少几个关键属性，虽提交成功，却没能在系统中生成记录。因为数据不足产生错误，从而最终被我们作为出错信息记录了下来。</p>
+
+<p>虽然这次攻击没有造成严重后果，但也暴漏了材价的一个安全隐患：
+<strong>伪造好对应属性，只需要一段简单的curl类脚本，就可以无限制地在系统中增加用户记录。</strong></p>
+
+<h2>对付这类攻击有以下几种常规解决方案：</h2>
+
+<ul>
+<li>增加注册码输入: 增加注册码的方法被很多网站使用，效果不错，维翰和书祥的单点登陆也使用了这个方案。</li>
+<li>IP异常管理，如封闭连续注册超过一定数量的独立IP: 作为另一种思路，理论上可以很好的解决上面的攻击。可作为补充方案。</li>
+<li>使用Rails防止跨站攻击的技术 <a href="http://api.rubyonrails.org/classes/ActionController/RequestForgeryProtection/ClassMethods.html#method-i-protect_from_forgery">protect_from_forgery</a>: 根据过往的经验来说，这是解决上述问题的最快、最简单的方案。然而在使用中发现，protect_from_forgery不好用了：虽然会在后台验证AuthenticityToken，但即使验证不通过，程序依然会继续运行（3.0.4甚至不会提示WARNING）。</li>
+</ul>
+
+
+<p><strong>经过google和实验，结果如下：</strong></p>
+
+<pre><code>protect_from_forgery 作为防止跨站攻击的有效方案，在 Rails 3.0.4中做了升级，以更好的
+防御跨站攻击。升级后与之前的行为有很大的不同：protect_from_forgery遇到异常时不会再爆出
+错误，而只是提示一个警告并清空 session。因此已无法再防御上述的粗暴型注册脚本攻击。
+</code></pre>
+
+<p>最终我们通过覆写handle_unverified_request方法找回以前的功能:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">handle_unverified_request</span>
+  <span class="n">reset_session</span>
+  <span class="k">raise</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">InvalidAuthenticityToken</span> <span class="c1"># or other strategy</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+
+
+
+<br>
+
+
+<p>结论：上面只是用到了protect_from_forgery的附属作用解决了我们的问题，关于 protect_from_forgery 的真正牛逼用途请看下面关于Authenticity Token的解释和<a href="http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf">Rails guides</a>。</p>
+
+<p>在寻找解决方案的过程中我们做了一系列调研和实验，感兴趣的同学往下看：）</p>
+
+<br><br>
+
+
+<hr />
+
+<br><br>
+
+
+<p>注：跨站攻击(Cross-Site Request Forgery)和protect_from_forgery在Rails API中的描述：</p>
+
+<pre><code>Controller actions are protected from Cross-Site Request Forgery (CSRF) attacks
+by including a token in the rendered html for your application. This token is 
+stored as a random string in the session, to which an attacker does not have 
+access. When a request reaches your application, Rails verifies the received 
+token with the token in the session. Only HTML and JavaScript requests are 
+checked, so this will not protect your XML API (presumably you’ll have a 
+different authentication scheme there anyway). Also, GET requests are not 
+protected as these should be idempotent.
+
+CSRF protection is turned on with the protect_from_forgery method, which 
+checks the token and resets the session if it doesn’t match what was expected. 
+A call to this method is generated for new Rails applications by default. 
+You can customize the error message by editing public/422.html.
+</code></pre>
+
+<hr />
+
+<br>
+
+
+<h1>1. 排查过程</h1>
+
+<p>发现被攻击，我们第一感觉要在application_controller加入protect_from_forgery。检查代码，发现protect_from_forgery赫然已经加入了。</p>
+
+<p>尝试curl命令，发现可以越过authentauthenticity_token的验证直接进入controller代码，并造成 500 错误。</p>
+
+<p>curl的实例：</p>
+
+<pre><code>curl -d "authentauthenticity_token=ZKbyMUhu8NEUW87cWij4Gjlr2JzMkUVLjTpUEeyS41E=
+&amp;user[login]=xxx&amp;user[name]=ccc&amp;user[email]=wwwwwww@ssss.sss&amp;user[password]=
+1234123&amp;user[password_confirmation]=1234123" http://xx.com/users
+</code></pre>
+
+<p>直觉上认定肯定是protect_from_forgery在代码的某处被覆盖了。但最终也没能找到。</p>
+
+<p>无奈google，发现了这么两段：</p>
+
+<pre><code>The documentation for the authenticity token/csrf behavior is out of date. 
+TheInvalidAuthenticityToken exception is no longer thrown in these cases, 
+instead your session is just reset. If you would like to handle this differently 
+(or the old way) you can define your own behavior inhandle_unverified_request 
+on your controller.
+</code></pre>
+
+<p><a href="http://stackoverflow.com/questions/6090063/rails-3-protect-from-forgery-not-working-correctly/6092858#6092858">http://stackoverflow.com/questions/6090063/rails-3-protect-from-forgery-not-working-correctly/6092858#6092858</a></p>
+
+<pre><code>The behavior was changed fairly recently but the documentation has yet to be 
+updated. The new approach being used is to presume the session has been 
+hijacked, and therefore to clear the session. Assuming your session contains 
+the all-important authentication information for this request (like the fact 
+you're logged in as alice) and your controller assures the user is 
+authenticated for this action, your request will be redirected to a login 
+page (or however you choose to handle a non logged-in user). However, for 
+requests which are not authenticated, like a sign-up form, the request would 
+go through using an empty session.
+
+It seems this commit also goes on to close a CSRF vulnerability, but I didn't 
+read into the details of that.
+
+To obtain the old behavior, you would simply define this method:
+</code></pre>
+
+<br>
+
+
+
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">handle_unverified_request</span>
+  <span class="k">raise</span><span class="p">(</span><span class="no">ActionController</span><span class="o">::</span><span class="no">InvalidAuthenticityToken</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+
+<p><a href="http://stackoverflow.com/questions/5000333/how-does-rails-csrf-protection-work">http://stackoverflow.com/questions/5000333/how-does-rails-csrf-protection-work</a></p>
+
+<br>
+
+
+<p>于是去查最新的 <a href="http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf">rails guides</a></p>
+
+<pre><code>blablabla ......
+This will automatically include a security token, calculated from the current 
+session and the server-side secret, in all forms and Ajax requests generated 
+by Rails. You won’t need the secret, if you use CookieStorage as session 
+storage. If the security token doesn’t match what was expected, the session 
+will be reset. Note: In Rails versions prior to 3.0.4, this raised an 
+ActionController::InvalidAuthenticityToken error.
+</code></pre>
+
+<p><strong>查 Rails 3.0.4 的 release note，追踪到：</strong></p>
+
+<pre><code>There are two major changes in this fix, the behaviour when CSRFprotection 
+fails has changed and the token will now be required forall non-GET requests.
+After applying this patch failed CSRF requests will no longer generateHTTP 
+500 errors, instead the session will be reset. Users can override this 
+behaviour by overriding handle_unverified_request in their own controllers.
+</code></pre>
+
+<p><a href="http://weblog.rubyonrails.org/2011/2/8/csrf-protection-bypass-in-ruby-on-rails/">http://weblog.rubyonrails.org/2011/2/8/csrf-protection-bypass-in-ruby-on-rails/</a></p>
+
+<p><strong>于是找到3.0.4的代码更新：</strong></p>
+
+<pre><code>Change the CSRF whitelisting to only apply to get requests.
+Unfortunately the previous method of browser detection and XHR whitelisting 
+is unable to prevent requests issued from some Flash animations and Java 
+applets.  To ease the work required to include the CSRF token in ajax requests 
+rails now supports providing the token in a custom http header: X-CSRF-Token: …
+This fixes CVE-2011-0447
+</code></pre>
+
+<p><img src="/images/code_update_CSRF.jpg" title="code update CSRF" alt="Alt text" /></p>
+
+<p><a href="https://github.com/rails/rails/commit/ae19e4141f27f80013c11e8b1da68e5c52c779ea">https://github.com/rails/rails/commit/ae19e4141f27f80013c11e8b1da68e5c52c779ea</a></p>
+
+<p><strong>最新版本的 protect_from_forgery实现:</strong></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">protect_from_forgery</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
+  <span class="nb">self</span><span class="o">.</span><span class="n">request_forgery_protection_token</span> <span class="o">||=</span> <span class="ss">:authenticity_token</span>
+  <span class="n">before_filter</span> <span class="ss">:verify_authenticity_token</span><span class="p">,</span> <span class="n">options</span>
+<span class="k">end</span>
+
+<span class="kp">protected</span>
+ <span class="c1"># The actual before_filter that is used. Modify this to change how you handle unverified requests.</span>
+<span class="k">def</span> <span class="nf">verify_authenticity_token</span>
+  <span class="n">verified_request?</span> <span class="o">||</span> <span class="n">handle_unverified_request</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">handle_unverified_request</span>
+  <span class="n">reset_session</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+
+<p>发现正如guide里描述的，遇到攻击只是reset session而不爆出错。</p>
+
+<br>
+
+
+<p><strong>最新的api如下:</strong></p>
+
+<p><img src="/images/api.jpg" title="code update CSRF" alt="Alt text" /></p>
+
+<p><a href="http://api.rubyonrails.org/classes/ActionController/RequestForgeryProtection/ClassMethods.html#method-i-protect_from_forgery">http://api.rubyonrails.org/classes/ActionController/RequestForgeryProtection/ClassMethods.html#method-i-protect_from_forgery</a></p>
+
+<br>
+
+
+<hr />
+
+<br>
+
+
+<h1>2. 结论：protect_from_forgery在新的版本里不会再爆出错误，而只是提示一个警告并清空 session。</h1>
+
+<p>当然可以通过patch的方式找回以前的功能：</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">handle_unverified_request</span>    
+  <span class="n">reset_session</span>
+  <span class="k">raise</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">InvalidAuthenticityToken</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+
+
+
+<br>
+
+
+<p>这里还有一个小插曲，ActionController::InvalidAuthenticityToken会和subdomain有兼容性问题，不知道这是不是 3.0.4 去掉 ActionController::InvalidAuthenticityToken的原因。当然这个问题可以通过配置文件解决。</p>
+
+<hr />
+
+<br>
+
+
+<h1>3. 关于Rails升级的一点思考</h1>
+
+<p>3.0.4这次升级可能会造成的问题是：旧的Rails程序可能会依赖 protect_from_forgery 解决上述攻击(粗暴型注册脚本攻击)。一旦旧的程序升级到Rails
+新版本时可能会忽略这个问题，从而造成了潜在安全漏洞。</p>
+
+<p>正是基于这个想法，我测试了包括 github 在内的12个Rails站点，结果在4个上面都发现了同样的隐患（当然另外8个肯定不乏基于Rails2的）。
+其中github的处理方式很好，它给出的错误提示为：</p>
+
+<pre><code>Usually this means that your user authenticity token is incorrect.
+This can happen when you visit a page with a form, then login in a
+separate window, and then return to resubmit the form.
+Here's what you can try next:
+
+Go back and refresh the page that brought you here. Make sure the
+toolbar shows that you're logged in.
+
+If the problem persists,
+&lt;a href="http://github.com/contact"&gt;contact us&lt;/a&gt;
+and we'll help get you on your way.
+</code></pre>
+
+<hr />
+
+<br>
+
+
+<p>后话：</p>
+
+<p>这里只是用到了protect_from_forgery的附属作用解决了我们的问题，关于 protect_from_forgery 的真正牛逼用途请看下面的解释和 <a href="http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf">Rails guides</a>。</p>
+
+<pre><code>What happens: When the user views a form to create, update, or destroy 
+a resource, the rails app would create a random authenticity_token, 
+store this token in the session, and place it in a hidden field in the 
+form. When the user submits the form, rails would look for the 
+authenticity_token, compare it to the one stored in the session, and if 
+they match the request is allowed to continue.
+
+Why this happens: Since the authenticity token is stored in the session, 
+the client can not know its value. This prevents people from submitting 
+forms to a rails app without viewing the form within that app itself. 
+Imagine that you are using service A, you logged into the service and 
+everything is ok. Now imagine that you went to use service B, and you saw 
+a picture you like, and pressed on the picture to view a larger size of 
+it. Now, if some evil code was there at service B, it might send a request 
+to service A (which you are logged into), and ask to delete your account, 
+by sending a request tohttp://serviceA.com/close_account. This is what is 
+known as CSRF (Cross Site Request Forgery).
+
+If service A is using authenticity tokens, this attack vector is no longer 
+applicable, since the request from service B would not contain the correct 
+authenticity token, and will not be allowed to continue.
+
+Notes: Keep in mind, rails only checks POST, PUT, and DELETE requests. 
+GET request are not checked for authenticity token. Why? because the HTTP 
+specification states that GET requests should NOT create, alter, or destroy 
+resources at the server, and the request should be idempotent 
+(if you run the same command multiple times, you should get the same result 
+every time).
+
+Lessons: Use authenticity_token to protect your POST, PUT, and DELETE 
+requests. Also make sure not to make any GET requests that could potentially 
+modify resources on the server.
+</code></pre>
+
+<p><a href="http://stackoverflow.com/questions/941594/understand-rails-authenticity-token">Understand Rails Authenticity Token!</a></p>
+
+<br>
+
+
+</div>
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>21 May 2012</span> &raquo; <a href="/design_patten/2012/05/21/design-patten-observer">设计模式之'观察者模式'</a></li>
+    
+      <li><span>21 May 2012</span> &raquo; <a href="/美文/2012/05/21/a-business-creed">（转） A Business Creed 《职业信条》</a></li>
+    
+      <li><span>18 May 2012</span> &raquo; <a href="/design_patten/2012/05/18/design-patten-strategy">设计模式之'策略模式'</a></li>
+    
+  </ul>
+</div>
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_developer = 1;
+    var disqus_shortname = 'jekyllbootstrap'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+  
+    <div class="footer">
+      <div class="contact">
+        <p>
+          <a href='mailto:gary.zzhang@gmail.com'>gary.zzhang@gmail.com</a>
+        </p>
+      </div>
+      <div class="contact">
+        <p>
+          <a href="http://github.com/zhangzhe/">github.com/zhangzhe</a><br />
+        </p>
+      </div>
+    </div>
+  </div>
+  <a href="http://github.com/zhangzhe"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+  
+</body>
+</html>
+
