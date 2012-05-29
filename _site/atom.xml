@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-05-29T22:32:08+08:00</updated>
+ <updated>2012-05-29T22:32:17+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>关于跨站攻击</title>
+   <title>关于预防跨站攻击</title>
    <link href="http://zhangzhe.github.com/csrf/2012/05/29/about-protect_from_forgery"/>
    <updated>2012-05-29T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/csrf/2012/05/29/about-protect_from_forgery</id>
