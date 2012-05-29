@@ -201,7 +201,8 @@ end
 
 ***
 <br>
-#2. 结论：protect_from_forgery在新的版本里不会再爆出错误，而只是提示一个警告并清空 session。
+#2. 结论：protect_from_forgery的版本遇到异常时不会再爆出错误，而只是提示一个警告并清空 session。
+
 
 当然可以通过patch的方式找回以前的功能：
 

@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-05-29T22:32:17+08:00</updated>
+ <updated>2012-05-29T22:35:53+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -223,7 +223,7 @@ This fixes CVE-2011-0447
 &lt;br&gt;
 
 
-&lt;h1&gt;2. 结论：protect_from_forgery在新的版本里不会再爆出错误，而只是提示一个警告并清空 session。&lt;/h1&gt;
+&lt;h1&gt;2. 结论：protect_from_forgery的版本遇到异常时不会再爆出错误，而只是提示一个警告并清空 session。&lt;/h1&gt;
 
 &lt;p&gt;当然可以通过patch的方式找回以前的功能：&lt;/p&gt;
 
