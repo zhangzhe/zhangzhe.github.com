@@ -9,6 +9,7 @@ http://zhangzhe.github.com/pages.html
 http://zhangzhe.github.com/sitemap.txt
 http://zhangzhe.github.com/tags.html
 
+http://zhangzhe.github.com/design_patten/2012/06/06/design-patten-composite
 http://zhangzhe.github.com/csrf/2012/05/29/about-protect_from_forgery
 http://zhangzhe.github.com/design_patten/2012/05/21/design-patten-observer
 http://zhangzhe.github.com/美文/2012/05/21/a-business-creed
