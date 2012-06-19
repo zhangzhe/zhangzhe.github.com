@@ -1,11 +1,25 @@
 <div id="post">
   <h1>{{ page.title }}</h1>
   <p class="meta">
-    {{ page.date | date_to_long_string }} 
+    {{ page.date | date_to_long_string }}
     {% if page.location %}{{ page.location }}{% endif %}
   </p>
   {{ content }}
 </div>
+
+<br>
+<h1>版权声明：</h1>
+<p>
+  <a rel="licence" href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/"
+  target="_blank"><img src="http://i.creativecommons.org/l/by-nc-nd/2.5/cn/88x31.png"/></a>
+</p>
+
+<p>
+  本文采用 <a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/"
+  target="_blank" rel="licence">知识共享 署名-非商业性使用-禁止演绎 2.5 中国大陆(CC-BY-NC-ND)</a> 授权，任何形式的转载均需加入本授权协议链接（或文本）以及指向本站的链接。<br>
+  协议地址：http://creativecommons.org/licenses/by-nc-nd/2.5/cn/legalcode<br>
+</p>
+<br>
 
 <div id="related">
   <h2>Related Posts</h2>
@@ -16,4 +30,7 @@
   </ul>
 </div>
 
+
 {% include JB/comments %}
+
+

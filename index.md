@@ -25,6 +25,3 @@ In this blog I will share some technical stuff at work, also part of my personal
     <li><span>{{ post.date | date_to_string }}</span>&nbsp; &raquo; &nbsp; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 </ul>
-
-
-
