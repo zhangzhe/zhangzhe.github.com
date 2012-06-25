@@ -76,9 +76,7 @@
 
 <h2>下面整理写Migration时容易忽略的地方和需要注意的事项。</h2>
 
-<h2>1. <strong>up and down</strong>: migration目的是做数据迁移，所以一定要可进可退。</h2>
-
-<p>但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 raise ActiveRecord::IrreversibleMigration，下面第五点中会有详细说明。</p>
+<h2>1. <strong>up and down</strong>: migration目的是做数据迁移，所以一定要可进可退。但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 raise ActiveRecord::IrreversibleMigration，下面第五点中会有详细说明。</h2>
 
 <br>
 
@@ -102,9 +100,7 @@
 <br>
 
 
-<h2>3. Migration是类，它继承自 ActiveRecord::Migration。</h2>
-
-<p>所以可以直接调用它，可以为它增加方法。当然和业务逻辑相关的方法还是建议写在对应model中。</p>
+<h2>3. Migration是类，它继承自 ActiveRecord::Migration。所以可以直接调用它，可以为它增加方法。当然和业务逻辑相关的方法还是建议写在对应model中。</h2>
 
 <br>
 
@@ -114,9 +110,7 @@
 <br>
 
 
-<h2>5. 不可更改的操作。</h2>
-
-<p>如果有些操作确实不可更改，比如删除操作，那一定要有明确说明，并且在down中raise ActiveRecord::IrreversibleMigration。例：</p>
+<h2>5. 不可更改的操作。如果有些操作确实不可更改，比如删除操作，那一定要有明确说明，并且在down中raise ActiveRecord::IrreversibleMigration。例：</h2>
 
 <div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">RemoveEmptyTags</span><span class="o">&lt;</span><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nf">up</span>

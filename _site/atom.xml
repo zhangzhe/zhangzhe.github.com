@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-06-25T18:55:29+08:00</updated>
+ <updated>2012-06-25T18:57:18+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -59,9 +59,7 @@
 
 &lt;h2&gt;下面整理写Migration时容易忽略的地方和需要注意的事项。&lt;/h2&gt;
 
-&lt;h2&gt;1. &lt;strong&gt;up and down&lt;/strong&gt;: migration目的是做数据迁移，所以一定要可进可退。&lt;/h2&gt;
-
-&lt;p&gt;但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 raise ActiveRecord::IrreversibleMigration，下面第五点中会有详细说明。&lt;/p&gt;
+&lt;h2&gt;1. &lt;strong&gt;up and down&lt;/strong&gt;: migration目的是做数据迁移，所以一定要可进可退。但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 raise ActiveRecord::IrreversibleMigration，下面第五点中会有详细说明。&lt;/h2&gt;
 
 &lt;br&gt;
 
@@ -85,9 +83,7 @@
 &lt;br&gt;
 
 
-&lt;h2&gt;3. Migration是类，它继承自 ActiveRecord::Migration。&lt;/h2&gt;
-
-&lt;p&gt;所以可以直接调用它，可以为它增加方法。当然和业务逻辑相关的方法还是建议写在对应model中。&lt;/p&gt;
+&lt;h2&gt;3. Migration是类，它继承自 ActiveRecord::Migration。所以可以直接调用它，可以为它增加方法。当然和业务逻辑相关的方法还是建议写在对应model中。&lt;/h2&gt;
 
 &lt;br&gt;
 
@@ -97,9 +93,7 @@
 &lt;br&gt;
 
 
-&lt;h2&gt;5. 不可更改的操作。&lt;/h2&gt;
-
-&lt;p&gt;如果有些操作确实不可更改，比如删除操作，那一定要有明确说明，并且在down中raise ActiveRecord::IrreversibleMigration。例：&lt;/p&gt;
+&lt;h2&gt;5. 不可更改的操作。如果有些操作确实不可更改，比如删除操作，那一定要有明确说明，并且在down中raise ActiveRecord::IrreversibleMigration。例：&lt;/h2&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RemoveEmptyTags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;up&lt;/span&gt;
