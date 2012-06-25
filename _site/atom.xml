@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-06-25T18:58:05+08:00</updated>
+ <updated>2012-06-25T19:05:22+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -49,15 +49,21 @@
 
 &lt;p&gt;&lt;code&gt;运行对表结构改变的migration时，postgresql会锁定对应表，mysql和sqlit3不会锁。&lt;/code&gt;&lt;/p&gt;
 
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 
 
 &lt;hr /&gt;
 
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
 
 
 &lt;h2&gt;下面整理写Migration时容易忽略的地方和需要注意的事项。&lt;/h2&gt;
+
+&lt;br&gt;
+
+
+&lt;br&gt;
+
 
 &lt;h2&gt;1. &lt;strong&gt;up and down&lt;/strong&gt;: migration目的是做数据迁移，所以一定要可进可退。但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 &lt;code&gt;raise ActiveRecord::IrreversibleMigration&lt;/code&gt;，下面第五点中会有详细说明。&lt;/h2&gt;
 
@@ -220,15 +226,8 @@
 
 &lt;p&gt;更多相关介绍请参考：&lt;/p&gt;
 
-&lt;br&gt;
-
-
-&lt;p&gt;http://api.rubyonrails.org/classes/ActiveRecord/Migration.html&lt;/p&gt;
-
-&lt;br&gt;
-
-
-&lt;p&gt;http://guides.rubyonrails.org/migrations.html&lt;/p&gt;
+&lt;p&gt;http://api.rubyonrails.org/classes/ActiveRecord/Migration.html
+http://guides.rubyonrails.org/migrations.html&lt;/p&gt;
 </content>
  </entry>
  
