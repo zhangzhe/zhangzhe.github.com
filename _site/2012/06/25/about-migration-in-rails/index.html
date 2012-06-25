@@ -76,7 +76,7 @@
 
 <h2>下面整理写Migration时容易忽略的地方和需要注意的事项。</h2>
 
-<h2>1. <strong>up and down</strong>: migration目的是做数据迁移，所以一定要可进可退。但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 raise ActiveRecord::IrreversibleMigration，下面第五点中会有详细说明。</h2>
+<h2>1. <strong>up and down</strong>: migration目的是做数据迁移，所以一定要可进可退。但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 <code>raise ActiveRecord::IrreversibleMigration</code>，下面第五点中会有详细说明。</h2>
 
 <br>
 
@@ -100,12 +100,12 @@
 <br>
 
 
-<h2>3. Migration是类，它继承自 ActiveRecord::Migration。所以可以直接调用它，可以为它增加方法。当然和业务逻辑相关的方法还是建议写在对应model中。</h2>
+<h2>3. <code>Migration</code>是类，它继承自 <code>ActiveRecord::Migration</code>。所以可以直接调用它，可以为它增加方法。当然和业务逻辑相关的方法还是建议写在对应model中。</h2>
 
 <br>
 
 
-<h2>4. Migration中对应的操作会被包在<code>事务</code>中。</h2>
+<h2>4. <code>Migration</code>中对应的操作会被包在<code>事务</code>中。</h2>
 
 <br>
 

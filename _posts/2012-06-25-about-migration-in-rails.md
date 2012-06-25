@@ -32,11 +32,14 @@ end
 ##结论：
 `运行对表结构改变的migration时，postgresql会锁定对应表，mysql和sqlit3不会锁。`
 
-<br><br>
+<br>
+
 ***
 
-<br><br>
+<br>
 ##下面整理写Migration时容易忽略的地方和需要注意的事项。
+<br>
+<br>
 
 ##1. **up and down**: migration目的是做数据迁移，所以一定要可进可退。但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 `raise ActiveRecord::IrreversibleMigration`，下面第五点中会有详细说明。
 
@@ -161,7 +164,6 @@ end
 ***
 
 更多相关介绍请参考：
-<br>
+
 http://api.rubyonrails.org/classes/ActiveRecord/Migration.html
-<br>
 http://guides.rubyonrails.org/migrations.html
