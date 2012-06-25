@@ -38,8 +38,7 @@ end
 <br><br>
 ##下面整理写Migration时容易忽略的地方和需要注意的事项。
 
-##1. **up and down**: migration目的是做数据迁移，所以一定要可进可退。
-但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 raise ActiveRecord::IrreversibleMigration，下面第五点中会有详细说明。
+##1. **up and down**: migration目的是做数据迁移，所以一定要可进可退。但有一些删除或修改的操作没法回退，则一定要有明确说明，并且在down中 raise ActiveRecord::IrreversibleMigration，下面第五点中会有详细说明。
 
 <br>
 ##2. rails 3.1新增加了change方法，用来处理增量类操作，如增加表或增加属性，Migration会自动为我们加入回退。例：
@@ -56,8 +55,7 @@ end
 
 <br>
 
-##3. Migration是类，它继承自 ActiveRecord::Migration。
-所以可以直接调用它，可以为它增加方法。当然和业务逻辑相关的方法还是建议写在对应model中。
+##3. Migration是类，它继承自 ActiveRecord::Migration。所以可以直接调用它，可以为它增加方法。当然和业务逻辑相关的方法还是建议写在对应model中。
 
 <br>
 
@@ -65,8 +63,7 @@ end
 
 <br>
 
-##5. 不可更改的操作。
-如果有些操作确实不可更改，比如删除操作，那一定要有明确说明，并且在down中raise ActiveRecord::IrreversibleMigration。例：
+##5. 不可更改的操作。如果有些操作确实不可更改，比如删除操作，那一定要有明确说明，并且在down中raise ActiveRecord::IrreversibleMigration。例：
 
 {% highlight ruby %}
 class RemoveEmptyTags<ActiveRecord::Migration
