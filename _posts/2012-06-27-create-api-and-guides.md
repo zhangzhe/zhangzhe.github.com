@@ -19,7 +19,7 @@ tags: [Rails, api, guide]
 
 
 
-##1. 创建 Rails Guides
+##1. 离线 Rails Guides
 首先新建一个rails应用，不妨就叫railsguides
 
 `rails new railsguides`
@@ -39,7 +39,7 @@ tags: [Rails, api, guide]
 
 *** 
 <br>
-##2. 创建 Rails API，
+##2. 离线 Rails API
 Rails为我们提供了生成doc的方法，但是我更喜欢这个方便查找的版本。
 直接去[http://railsapi.com/](http://railsapi.com/ "http://railsapi.com/")下载吧，同时附赠了Ruby API，还可以定制。
 <br>
