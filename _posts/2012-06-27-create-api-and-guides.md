@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "关于使用脱机版的Rails api 和 guides"
+title: "关于使用脱机版的Rails API 和 guides"
 description: ""
 category: 
 tags: [Rails, api, guide]
@@ -15,7 +15,7 @@ tags: [Rails, api, guide]
 
 当然我们可以通过访问上述网址在线查看，但是有时网速问题或无法上网还是最造成一些不变。那如果可以离线使用就太好了。
 
-下面介绍如何把这两个东西搞到你的本机上。（当然你更可以把他们搞到移动端，如`ipad`或`iphone`上。个人感觉使用`goodreader`查看guide效果很好，查api有些不方便。）
+下面介绍如何把这两个东西搞到你的本机上。（当然你更可以把他们搞到移动端，如`ipad`或`iphone`上。个人感觉使用`goodreader`查看guide效果很好，查API有些不方便。）
 
 
 
