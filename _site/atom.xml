@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-06-25T19:05:22+08:00</updated>
+ <updated>2012-06-27T15:00:33+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -13,10 +13,62 @@
 
  
  <entry>
-   <title>about migration in Rails</title>
-   <link href="http://zhangzhe.github.com/2012/06/25/about-migration-in-rails"/>
+   <title>关于使用脱机版的Rails api 和 guides</title>
+   <link href="http://zhangzhe.github.com/2012/06/27/create-api-and-guides"/>
+   <updated>2012-06-27T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/2012/06/27/create-api-and-guides</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;http://api.rubyonrails.org/&quot; title=&quot;http://api.rubyonrails.org/&quot;&gt;http://api.rubyonrails.org/&lt;/a&gt; &amp;amp; &lt;a href=&quot;http://guides.rubyonrails.org/&quot; title=&quot;http://guides.rubyonrails.org/&quot;&gt;http://guides.rubyonrails.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;使用&lt;code&gt;Ruby On Rails&lt;/code&gt;做开发对这两个网站一定不会陌生。相信不管是新手还是老鸟都能从上边找到自己需要的信息。&lt;/p&gt;
+
+&lt;p&gt;当然我们可以通过访问上述网址在线查看，但是有时网速问题或无法上网还是最造成一些不变。那如果可以离线使用就太好了。&lt;/p&gt;
+
+&lt;p&gt;下面介绍如何把这两个东西搞到你的本机上。（当然你更可以把他们搞到移动端，如&lt;code&gt;ipad&lt;/code&gt;或&lt;code&gt;iphone&lt;/code&gt;上。个人感觉使用&lt;code&gt;goodreader&lt;/code&gt;查看guide效果很好，查api有些不方便。）&lt;/p&gt;
+
+&lt;h2&gt;创建 Rails Guides&lt;/h2&gt;
+
+&lt;p&gt;首先新建一个rails应用，不妨就叫railsguides&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;rails new railsguides&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;接下来加入 RedCloth 到 Gemfile&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;gem 'RedCloth'&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;运行 bundle 完成安装&lt;/p&gt;
+
+&lt;p&gt;接下来运行下面的命令&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;rake doc:guides&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;去doc目录下找你的guides吧。&lt;/p&gt;
+
+&lt;br&gt;
+
+
+&lt;hr /&gt;
+
+&lt;br&gt;
+
+
+&lt;h2&gt;创建 Rails API，&lt;/h2&gt;
+
+&lt;p&gt;Rails为我们提供了生成doc的方法，但是我更喜欢这个方便查找的版本。
+直接去&lt;a href=&quot;http://railsapi.com/&quot; title=&quot;http://railsapi.com/&quot;&gt;http://railsapi.com/&lt;/a&gt;下载吧，同时附赠了Ruby API，还可以定制。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;结论&lt;/h2&gt;
+
+&lt;p&gt;我个人喜欢把API和guides放到项目目录下，然后为index在建立书签。方便在开发同时查阅。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>关于Rails中的 migration</title>
+   <link href="http://zhangzhe.github.com/Rails/2012/06/25/about-migration-in-rails"/>
    <updated>2012-06-25T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/2012/06/25/about-migration-in-rails</id>
+   <id>http://zhangzhe.github.com/Rails/2012/06/25/about-migration-in-rails</id>
    <content type="html">&lt;h2&gt;0. 一个发现：&lt;/h2&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestMigrationLock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;

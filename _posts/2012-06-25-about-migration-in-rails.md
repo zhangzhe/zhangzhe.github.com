@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "about migration in Rails"
+title: "关于Rails中的 migration"
 description: ""
-category: 
-tags: []
+category: Rails
+tags: [rails, migration]
 ---
 {% include JB/setup %}
 
