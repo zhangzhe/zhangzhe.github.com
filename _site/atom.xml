@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-06-27T15:03:34+08:00</updated>
+ <updated>2012-06-27T15:07:37+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -25,7 +25,7 @@
 
 &lt;p&gt;下面介绍如何把这两个东西搞到你的本机上。（当然你更可以把他们搞到移动端，如&lt;code&gt;ipad&lt;/code&gt;或&lt;code&gt;iphone&lt;/code&gt;上。个人感觉使用&lt;code&gt;goodreader&lt;/code&gt;查看guide效果很好，查API有些不方便。）&lt;/p&gt;
 
-&lt;h2&gt;1. 创建 Rails Guides&lt;/h2&gt;
+&lt;h2&gt;1. 离线 Rails Guides&lt;/h2&gt;
 
 &lt;p&gt;首先新建一个rails应用，不妨就叫railsguides&lt;/p&gt;
 
@@ -51,7 +51,7 @@
 &lt;br&gt;
 
 
-&lt;h2&gt;2. 创建 Rails API，&lt;/h2&gt;
+&lt;h2&gt;2. 离线 Rails API&lt;/h2&gt;
 
 &lt;p&gt;Rails为我们提供了生成doc的方法，但是我更喜欢这个方便查找的版本。
 直接去&lt;a href=&quot;http://railsapi.com/&quot; title=&quot;http://railsapi.com/&quot;&gt;http://railsapi.com/&lt;/a&gt;下载吧，同时附赠了Ruby API，还可以定制。&lt;/p&gt;

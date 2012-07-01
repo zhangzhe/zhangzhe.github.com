@@ -14,6 +14,9 @@ I love beautiful code and try my best writing them.
 I am crazy about cycling, running and swimming. I took part in marathon three times, triathlons four times, 70.3 ironman one time and lots of other games.
 
 In this blog I will share some technical stuff at work, also part of my personal life. Enjoy:)![Alt text](/images/portrait.jpg "me")
+ 
+
+(zhangzhe.heroku.com "Old blog")
 <br>
 
 ***
