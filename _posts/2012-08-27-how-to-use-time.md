@@ -3,7 +3,7 @@ layout: post
 title: "有效地利用碎片时间"
 description: ""
 category: Journal
-tags: [time]
+tags: [生活]
 ---
 {% include JB/setup %}
 

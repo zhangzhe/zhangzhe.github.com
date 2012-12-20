@@ -6,7 +6,6 @@ git add .
 $ git commit -m "Add new content"
 $ git push origin master
 
-
 http://jekyllbootstrap.com/lessons/jekyll-introduction.html
 
 # Jekyll-Bootstrap
