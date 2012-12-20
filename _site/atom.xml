@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-12-20T18:42:20+08:00</updated>
+ <updated>2012-12-20T21:01:53+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -30,6 +30,135 @@
 &lt;p&gt;共勉&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;生活中每个人都像一个小丑，同时在玩着五个球，分别是你的工作、健康、家庭、朋友还有灵魂。这五个球只有一个是用橡胶做的，掉下去会弹起来，那就是工作。另外四个呢，都是用玻璃做的，掉下去会碎的。所以工作要努力，但是家庭、健康、朋友还有灵魂大家更要珍惜。&lt;/code&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>有效地利用碎片时间</title>
+   <link href="http://zhangzhe.github.com/Journal/2012/08/27/how-to-use-time"/>
+   <updated>2012-08-27T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Journal/2012/08/27/how-to-use-time</id>
+   <content type="html">&lt;p&gt;最近读到关于利用有效碎片时间的文章，也整理出自己的一些方法，分享在这里。&lt;/p&gt;
+
+&lt;p&gt;合理的利用零散时间不单是技巧的结合，而是一种生活习惯，平时就准备好，遇到空闲时间直接就用不用考虑直接就行动：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;1、厕所和床头各放一本书，看完就换
+2、手机上装满书和视频，比如TED、公开课
+3、手机上安装evernote，随时记下想法，列一些待办事项清单
+4、准备个电话清单，都是要定期打电话的人。比如公司客户、家人、朋友，空闲时打个电话交流下感情
+5、利用几分钟的时间，按摩头发（还可以防止掉头发）和眼睛。
+6、平时纪录一些笔记或资料，存在手机里，没事的时候找出来复习一下。
+7、做个当天或前一周的总结，记到Evernote上
+8、平时订阅一些Blog、网站的RSS，空闲时阅读一下
+9、给家人或朋友准备个礼物清单，在空闲时用手机上网挑些有特色的创意礼物，买完放到办公室里。
+等有需要的时候立刻就可以用。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;碎片时间就像拼图，用好了同样可以拼装成大的整块，做成很多事情。并且碎片时间预备整块时间所没有的特有便利性。&lt;/p&gt;
+
+&lt;p&gt;PS，千万不要用碎片时间看微博 ～&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>那些遗憾不算什么</title>
+   <link href="http://zhangzhe.github.com/Journal/2012/08/18/no-big-deal"/>
+   <updated>2012-08-18T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Journal/2012/08/18/no-big-deal</id>
+   <content type="html">&lt;p&gt;某天迷迷糊糊中听了纯白网络电台的一段播音，内容是关于人生的遗憾。&lt;/p&gt;
+
+&lt;p&gt;其实我们的每一天都在遗憾中度过。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;早晨起晚了，错过第一缕晨曦；
+早餐没有吃到自己想吃的；
+程序中出现了蹩脚的bug；
+打球时投失了关键球 ... 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;遗憾，但是没什么。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;起晚了，但是补充了睡眠，让我一天更有精神；
+没有吃到自己想吃的，但却尝到了另一种味道；
+程序中出现的bug让我以后不再犯同样的错误；
+投失了关键球说明我的心理素质不够，以后会重点锻炼。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那些遗憾不算什么，因为我们从中得到了更宝贵的东西。&lt;/p&gt;
+
+&lt;p&gt;人生是不可能完美的，那些遗憾就是我们人生的完美。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>关于破窗理论</title>
+   <link href="http://zhangzhe.github.com/Journal/2012/08/06/broken-window-theory"/>
+   <updated>2012-08-06T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Journal/2012/08/06/broken-window-theory</id>
+   <content type="html">&lt;p&gt;上周换了新的电脑，兴奋之余又把操作系统升级到了Mountain Lion。整个一周感觉小心翼翼而又心情愉快。心情愉快很正常，为什么又会小心翼翼呢？&lt;/p&gt;
+
+&lt;p&gt;因为上了新电脑和新系统，顺便把之前的硬盘内容清理了一下：删掉很多多余的东西；上周的反思提到了Railscasts的未及时跟进和googlereader内容的多与杂也在周末一并解决了；部分重要内容同步到了Dropbox和快盘上。之后的一切就是小心翼翼了，生怕把一个整洁美感的环境破坏掉。&lt;/p&gt;
+
+&lt;p&gt;关于破窗理论，任何一个程序员都是耳熟能详的：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;一个房子如果窗户破了，没有人去修补，隔不久，其它的窗户也会莫名其妙地被人打破；一面墙，如果出现一些涂鸦没有被清洗掉，很快的，墙上就布满了乱七八糟、不堪入目的东西；一个很干净的地方，人们不好意思丢垃圾，但是一旦地上有垃圾出现之后，人就会毫不犹疑地抛，丝毫不觉羞愧。&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;我联想到在项目计划、管理过程中，如果每一步计划、任务都做到让自己满意，满意到在做接下来的工作时不忍心破坏这种完美的话，理论上来说这个任务最终完成时也会是完美的。但如果在进行过程中，有任何一步做的不好，形成了“破窗”，那可能接下来破窗会越来越多，项目最终也可能会成为废墟，导致失败。&lt;/p&gt;
+
+&lt;p&gt;我会努力让新的电脑在很长时间不产生“破窗”；同时在项目中尽量将每一步做到最好，永远避免第一个“破窗”的出现。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>TOT培训有感</title>
+   <link href="http://zhangzhe.github.com/Journal/2012/07/23/tot-training-back"/>
+   <updated>2012-07-23T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Journal/2012/07/23/tot-training-back</id>
+   <content type="html">&lt;p&gt;上周作为辅导员参加了&lt;code&gt;TOT12-2&lt;/code&gt;的素质培训。&lt;/p&gt;
+
+&lt;p&gt;为期5天的培训，第一次以旁观者的视角看一些事情，发现一些之前不会意识到的问题。&lt;/p&gt;
+
+&lt;p&gt;因为之前也没有参加过类似的培训，虽然有了心理准备，但还是为培训的强度和丰富的内容吃了一惊。&lt;/p&gt;
+
+&lt;p&gt;其中“盲人互助&quot;这个培训活动给我留下了极深的印象。两个之前素不相识的人究竟能产生有多大的默契和信任，来完成那样一段坎坷的路。而共患难后的感情和信任着实让人羡慕。&lt;/p&gt;
+
+&lt;p&gt;老卢的讲话也让我让我受益匪浅：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;捉住心目中最重要的东西；
+厚积薄发，塌下心来做实事，不要着急和人攀比。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;是的，人的一生很长，正如一场马拉松比赛。暂时的落后也要心平气和，按照自己的节奏逐步赶上；短暂的领先更要小心谨慎，避免自大而跌倒。&lt;/p&gt;
+
+&lt;p&gt;正如海明威所说的：&lt;code&gt;优于别人，并不高贵，真正的高贵应该是优于过去的自己。&lt;/code&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>肖恩·阿克尔: 改善工作的快乐之道</title>
+   <link href="http://zhangzhe.github.com/Journal/2012/07/11/happy-way"/>
+   <updated>2012-07-11T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Journal/2012/07/11/happy-way</id>
+   <content type="html">&lt;p&gt;分享一个昨天看到的很棒的演讲《改善工作的快乐之道》，这绝对是我今年到现在为止看到的最有感触的视频。&lt;/p&gt;
+
+&lt;p&gt;我们都想快乐，也都想高效工作，这两者之间又有什么关系呢？在TEDxBloomington大会上，心理学家肖恩·阿克尔做了一个快速、生动有趣的演讲，告诉我们其实是快乐激发了生产力。&lt;/p&gt;
+
+&lt;p&gt;演讲中我认为最好的两个观点：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;1. 把难题当作挑战而不是困难。
+2. 每天记录下三件快乐或感恩的事情，连续21天可改变心态。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.universalsubtitles.org/en/videos/m4eMmeG8M1FI/zh-cn/293258/&quot; title=&quot;地址&quot;&gt;地址&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  

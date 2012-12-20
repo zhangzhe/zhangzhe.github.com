@@ -10,6 +10,11 @@ http://zhangzhe.github.com/sitemap.txt
 http://zhangzhe.github.com/tags.html
 
 http://zhangzhe.github.com/Journal/2012/09/11/surprise-in-life
+http://zhangzhe.github.com/Journal/2012/08/27/how-to-use-time
+http://zhangzhe.github.com/Journal/2012/08/18/no-big-deal
+http://zhangzhe.github.com/Journal/2012/08/06/broken-window-theory
+http://zhangzhe.github.com/Journal/2012/07/23/tot-training-back
+http://zhangzhe.github.com/Journal/2012/07/11/happy-way
 http://zhangzhe.github.com/Rails/2012/06/27/create-api-and-guides
 http://zhangzhe.github.com/Rails/2012/06/25/about-migration-in-rails
 http://zhangzhe.github.com/DesignPattern/2012/06/06/design-patten-composite

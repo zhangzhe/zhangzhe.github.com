@@ -1,5 +1,5 @@
 jekyll --server
-rake post title="Computer upgrade"
+rake post title="happy way"
 rake page name="about.md"
 
 git add .
