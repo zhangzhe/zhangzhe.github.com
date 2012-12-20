@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-12-20T18:15:49+08:00</updated>
+ <updated>2012-12-20T18:42:20+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -1546,6 +1546,146 @@ json格式:
 
 &lt;p&gt;总结：模板方法实际上是利用多态这种晚绑定机制来将一些执行动作的定义延迟到子类。子类可以在不改变算法结构的情况下，调整算法的细节实现。
 除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你”的反向控制结构是模版方法的典型应用。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>some tricks from work</title>
+   <link href="http://zhangzhe.github.com/2010/02/12/some-work-tricks"/>
+   <updated>2010-02-12T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/2010/02/12/some-work-tricks</id>
+   <content type="html">&lt;p&gt;Read &quot;The productive programmer&quot; before, though could not understand a lot, I thought it was very useful to me.
+Today read &quot;追求神乎其技的程式設計之道（十）&quot;:程式設計師的生產力之謎. Identify with author's opinin about productivity.&lt;/p&gt;
+
+&lt;p&gt;Record some tricks from work, hope helps:)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1.create ubuntu shorter command&lt;/strong&gt;&lt;br&gt;
+add to &lt;code&gt;~/.bashrc&lt;/code&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;alias s='script/server'
+alias c='script/console'
+alias gz='cd /home/gary/idapted/zhangzhe/'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;restart terminal.&lt;/p&gt;
+
+&lt;p&gt;Now input &lt;code&gt;gz&lt;/code&gt; in term goes to /home/gary/idapted/zhangzhe/ folder，
+under rails app root path，input &lt;code&gt;s&lt;/code&gt; opens server, &lt;code&gt;c&lt;/code&gt; open console.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.Use shortcut&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;Ubuntu&lt;/code&gt;&lt;br&gt;
+Use Compiz Config Settings Manager config with habit.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;Alt + f       open Firefox
+Alt + e      open Emacs
+Alt + p      open Pidgin
+Alt + g      open Geditor
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Firefox&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;ctrl + shift + t      open last closed tab
+ctrl + k              into google search 
+ctrl + w              close current tab
+ctrl + t              open a new tab
+ctrl + l              into address field
+ctrl + tab            loop go to next tab
+ctrl + shift + tab    loop go to pre tab
+ctrl + f              search
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;3.Use script to shorter command&lt;/strong&gt;&lt;br&gt;
+For example, I use git do version control，deploy app to heroku. So after every iteration, I need to input into term:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;git add .
+git commit . -m &quot;some info&quot;
+git push heroku master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to commit and deploy.&lt;/p&gt;
+
+&lt;p&gt;All the command above can be simple by ruby script.&lt;/p&gt;
+
+&lt;p&gt;I create a file &lt;code&gt;cmh&lt;/code&gt; in app root, with ruby script&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env ruby
+def exe_cmd(cmd)
+  puts cmd
+  system cmd
+end
+
+cmd = &quot;git add .&quot;
+exe_cmd cmd
+
+args = ARGV.join(' ')
+cmd = &quot;git commit . -m '#{ARGV[0]}'&quot;
+exe_cmd cmd
+
+cmd = &quot;git push heroku master&quot;
+exe_cmd cmd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;so I can call ./cmh &quot;some info&quot; in term for short to deploy.&lt;/p&gt;
+
+&lt;p&gt;Another example, create a file calls &lt;code&gt;bf&lt;/code&gt; in app root, with ruby script&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env ruby
+def exe_cmd(cmd)
+  puts cmd
+  system cmd
+end
+
+cmd = &quot;heroku db:pull mysql://user@localhost/zhangzhe_bf?encoding=utf8&quot;
+exe_cmd cmd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;so I can call ./bf in term for short to backup.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4.improve ruby console&lt;/strong&gt;&lt;br&gt;
+Wirble, a gem that improve your irb console with syntax coloring of output and input history.
+install &lt;br&gt;
+&lt;code&gt;gem install wirble&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;and put the following into &lt;code&gt;~/.irbrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;require 'rubygems'
+require 'wirble'
+Wirble.init
+Wirble.colorize
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;check &lt;a href=&quot;http://pablotron.org/software/wirble/&quot; title=&quot;here&quot;&gt;here&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5.improve ruby console plus&lt;/strong&gt;&lt;br&gt;
+When start learning Ruby, I kept thinking about, is there a way can edit code as easy as in a code_editor and check code output as easy as in &lt;code&gt;irb&lt;/code&gt;.
+Today, found it:)
+&lt;code&gt;sketches&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;install:&lt;br&gt;
+&lt;code&gt;gem install sketches&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then require sketches in your &lt;code&gt;.irbrc&lt;/code&gt; file:&lt;br&gt;
+&lt;code&gt;require 'sketches'&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Sketches can be configured to use a custom editor command: &lt;br&gt;
+&lt;code&gt;Sketches.config :editor =&amp;gt; 'gedit'&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;use in &lt;code&gt;irb&lt;/code&gt;:&lt;br&gt;
+&lt;code&gt;sketch&lt;/code&gt;&lt;/p&gt;
 </content>
  </entry>
  

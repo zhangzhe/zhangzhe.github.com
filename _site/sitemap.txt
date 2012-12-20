@@ -18,5 +18,6 @@ http://zhangzhe.github.com/DesignPattern/2012/05/21/design-patten-observer
 http://zhangzhe.github.com/Journal/2012/05/21/a-business-creed
 http://zhangzhe.github.com/DesignPattern/2012/05/18/design-patten-strategy
 http://zhangzhe.github.com/DesignPattern/2012/05/16/design-patten-template
+http://zhangzhe.github.com/2010/02/12/some-work-tricks
 http://zhangzhe.github.com/Journal/2010/01/26/computer-upgrade
 http://zhangzhe.github.com/Tool/2010/01/19/no-cheat-sheet-anymore
