@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-09-11T09:06:55+08:00</updated>
+ <updated>2012-12-20T17:48:11+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>生活中的小惊喜</title>
-   <link href="http://zhangzhe.github.com/2012/09/11/surprise-in-life"/>
+   <link href="http://zhangzhe.github.com/Journal/2012/09/11/surprise-in-life"/>
    <updated>2012-09-11T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/2012/09/11/surprise-in-life</id>
+   <id>http://zhangzhe.github.com/Journal/2012/09/11/surprise-in-life</id>
    <content type="html">&lt;p&gt;上周工作很辛苦，加上周五被防水材料熏了一晚，周六早上整个脑袋都昏昏的。于是周六去了花卉市场排毒。惊喜的发现那边有菜籽出售。于是买了香菜、香葱、苦苣和小西红柿种子，去小区草堆里精挑细选的刨了一堆土，周日一早种上了。看来今年有望吃上自己种的菜。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/supprise.jpg&quot; title=&quot;me&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
@@ -35,9 +35,9 @@
  
  <entry>
    <title>关于使用脱机版的Rails API 和 guides</title>
-   <link href="http://zhangzhe.github.com/2012/06/27/create-api-and-guides"/>
+   <link href="http://zhangzhe.github.com/Rails/2012/06/27/create-api-and-guides"/>
    <updated>2012-06-27T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/2012/06/27/create-api-and-guides</id>
+   <id>http://zhangzhe.github.com/Rails/2012/06/27/create-api-and-guides</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;http://api.rubyonrails.org/&quot; title=&quot;http://api.rubyonrails.org/&quot;&gt;http://api.rubyonrails.org/&lt;/a&gt; &amp;amp; &lt;a href=&quot;http://guides.rubyonrails.org/&quot; title=&quot;http://guides.rubyonrails.org/&quot;&gt;http://guides.rubyonrails.org/&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;使用&lt;code&gt;Ruby On Rails&lt;/code&gt;做开发对这两个网站一定不会陌生。相信不管是新手还是老鸟都能从上边找到自己需要的信息。&lt;/p&gt;
@@ -312,9 +312,9 @@ http://guides.rubyonrails.org/migrations.html&lt;/p&gt;
  
  <entry>
    <title>设计模式之'组合模式'</title>
-   <link href="http://zhangzhe.github.com/design_patten/2012/06/06/design-patten-composite"/>
+   <link href="http://zhangzhe.github.com/DesignPattern/2012/06/06/design-patten-composite"/>
    <updated>2012-06-06T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/design_patten/2012/06/06/design-patten-composite</id>
+   <id>http://zhangzhe.github.com/DesignPattern/2012/06/06/design-patten-composite</id>
    <content type="html">&lt;h1&gt;模式描述&lt;/h1&gt;
 
 &lt;p&gt;&lt;code&gt;组合模式&lt;/code&gt; 是一种结构型模式。&lt;/p&gt;
@@ -625,9 +625,9 @@ http://guides.rubyonrails.org/migrations.html&lt;/p&gt;
  
  <entry>
    <title>关于预防跨站攻击</title>
-   <link href="http://zhangzhe.github.com/csrf/2012/05/29/about-protect_from_forgery"/>
+   <link href="http://zhangzhe.github.com/DesignPattern/2012/05/29/about-protect_from_forgery"/>
    <updated>2012-05-29T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/csrf/2012/05/29/about-protect_from_forgery</id>
+   <id>http://zhangzhe.github.com/DesignPattern/2012/05/29/about-protect_from_forgery</id>
    <content type="html">&lt;p&gt;公司网站自从上周开始使用&lt;code&gt;exception_notification&lt;/code&gt; 实现错误报警。截止到今天（2012.5.29），user_registrations controller  的 create action 共上报了1098个错误。虽然错误信息是所谓的 ‘undefined method [] for nil:NilClass ‘，但代码排查后我们发现，这是一个典型的漏洞攻击。&lt;/p&gt;
 
 &lt;p&gt;攻击者伪造了&lt;code&gt;name、company_name、nickname、password_confirmation、user_type、company_type、password、mobile_phone、email&lt;/code&gt; 共9个属性，填写后越过Ajax验证提交表单。由于还缺少几个关键属性，虽提交成功，却没能在系统中生成记录。因为数据不足产生错误，从而最终被我们作为出错信息记录了下来。&lt;/p&gt;
@@ -931,9 +931,9 @@ modify resources on the server.
  
  <entry>
    <title>设计模式之'观察者模式'</title>
-   <link href="http://zhangzhe.github.com/design_patten/2012/05/21/design-patten-observer"/>
+   <link href="http://zhangzhe.github.com/DesignPattern/2012/05/21/design-patten-observer"/>
    <updated>2012-05-21T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/design_patten/2012/05/21/design-patten-observer</id>
+   <id>http://zhangzhe.github.com/DesignPattern/2012/05/21/design-patten-observer</id>
    <content type="html">&lt;h1&gt;模式描述&lt;/h1&gt;
 
 &lt;p&gt;&lt;code&gt;观察者模式&lt;/code&gt; 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）&lt;/p&gt;
@@ -1144,9 +1144,9 @@ modify resources on the server.
  
  <entry>
    <title>（转） A Business Creed 《职业信条》</title>
-   <link href="http://zhangzhe.github.com/美文/2012/05/21/a-business-creed"/>
+   <link href="http://zhangzhe.github.com/Journal/2012/05/21/a-business-creed"/>
    <updated>2012-05-21T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/美文/2012/05/21/a-business-creed</id>
+   <id>http://zhangzhe.github.com/Journal/2012/05/21/a-business-creed</id>
    <content type="html">&lt;h2&gt;注：一位朋友翻译并推荐的。目前已成为部门工作信条。&lt;/h2&gt;
 
 &lt;p&gt;分享一个十年前的今天读到的一篇文章，虽时过境迁，读起来犹足以自砺，早上起来又翻译了一遍，分享以共勉。
@@ -1208,9 +1208,9 @@ modify resources on the server.
  
  <entry>
    <title>设计模式之'策略模式'</title>
-   <link href="http://zhangzhe.github.com/design_patten/2012/05/18/design-patten-strategy"/>
+   <link href="http://zhangzhe.github.com/DesignPattern/2012/05/18/design-patten-strategy"/>
    <updated>2012-05-18T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/design_patten/2012/05/18/design-patten-strategy</id>
+   <id>http://zhangzhe.github.com/DesignPattern/2012/05/18/design-patten-strategy</id>
    <content type="html">&lt;h1&gt;模式描述&lt;/h1&gt;
 
 &lt;p&gt;&lt;code&gt;策略模式&lt;/code&gt; 是一种行为型模式。
@@ -1338,9 +1338,9 @@ modify resources on the server.
  
  <entry>
    <title>设计模式之'模版方法'</title>
-   <link href="http://zhangzhe.github.com/design_patten/2012/05/16/design-patten-template"/>
+   <link href="http://zhangzhe.github.com/DesignPattern/2012/05/16/design-patten-template"/>
    <updated>2012-05-16T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/design_patten/2012/05/16/design-patten-template</id>
+   <id>http://zhangzhe.github.com/DesignPattern/2012/05/16/design-patten-template</id>
    <content type="html">&lt;h1&gt;模式描述&lt;/h1&gt;
 
 &lt;p&gt;&lt;code&gt;模版方法&lt;/code&gt; 是一种行为型模式。
@@ -1546,6 +1546,49 @@ json格式:
 
 &lt;p&gt;总结：模板方法实际上是利用多态这种晚绑定机制来将一些执行动作的定义延迟到子类。子类可以在不改变算法结构的情况下，调整算法的细节实现。
 除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你”的反向控制结构是模版方法的典型应用。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>no cheat sheet anymore</title>
+   <link href="http://zhangzhe.github.com/Tool/2010/01/19/no-cheat-sheet-anymore"/>
+   <updated>2010-01-19T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Tool/2010/01/19/no-cheat-sheet-anymore</id>
+   <content type="html">&lt;p&gt;All the time I used cheat sheet struggling with my bad memory.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Rails sheet&lt;/li&gt;
+&lt;li&gt;Postgres sheet&lt;/li&gt;
+&lt;li&gt;Prototype sheet&lt;/li&gt;
+&lt;li&gt;jQuery sheet&lt;/li&gt;
+&lt;li&gt;Girls sheet...&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;/images/cheat.jpg&quot; title=&quot;cheat&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;No need anymore!!! Because &lt;a href=&quot;http://cheat.errtheblog.com&quot;&gt;Cheat&lt;/a&gt; Comes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;install&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;gem install cheat&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;use&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;cheat stuff&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;check all sheets&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;cheat sheets&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;need help(cheet?)&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;cheat cheat&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;examples&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;cheat mysql&lt;/code&gt;
+&lt;code&gt;cheat svn&lt;/code&gt;
+&lt;code&gt;cheat ruby&lt;/code&gt;
+&lt;code&gt;cheat console&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;more information&lt;/strong&gt;&lt;br&gt;
+&lt;a href=&quot;http://cheat.errtheblog.com&quot;&gt;http://cheat.errtheblog.com&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  

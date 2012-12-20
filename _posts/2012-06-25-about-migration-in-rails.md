@@ -3,7 +3,7 @@ layout: post
 title: "关于Rails中的 migration"
 description: ""
 category: Rails
-tags: [rails, migration]
+tags: [Rails, migration]
 ---
 {% include JB/setup %}
 

@@ -16,15 +16,27 @@ I am crazy about cycling, running and swimming. I took part in marathon three ti
 In this blog I will share some technical stuff at work, also part of my personal life. Enjoy:)![Alt text](/images/portrait.jpg "me")
 
 
-[Old blog](http://zhangzhe.heroku.com "Old blog")
 <br>
 
 ***
 
 <br>
 
-<ul class="posts">
+
+<ul>
   {% for post in site.posts %}
-    <li><span>{{ post.date | date_to_string }}</span>&nbsp; &raquo; &nbsp; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
+
+    {% unless post.next %}
+      <h3>{{ post.date | date: '%Y' }}</h3>
+    {% else %}
+      {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+      {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+      {% if year != nyear %}
+        <br>
+        <h2>{{ post.date | date: '%Y' }}</h2>
+      {% endif %}
+    {% endunless %}
+    
+    <li>{{ post.date | date:"%b" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 </ul>

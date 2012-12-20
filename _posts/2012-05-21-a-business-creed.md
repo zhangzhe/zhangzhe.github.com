@@ -2,8 +2,8 @@
 layout: post
 title: "（转） A Business Creed 《职业信条》"
 description: "一位朋友翻译并推荐的。目前已成为部门工作信条。"
-category: 美文
-tags: [美文, 信条]
+category: Journal
+tags: [信条]
 ---
 {% include JB/setup %}
 

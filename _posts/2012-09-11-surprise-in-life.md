@@ -2,8 +2,8 @@
 layout: post
 title: "生活中的小惊喜"
 description: ""
-category: 
-tags: [life]
+category: Journal
+tags: [生活]
 ---
 {% include JB/setup %}
 

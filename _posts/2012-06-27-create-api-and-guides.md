@@ -2,8 +2,8 @@
 layout: post
 title: "关于使用脱机版的Rails API 和 guides"
 description: ""
-category: 
-tags: [Rails, api, guide]
+category: Rails
+tags: [Rails, Api, Guide]
 ---
 {% include JB/setup %}
 

@@ -2,8 +2,8 @@
 layout: post
 title: "设计模式之'组合模式'"
 description: ""
-category: design_patten
-tags: [设计模式, ruby]
+category: DesignPattern
+tags: [设计模式, Ruby]
 ---
 {% include JB/setup %}
 

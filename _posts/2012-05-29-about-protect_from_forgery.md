@@ -2,8 +2,8 @@
 layout: post
 title: "关于预防跨站攻击"
 description: ""
-category: csrf
-tags: [csrf]
+category: DesignPattern
+tags: [Rails, csrf, 安全]
 ---
 {% include JB/setup %}
 

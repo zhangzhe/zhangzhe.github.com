@@ -1,3 +1,14 @@
+jekyll --server
+rake post title="Hello World"
+rake page name="about.md"
+
+git add .
+$ git commit -m "Add new content"
+$ git push origin master
+
+
+http://jekyllbootstrap.com/lessons/jekyll-introduction.html
+
 # Jekyll-Bootstrap
 
 The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages
