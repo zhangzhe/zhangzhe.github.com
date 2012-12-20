@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-12-20T17:48:11+08:00</updated>
+ <updated>2012-12-20T18:15:49+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -625,9 +625,9 @@ http://guides.rubyonrails.org/migrations.html&lt;/p&gt;
  
  <entry>
    <title>关于预防跨站攻击</title>
-   <link href="http://zhangzhe.github.com/DesignPattern/2012/05/29/about-protect_from_forgery"/>
+   <link href="http://zhangzhe.github.com/Rails/2012/05/29/about-protect_from_forgery"/>
    <updated>2012-05-29T00:00:00+08:00</updated>
-   <id>http://zhangzhe.github.com/DesignPattern/2012/05/29/about-protect_from_forgery</id>
+   <id>http://zhangzhe.github.com/Rails/2012/05/29/about-protect_from_forgery</id>
    <content type="html">&lt;p&gt;公司网站自从上周开始使用&lt;code&gt;exception_notification&lt;/code&gt; 实现错误报警。截止到今天（2012.5.29），user_registrations controller  的 create action 共上报了1098个错误。虽然错误信息是所谓的 ‘undefined method [] for nil:NilClass ‘，但代码排查后我们发现，这是一个典型的漏洞攻击。&lt;/p&gt;
 
 &lt;p&gt;攻击者伪造了&lt;code&gt;name、company_name、nickname、password_confirmation、user_type、company_type、password、mobile_phone、email&lt;/code&gt; 共9个属性，填写后越过Ajax验证提交表单。由于还缺少几个关键属性，虽提交成功，却没能在系统中生成记录。因为数据不足产生错误，从而最终被我们作为出错信息记录了下来。&lt;/p&gt;
@@ -1143,7 +1143,7 @@ modify resources on the server.
  </entry>
  
  <entry>
-   <title>（转） A Business Creed 《职业信条》</title>
+   <title> A Business Creed 《职业信条》（转）</title>
    <link href="http://zhangzhe.github.com/Journal/2012/05/21/a-business-creed"/>
    <updated>2012-05-21T00:00:00+08:00</updated>
    <id>http://zhangzhe.github.com/Journal/2012/05/21/a-business-creed</id>
@@ -1546,6 +1546,58 @@ json格式:
 
 &lt;p&gt;总结：模板方法实际上是利用多态这种晚绑定机制来将一些执行动作的定义延迟到子类。子类可以在不改变算法结构的情况下，调整算法的细节实现。
 除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你”的反向控制结构是模版方法的典型应用。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>电脑升级记录 </title>
+   <link href="http://zhangzhe.github.com/Journal/2010/01/26/computer-upgrade"/>
+   <updated>2010-01-26T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Journal/2010/01/26/computer-upgrade</id>
+   <content type="html">&lt;p&gt;去年十一买的R61e如今已经不堪重负，终于升级。
+之前已经升级了内存到3G(实际买的两根4G内存，无奈装的32位系统支持不好，换成了3G)。
+现在开发时切换程序经常需要较长的等待时间，有时系统甚至暂时没有反应。由于工作的娱乐都使用这一台电脑，原配的120G硬盘常常捉襟见肘了。
+因此想换一块好一点的处理器，并加一块大硬盘，升级下来的硬盘做移动硬盘继续使用。&lt;/p&gt;
+
+&lt;p&gt;处理器看好t7300（淘宝）,性能不俗，而且完美支持小黑的GM965主板。硬盘看好日立的7K320，7200转（京东）。硬盘盒看好元谷星钻iPD-USB（京东）。
+提交订单，到货，安装。一切顺利：）&lt;/p&gt;
+
+&lt;p&gt;但安装系统和软件过程出乎意料的麻烦，以为曾经装过的会很顺利，没想到竟耽误了近10个小时。
+下面是安装过程以及一些心得。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ubuntu&lt;/strong&gt;&lt;br&gt;
+因为着急用，手头又没有9.10的安装盘。就想安装了8.10之后升级上去。后来缓慢的升级过程证明这是一个非常笨的错误。
+发现Ubunut Tweak很好用阿：）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ruby on Rails&lt;/strong&gt;&lt;br&gt;
+或许因为是逐渐升级的缘故，安装过程中遇见很多困难，解决时使用一些命令和心得：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;apt-cache search ruby&lt;/li&gt;
+&lt;li&gt;dpkg -L ruby：检查装了什么&lt;/li&gt;
+&lt;li&gt;dpkg -S：查依赖关系&lt;/li&gt;
+&lt;li&gt;which ruby：调用ruby的命令地址&lt;/li&gt;
+&lt;li&gt;ls -L /usr/bin/ruby：显示符号链接&lt;/li&gt;
+&lt;li&gt;gem 装在/usr/lib/ruby/gems/1.8&lt;/li&gt;
+&lt;li&gt;gem list&lt;/li&gt;
+&lt;li&gt;/etc/hosts：本机域名配置地址&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;gem&lt;/strong&gt;&lt;br&gt;
+gem的安装让我崩溃，最后怒把老硬盘里gems原封不动考了过来。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;github和heroku&lt;/strong&gt;&lt;br&gt;
+升级完之后发现github和heroku账户都无法commit了。
+解决方法如下&lt;br&gt;
+1.生成key &lt;br&gt;
+&lt;code&gt;ssh-keygen -d&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;2.加入key &lt;br&gt;
+heroku: 运行&lt;code&gt;heroku keys:add&lt;/code&gt; , 输入邮箱和密码, heroku解决。 &lt;br&gt;
+github: 拷贝/home/gary/.ssh/id_dsa.pub中内容到github账户&quot;Deploy Keys&quot;中, github解决。&lt;/p&gt;
+
+&lt;p&gt;PS, 升级后系统性能的提升让我非常满意。&lt;/p&gt;
 </content>
  </entry>
  
