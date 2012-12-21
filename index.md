@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Keep simple
+title: Keep simple & live Strong
 tagline: Supporting tagline
 ---
 {% include JB/setup %}
@@ -41,10 +41,3 @@ In this blog I will share some technical stuff at work, also part of my personal
     <li>{{ post.date | date: "%b %d" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 </ul>
-
-
-
-
-
-
-
