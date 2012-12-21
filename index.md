@@ -38,7 +38,7 @@ In this blog I will share some technical stuff at work, also part of my personal
       {% endif %}
     {% endunless %}
     
-    <li>{{ post.date | date:"%b" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
+    <li>{{ post.date | date: "%d %b" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 </ul>
 
