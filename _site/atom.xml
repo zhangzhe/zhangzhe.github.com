@@ -4,13 +4,45 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-12-23T17:48:23+08:00</updated>
+ <updated>2012-12-23T18:04:31+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
    <email>gary.zzhang@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>理论到实践的距离</title>
+   <link href="http://zhangzhe.github.com/2012/12/16/theory-to-real-life"/>
+   <updated>2012-12-16T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/2012/12/16/theory-to-real-life</id>
+   <content type="html">&lt;p&gt;上周我们为AP运营项目的数据传输部分功能做了优化：使用消息队列 ＋ samba实现工程修复和检测的自动化。大致思路为：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;windows和Linux使用samba共享一块磁盘&lt;/li&gt;
+&lt;li&gt;工程文件上传到共享磁盘后向消息队列出发请求&lt;/li&gt;
+&lt;li&gt;消息队列接到任务后触发Windows服务器上的程序，检测和修复共享磁盘上的文件，保存结果，并将部分结果发回给linux服务器&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;strong&gt;这样一个简单的工作我们用了超过6个人日，还不包括前期的方案讨论和思考，更不包括上线后可能出现的其它问题。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;方案讨论出来一些人认为都是成熟的技术：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;消息队列：早就搭好了放在那里，一小时搞定&lt;/li&gt;
+&lt;li&gt;samba共享：成熟技术，半小时搞定&lt;/li&gt;
+&lt;li&gt;修改Windows程序和Rails的接受接口: 半小时搞定&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;而实际上调通AP运营，消息队列和检测修复程序的整个流程花费了我们整整两天半的时间
+中文问题用了一天（直到晚上12点）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;行百步者半九十。&lt;/strong&gt;理论到实践的距离，我们真的了解吗？&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>嗑瓜子理论</title>

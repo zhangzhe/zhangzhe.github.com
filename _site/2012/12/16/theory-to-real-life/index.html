@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>no cheat sheet anymore</title>
+   <title>理论到实践的距离</title>
    <meta name="author" content="zhangzhe" />
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/assets/themes/tom/css/syntax.css" type="text/css" />
@@ -28,46 +28,35 @@
 
     
 <div id="post">
-  <h1>no cheat sheet anymore</h1>
+  <h1>理论到实践的距离</h1>
   <p class="meta">
-    19 January 2010
+    16 December 2012
     
   </p>
-  <p>All the time I used cheat sheet struggling with my bad memory.</p>
+  <p>上周我们为AP运营项目的数据传输部分功能做了优化：使用消息队列 ＋ samba实现工程修复和检测的自动化。大致思路为：</p>
+
+<ol>
+<li>windows和Linux使用samba共享一块磁盘</li>
+<li>工程文件上传到共享磁盘后向消息队列出发请求</li>
+<li>消息队列接到任务后触发Windows服务器上的程序，检测和修复共享磁盘上的文件，保存结果，并将部分结果发回给linux服务器</li>
+</ol>
+
+
+<p><strong>这样一个简单的工作我们用了超过6个人日，还不包括前期的方案讨论和思考，更不包括上线后可能出现的其它问题。</strong></p>
+
+<p>方案讨论出来一些人认为都是成熟的技术：</p>
 
 <ul>
-<li>Rails sheet</li>
-<li>Postgres sheet</li>
-<li>Prototype sheet</li>
-<li>jQuery sheet</li>
-<li>Girls sheet...</li>
+<li>消息队列：早就搭好了放在那里，一小时搞定</li>
+<li>samba共享：成熟技术，半小时搞定</li>
+<li>修改Windows程序和Rails的接受接口: 半小时搞定</li>
 </ul>
 
 
-<p><img src="/images/cheat.jpg" title="cheat" alt="Alt text" /></p>
+<p>而实际上调通AP运营，消息队列和检测修复程序的整个流程花费了我们整整两天半的时间
+中文问题用了一天（直到晚上12点）</p>
 
-<p>No need anymore!!! Because <a href="http://cheat.errtheblog.com">Cheat</a> Comes.</p>
-
-<p><strong>install</strong><br>
-<code>gem install cheat</code></p>
-
-<p><strong>use</strong><br>
-<code>cheat stuff</code></p>
-
-<p><strong>check all sheets</strong><br>
-<code>cheat sheets</code></p>
-
-<p><strong>need help(cheet?)</strong><br>
-<code>cheat cheat</code></p>
-
-<p><strong>examples</strong><br>
-<code>cheat mysql</code>
-<code>cheat svn</code>
-<code>cheat ruby</code>
-<code>cheat console</code></p>
-
-<p><strong>more information</strong><br>
-<a href="http://cheat.errtheblog.com">http://cheat.errtheblog.com</a></p>
+<p><strong>行百步者半九十。</strong>理论到实践的距离，我们真的了解吗？</p>
 
 </div>
 <br>
@@ -93,11 +82,11 @@
   <h2>Related Posts</h2>
   <ul class="posts">
     
-      <li><span>16 Dec 2012</span> &raquo; <a href="/2012/12/16/theory-to-real-life">理论到实践的距离</a></li>
-    
       <li><span>09 Dec 2012</span> &raquo; <a href="/Journal/2012/12/09/sunflower-seed-theory">嗑瓜子理论</a></li>
     
       <li><span>25 Nov 2012</span> &raquo; <a href="/Journal/2012/11/25/my-fourth-marathon">记我的第四次马拉松</a></li>
+    
+      <li><span>22 Oct 2012</span> &raquo; <a href="/Journal/2012/10/22/learn-for-your-life">活到老，学到老</a></li>
     
   </ul>
 </div>
