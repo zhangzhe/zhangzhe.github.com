@@ -2,7 +2,6 @@
 layout: page
 title: Keep simple & live Strong
 tagline: Supporting tagline
-title: Keep simple & live Strong
 ---
 {% include JB/setup %}
 
