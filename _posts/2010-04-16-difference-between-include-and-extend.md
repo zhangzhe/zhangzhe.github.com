@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Difference between include and extend"
+title: "include 和 extend 的区别"
 description: ""
 category: Ruby
 tags: [extend, include]
