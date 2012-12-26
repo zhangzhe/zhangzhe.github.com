@@ -27,6 +27,11 @@ http://zhangzhe.github.com/DesignPattern/2012/05/21/design-patten-observer
 http://zhangzhe.github.com/Journal/2012/05/21/a-business-creed
 http://zhangzhe.github.com/DesignPattern/2012/05/18/design-patten-strategy
 http://zhangzhe.github.com/DesignPattern/2012/05/16/design-patten-template
+http://zhangzhe.github.com/Ruby/2010/04/16/difference-between-include-and-extend
+http://zhangzhe.github.com/Rails/2010/04/09/how-i-debug-ruby-code
+http://zhangzhe.github.com/Rails/2010/04/01/using-whenever-for-cron-job
+http://zhangzhe.github.com/Rails/2010/03/16/add-profiling-and-profiling-tool
+http://zhangzhe.github.com/Rails/2010/03/10/use-helper-methods-in-controller-model-and-all-rails-env
 http://zhangzhe.github.com/2010/03/01/textile-wysiwyg-editor
 http://zhangzhe.github.com/Tool/2010/02/25/my-emacs-configuration
 http://zhangzhe.github.com/2010/02/12/some-work-tricks

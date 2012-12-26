@@ -1,5 +1,5 @@
 jekyll --server
-rake post title="my emacs configuration"
+rake post title="Textile WYSIWYG editor"
 rake page name="about.md"
 
 git add .

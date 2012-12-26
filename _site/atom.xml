@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-12-25T17:39:17+08:00</updated>
+ <updated>2012-12-26T22:36:14+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -1800,6 +1800,305 @@ json格式:
 
 &lt;p&gt;总结：模板方法实际上是利用多态这种晚绑定机制来将一些执行动作的定义延迟到子类。子类可以在不改变算法结构的情况下，调整算法的细节实现。
 除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你”的反向控制结构是模版方法的典型应用。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Difference between include and extend</title>
+   <link href="http://zhangzhe.github.com/Ruby/2010/04/16/difference-between-include-and-extend"/>
+   <updated>2010-04-16T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Ruby/2010/04/16/difference-between-include-and-extend</id>
+   <content type="html">&lt;p&gt;请看下面的代码：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Gary&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;hello&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;world&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;world&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;A&lt;/span&gt; 
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Gary&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;B&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;extend&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Gary&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; &amp;quot;hello&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hello&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; &amp;quot;hello&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;world&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# throw error: undefined method `world&amp;#39; for A:Class (NoMethodError)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;world&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# throw error: undefined method `world&amp;#39; for B:Class (NoMethodError)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;br&gt;
+
+
+&lt;p&gt;结论是: &lt;br&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;include 让目标类可以以实例方法的形式调用包含的module中的实例方法;&lt;/li&gt;
+&lt;li&gt;extend 让目标类可以以类方法的形式调用包含的module中的实例方法;&lt;/li&gt;
+&lt;li&gt;include 和 extend 都无法调用包含的module中的类方法。&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>How I debug ruby code</title>
+   <link href="http://zhangzhe.github.com/Rails/2010/04/09/how-i-debug-ruby-code"/>
+   <updated>2010-04-09T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Rails/2010/04/09/how-i-debug-ruby-code</id>
+   <content type="html">&lt;p&gt;Debugging code is so important.
+I would like to share my ways. Enjoy:)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. put in anywhere of the code need to debug&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;puts something&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;it will output &lt;em&gt;something&lt;/em&gt; into logs.
+This is the basic way but very easy, further more you can use tap to make it easier.&lt;/p&gt;
+
+&lt;br&gt;
+
+
+&lt;p&gt;&lt;strong&gt;2.later I wrote a method in lib/my_puts.rb like&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;gp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;and put into enviroment.rb&lt;br&gt;
+&lt;code&gt;require 'my_puts'&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So in Rails enviroment, use&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;pg&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;I am strong&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;will output&lt;br&gt;
+&lt;code&gt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;
+I am strong
+&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;It make the debug info more easy to be found.&lt;/p&gt;
+
+&lt;br&gt;
+
+
+&lt;p&gt;&lt;strong&gt;3.Debugger is the final debug solution. It even can be use in writing test code or rake task.&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;Just puts debugger in your code.
+Most useful commands in ruby-debug&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;list&lt;/li&gt;
+&lt;li&gt;irb&lt;/li&gt;
+&lt;li&gt;p&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;Do not forget to delete the debugger afterward:)&lt;/p&gt;
+
+&lt;br&gt;
+
+
+&lt;p&gt;&lt;strong&gt;4.Of course, if use TDD or BDD and meeting 100% code coverage, no need debug any more.&lt;/strong&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>using whenever for cron job</title>
+   <link href="http://zhangzhe.github.com/Rails/2010/04/01/using-whenever-for-cron-job"/>
+   <updated>2010-04-01T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Rails/2010/04/01/using-whenever-for-cron-job</id>
+   <content type="html">&lt;p&gt;Doing statistic things, need to statistic data from several databases and tables.&lt;/p&gt;
+
+&lt;p&gt;So slow and optimization seems not effective.&lt;/p&gt;
+
+&lt;p&gt;I want to make it not real time statistic: do cron job to count data at assign time and save the statistic result into database.&lt;/p&gt;
+
+&lt;p&gt;It will be very easy to do this using whenever.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;install&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;gem install whenever&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;write into config/environment.rb &lt;br&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Rails&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Initializer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;whenever&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:lib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;http://gemcutter.org/&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;go to root directory of app and generate cron file:&lt;br&gt;
+&lt;code&gt;wheneverize .&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;will generate schedule.rb at config/ , and in schedule.rb&lt;br&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/home/app/applications/scenario/current/log/whenever.log&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;every&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minutes&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;runner&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;puts (&amp;#39;still working&amp;#39;)&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;every&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;day&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:at&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;02:00 am&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;rake&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;update_course_record&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+
+&lt;br&gt;
+
+
+&lt;p&gt;&lt;strong&gt;importent&lt;/strong&gt;
+ 1. set :output will output log into assigned log file, but if the file not exists, there is not error message.
+ 2. command &quot;date&quot; will print current time; runner &quot;puts Time.now&quot; will print time the first time when whenever task converts to system task.
+ 3. rake &quot;update_course_record&quot; is the cron task I want to run, it will statistic and save the result into database. I want it run at 2:00 am very day(when system is idle).&lt;/p&gt;
+
+&lt;p&gt;Generate system task into /var/spool/cron/crontabs&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;whenever&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crontab&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scenario&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crontab&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;done:)&lt;/p&gt;
+
+&lt;p&gt;If you need more logs about what happened, see &lt;a href=&quot;http://earthcode.com/blog/2009/05/rails/_script/_runner/_logging/_cron.html&quot; title=&quot;here&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>add profiling and profiling tool</title>
+   <link href="http://zhangzhe.github.com/Rails/2010/03/16/add-profiling-and-profiling-tool"/>
+   <updated>2010-03-16T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Rails/2010/03/16/add-profiling-and-profiling-tool</id>
+   <content type="html">&lt;p&gt;Just added Cache to my blog. The performance enhancements were great!&lt;/p&gt;
+
+&lt;p&gt;New cache in rails is so good, just put code to be cached in a block is OK.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;% cache &lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@blog&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;  &amp;lt;ht&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;%= link_to h(@blog.title), blog_path(@blog) %&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;    &amp;lt;%=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link_to&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;(&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brother&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; version)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brother&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;  &amp;lt;/ht&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;%= @blog.created_at.to_date %&amp;gt;&amp;lt;/hd&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;  &amp;lt;div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;    &amp;lt;%=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g_textile&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;  &amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;% end &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;About Profiling tool, New Relic is a god choise. &lt;br&gt;
+Install newrelic as a plugin seems not work. so install the gem&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;gem install newrelic_rpm&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;and add to environment&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;newrelic_rpm&amp;quot;&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Below is the comparation of time spend on home page without cache and with cache for 10 times from newrelic.&lt;/p&gt;
+
+&lt;p&gt;I cann't find the page ... But it got about 300% performance enhancement. Cool!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>use helper methods in controller, model, and all Rails env</title>
+   <link href="http://zhangzhe.github.com/Rails/2010/03/10/use-helper-methods-in-controller-model-and-all-rails-env"/>
+   <updated>2010-03-10T00:00:00+08:00</updated>
+   <id>http://zhangzhe.github.com/Rails/2010/03/10/use-helper-methods-in-controller-model-and-all-rails-env</id>
+   <content type="html">&lt;p&gt;I wanted to use helper methods in controller, model, or even rake.&lt;/p&gt;
+
+&lt;p&gt;So I add&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;helpers/application_helper&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ApplicationHelper&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Then I can use methods of ApplicationHelper. But if these methods call other helper methods from out side, I got &quot;undefined method&quot; error.&lt;/p&gt;
+
+&lt;p&gt;Wired thing is，the &quot;include&quot; way works well in gem &quot;Idp::File&quot; when include helper. So I try the way gem include module and add in controller:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;ActionView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:include&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Student&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;CourseRecordsHelper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;The &quot;undefined method&quot; did not show up, but got&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;The error occurred while evaluating nil.url_for
+/usr/lib/ruby/gems/1.8/gems/actionpack-2.3.4/lib/action_view/helpers/url_helper.rb:85:in `send'
+/usr/lib/ruby/gems/1.8/gems/actionpack-2.3.4/lib/action_view/helpers/url_helper.rb:85:in `url_for
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I also tried include all need modules, but still got the same error.&lt;/p&gt;
+
+&lt;br&gt;
+
+
+&lt;br&gt;
+
+
+&lt;p&gt;Trying to find other way, and got two:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;ActionController::Base.helpers.link_to(&quot;&quot;, &quot;&quot;)&lt;/li&gt;
+&lt;li&gt;@template.link_to(&quot;&quot;, &quot;&quot;)&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;The first way can be used in controller, model or any where in rails; the second way can only be used in controller. &lt;a href=&quot;http://railscasts.com/episodes/132-helpers-outside-views&quot; title=&quot;more details &quot;&gt;more details &lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;But neither of them can solve my problem. First, methods I want to call are defined by myself，first way not work; second, where I want to call helper methods is in rake，second way not work either.&lt;/p&gt;
+
+&lt;p&gt;Stop here, I did not find a way solving it.&lt;/p&gt;
+
+&lt;p&gt;====&lt;/p&gt;
+
+&lt;p&gt;JP and seven advise me other way to achieve my requirement. Which make it easier and cleaner.
+I think next time meet this kind of problems, I should jump out and rethink. Some function difficult to achieve may because it is not reasonable. Just try other idea.&lt;/p&gt;
+
+&lt;p&gt;====&lt;/p&gt;
+
+&lt;p&gt;Use helper can call helper methods in console
+&lt;code&gt;helper.truncate &quot;Big sentence&quot;, 5&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+
+
+&lt;p&gt;Afterward&lt;br&gt;
+Helper methods are methods defined in module, just include what you need!!&lt;/p&gt;
 </content>
  </entry>
  
