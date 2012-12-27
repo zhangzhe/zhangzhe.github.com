@@ -4,7 +4,7 @@
  <title>Keep simple & live Strong</title>
  <link href="http://zhangzhe.github.com/atom.xml" rel="self"/>
  <link href="http://zhangzhe.github.com"/>
- <updated>2012-12-27T09:44:04+08:00</updated>
+ <updated>2012-12-27T09:46:01+08:00</updated>
  <id>http://zhangzhe.github.com</id>
  <author>
    <name>zhangzhe</name>
@@ -1811,8 +1811,9 @@ json格式:
    <content type="html">&lt;p&gt;Rspec and TDD are great.
 Would like to share my configuration and some experience, enjoy:)&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;1.generate test doc&lt;/strong&gt;
-use params &lt;code&gt;--format specdoc&lt;/code&gt; will output test doc in term&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.generate test doc&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;use params &lt;code&gt;--format specdoc&lt;/code&gt; will output test doc in term&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blog_spec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rb&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;specdoc&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -1849,8 +1850,9 @@ Just generate code coverage for models: &lt;br&gt;
 &lt;p&gt;Code coverage is great way for checking the quality of code, but 100% coverage does not mean your code is perfect. As says in The Rspec Book:
 [green]So while low code coverage is a clear indicator that your specs need some work, high coverage does not necessarily indicate that everything is honky-dory.[/green]&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;3.rspec options&lt;/strong&gt;
-most useful options for me&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3.rspec options&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;most useful options for me&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1864,8 +1866,9 @@ most useful options for me&lt;/p&gt;
 &lt;p&gt;All options are asstable, for example&lt;br&gt;
 &lt;code&gt;spec spec/models/formatable_string_spec.rb --format specdoc --color&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;4.opts&lt;/strong&gt;
-Do not need to add options every time when test, just do configuration to spec/spec.opts&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4.opts&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;Do not need to add options every time when test, just do configuration to spec/spec.opts&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1876,7 +1879,7 @@ Do not need to add options every time when test, just do configuration to spec/s
 
 &lt;p&gt;Combine the way of &quot;generating test doc&quot; in  1, add &lt;code&gt;--format html:test.html&lt;/code&gt; to &lt;code&gt;spec/spec.opts&lt;/code&gt; , will automate generate test doc after each test or rcov , the doc will output into test.html.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;5.Autotest&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5.Autotest&lt;/strong&gt;&lt;br&gt;&lt;/p&gt;
 
 &lt;p&gt;Autotest is very cleaver, every time you save a test file, autotest will run that test file; and every time you save a library file, autotest will run the corresponding test file. If it sees that the previous failures are now passing, it loads up the entire suite and runs all of the examples again.
 When tried autotest on company project, there was a problem. Solution see solve autotest always rerun problem.&lt;/p&gt;
@@ -1887,7 +1890,7 @@ When tried autotest on company project, there was a problem. Solution see solve 
 &lt;p&gt;Test is good, but as says in Code Complete: &lt;br&gt;
 Even considering the numerous kinds of testing available, testing is only one part of a good software-quality program. High-quality development methods, including minimizing defects in requirements and design, are at least as important.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;]Do not excessive relay on test.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Do not excessive relay on test.&lt;/strong&gt;&lt;/p&gt;
 </content>
  </entry>
  

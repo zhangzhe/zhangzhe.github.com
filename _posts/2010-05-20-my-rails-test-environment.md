@@ -12,7 +12,8 @@ Rspec and TDD are great.
 Would like to share my configuration and some experience, enjoy:) 
 
 
-**1.generate test doc**
+**1.generate test doc**<br>
+
 use params `--format specdoc` will output test doc in term 
 {% highlight ruby %}
 spec spec/models/blog_spec.rb --format specdoc
@@ -50,7 +51,8 @@ Just generate code coverage for models: <br>
 Code coverage is great way for checking the quality of code, but 100% coverage does not mean your code is perfect. As says in The Rspec Book: 
 [green]So while low code coverage is a clear indicator that your specs need some work, high coverage does not necessarily indicate that everything is honky-dory.[/green] 
 
-**3.rspec options**
+**3.rspec options**<br>
+
 most useful options for me 
 
 ----
@@ -65,7 +67,8 @@ All options are asstable, for example<br>
 `spec spec/models/formatable_string_spec.rb --format specdoc --color`
 
 
-**4.opts**
+**4.opts**<br>
+
 Do not need to add options every time when test, just do configuration to spec/spec.opts
 
 ----
@@ -76,7 +79,7 @@ Do not need to add options every time when test, just do configuration to spec/s
 
 Combine the way of "generating test doc" in  1, add `--format html:test.html` to `spec/spec.opts` , will automate generate test doc after each test or rcov , the doc will output into test.html. 
 
-**5.Autotest**
+**5.Autotest**<br>
 
 Autotest is very cleaver, every time you save a test file, autotest will run that test file; and every time you save a library file, autotest will run the corresponding test file. If it sees that the previous failures are now passing, it loads up the entire suite and runs all of the examples again. 
 When tried autotest on company project, there was a problem. Solution see solve autotest always rerun problem. 
@@ -86,4 +89,4 @@ When tried autotest on company project, there was a problem. Solution see solve 
 Test is good, but as says in Code Complete: <br>
 Even considering the numerous kinds of testing available, testing is only one part of a good software-quality program. High-quality development methods, including minimizing defects in requirements and design, are at least as important.
 
-**]Do not excessive relay on test.**
+**Do not excessive relay on test.**

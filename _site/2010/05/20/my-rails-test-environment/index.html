@@ -36,8 +36,9 @@
   <p>Rspec and TDD are great.
 Would like to share my configuration and some experience, enjoy:)</p>
 
-<p><strong>1.generate test doc</strong>
-use params <code>--format specdoc</code> will output test doc in term</p>
+<p><strong>1.generate test doc</strong><br></p>
+
+<p>use params <code>--format specdoc</code> will output test doc in term</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">spec</span> <span class="n">spec</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">blog_spec</span><span class="o">.</span><span class="n">rb</span> <span class="o">--</span><span class="nb">format</span> <span class="n">specdoc</span>
 </code></pre>
@@ -74,8 +75,9 @@ Just generate code coverage for models: <br>
 <p>Code coverage is great way for checking the quality of code, but 100% coverage does not mean your code is perfect. As says in The Rspec Book:
 [green]So while low code coverage is a clear indicator that your specs need some work, high coverage does not necessarily indicate that everything is honky-dory.[/green]</p>
 
-<p><strong>3.rspec options</strong>
-most useful options for me</p>
+<p><strong>3.rspec options</strong><br></p>
+
+<p>most useful options for me</p>
 
 <hr />
 
@@ -89,8 +91,9 @@ most useful options for me</p>
 <p>All options are asstable, for example<br>
 <code>spec spec/models/formatable_string_spec.rb --format specdoc --color</code></p>
 
-<p><strong>4.opts</strong>
-Do not need to add options every time when test, just do configuration to spec/spec.opts</p>
+<p><strong>4.opts</strong><br></p>
+
+<p>Do not need to add options every time when test, just do configuration to spec/spec.opts</p>
 
 <hr />
 
@@ -101,7 +104,7 @@ Do not need to add options every time when test, just do configuration to spec/s
 
 <p>Combine the way of "generating test doc" in  1, add <code>--format html:test.html</code> to <code>spec/spec.opts</code> , will automate generate test doc after each test or rcov , the doc will output into test.html.</p>
 
-<p><strong>5.Autotest</strong></p>
+<p><strong>5.Autotest</strong><br></p>
 
 <p>Autotest is very cleaver, every time you save a test file, autotest will run that test file; and every time you save a library file, autotest will run the corresponding test file. If it sees that the previous failures are now passing, it loads up the entire suite and runs all of the examples again.
 When tried autotest on company project, there was a problem. Solution see solve autotest always rerun problem.</p>
@@ -112,7 +115,7 @@ When tried autotest on company project, there was a problem. Solution see solve 
 <p>Test is good, but as says in Code Complete: <br>
 Even considering the numerous kinds of testing available, testing is only one part of a good software-quality program. High-quality development methods, including minimizing defects in requirements and design, are at least as important.</p>
 
-<p><strong>]Do not excessive relay on test.</strong></p>
+<p><strong>Do not excessive relay on test.</strong></p>
 
 </div>
 <br>
