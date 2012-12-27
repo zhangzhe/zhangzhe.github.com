@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>include 和 extend 的区别</title>
+   <title>solve 'single table inheritance' problem with view</title>
    <meta name="author" content="zhangzhe" />
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/assets/themes/tom/css/syntax.css" type="text/css" />
@@ -28,52 +28,49 @@
 
     
 <div id="post">
-  <h1>include 和 extend 的区别</h1>
+  <h1>solve 'single table inheritance' problem with view</h1>
   <p class="meta">
-    16 April 2010
+    27 April 2010
     
   </p>
-  <p>请看下面的代码：</p>
+  <p>I want to read data cross database, so I create a model page_group.rb and code like:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">module</span> <span class="nn">Gary</span>
-  <span class="k">def</span> <span class="nf">hello</span>
-    <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">world</span>
-    <span class="nb">puts</span> <span class="s2">&quot;world&quot;</span>
-  <span class="k">end</span>
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">PageGroup</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span>
+    <span class="ss">:adapter</span>  <span class="o">=&gt;</span> <span class="s2">&quot;mysql&quot;</span><span class="p">,</span>
+    <span class="ss">:host</span>     <span class="o">=&gt;</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="ss">:username</span> <span class="o">=&gt;</span> <span class="s2">&quot;myuser&quot;</span><span class="p">,</span>
+    <span class="ss">:password</span> <span class="o">=&gt;</span> <span class="s2">&quot;mypass&quot;</span><span class="p">,</span>
+    <span class="ss">:database</span> <span class="o">=&gt;</span> <span class="s2">&quot;somedatabase&quot;</span>
+  <span class="p">)</span>
 <span class="k">end</span>
-
-<span class="k">class</span> <span class="nc">A</span> 
-  <span class="kp">include</span> <span class="no">Gary</span>
-<span class="k">end</span>
-
-<span class="k">class</span> <span class="nc">B</span>
-  <span class="kp">extend</span> <span class="no">Gary</span>
-<span class="k">end</span>
-
-<span class="n">A</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">hello</span> <span class="c1">#=&gt; &quot;hello&quot;</span>
-<span class="n">B</span><span class="o">.</span><span class="n">hello</span> <span class="c1">#=&gt; &quot;hello&quot;</span>
-<span class="n">A</span><span class="o">.</span><span class="n">world</span> <span class="c1"># throw error: undefined method `world&#39; for A:Class (NoMethodError)</span>
-<span class="n">B</span><span class="o">.</span><span class="n">world</span> <span class="c1"># throw error: undefined method `world&#39; for B:Class (NoMethodError)</span>
 </code></pre>
 </div>
 
 
+<p>If PageGroup model in source app use single-table inheritance, then in console: <br>
+<code>PageGroup.first</code></p>
+
+<p>will got error:</p>
+
+<hr />
+
+<pre><code>ActiveRecord::SubclassNotFound: The single-table inheritance mechanism 
+failed to locate the subclass: 'sss'. This error is raised because the
+column 'type' is reserved for storing the class in case of inheritance.
+Please rename this column if you didn't intend it to be used for 
+storing the inheritance class or overwrite PageGroup.inheritance_column 
+to use another column for that information.
+</code></pre>
+
+<p>Solution is create view for the table use single-table inheritance(PageGroup) in source app:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE VIEW extra_lessons AS SELECT id, title, blabla FROM page_groups&quot;</span><span class="p">)</span>  
+</code></pre>
+</div>
 
 
-<br>
-
-
-<p>结论是: <br></p>
-
-<ul>
-<li>include 让目标类可以以实例方法的形式调用包含的module中的实例方法;</li>
-<li>extend 让目标类可以以类方法的形式调用包含的module中的实例方法;</li>
-<li>include 和 extend 都无法调用包含的module中的类方法。</li>
-</ul>
-
+<p>solved:)</p>
 
 </div>
 <br>

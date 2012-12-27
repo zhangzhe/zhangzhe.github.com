@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>'find in project' in emacs</title>
+   <meta name="author" content="zhangzhe" />
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/assets/themes/tom/css/syntax.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/assets/themes/tom/css/screen.css" type="text/css" media="screen, projection" />
+
+   <!-- Typekit -->
+   <script type="text/javascript" src="http://use.typekit.com/jpd0pfm.js"></script>
+   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+
+  <div class="site">
+    <div class="title">
+      <a href="/">Keep simple & live Strong</a>
+      <a class="extra" href="/pages.html">Pages</a>
+      <a class="extra" href="/archive.html">Archive</a>
+      <a class="extra" href="/categories.html">Categories</a>
+      <a class="extra" href="/tags.html">Tags</a>
+    </div>
+
+    
+<div id="post">
+  <h1>'find in project' in emacs</h1>
+  <p class="meta">
+    10 May 2010
+    
+  </p>
+  <p>Reference <a href="http://blog.lathi.net/articles/2007/11/07/navigating-your-projects-in-emacs" title="Doug Alcorn\'s method">Doug Alcorn\'s method</a>. First install <a href="http://ctags.sourceforge.net" title="exuberant ctags">exuberant ctags</a>.</p>
+
+<p>Create a rake task for creating tags for current project.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">module</span> <span class="nn">Tags</span>
+  <span class="no">RUBY_FILES</span> <span class="o">=</span> <span class="no">FileList</span><span class="o">[</span><span class="s1">&#39;**/*.rb&#39;</span><span class="o">]</span>
+<span class="k">end</span>
+<span class="n">namespace</span> <span class="s2">&quot;tags&quot;</span> <span class="k">do</span>
+  <span class="n">task</span> <span class="ss">:emacs</span> <span class="o">=&gt;</span> <span class="no">Tags</span><span class="o">::</span><span class="no">RUBY_FILES</span> <span class="k">do</span>
+    <span class="nb">puts</span> <span class="s2">&quot;Making Emacs TAGS file&quot;</span>
+    <span class="n">sh</span> <span class="s2">&quot;/usr/bin/ctags -e </span><span class="si">#{</span><span class="no">Tags</span><span class="o">::</span><span class="no">RUBY_FILES</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">:verbose</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+<span class="n">task</span> <span class="ss">:tags</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;tags:emacs&quot;</span><span class="o">]</span>
+</code></pre>
+</div>
+
+
+<p>run task <br>
+<code>rake tags:emacs</code></p>
+
+<br>
+
+
+<p>Now can use <code>tags-search</code> to search tags; and use <code>tags-loop-continue</code> to loop tags, cool:)</p>
+
+<p>It will be more handy using shortcut. what I did:</p>
+
+<hr />
+
+<pre><code>(global-set-key (kbd "C-c C-c C-s") 'tags-search)
+(global-set-key (kbd "C-c C-c C-n") 'tags-loop-continue)
+</code></pre>
+
+<p>Right now it can search all the *.rb files, but not others. It works, but not perfect:(</p>
+
+<br>
+
+
+<p>Two very handy shortcut</p>
+
+<hr />
+
+<pre><code>C-h w         where-is         
+C-h k         describe-key
+</code></pre>
+
+<br>
+
+
+<p>Refreshed my emacs config and shortcut again. Most popular shortcuts:</p>
+
+<hr />
+
+<pre><code>C-c C-c C-c                rinari-find-controller
+C-c C-c C-m                rinari-find-model
+C-c C-c C-v                rinari-find-view
+C-c C-c C-r                rinari-find-rspec
+C-c C-c C-f                rinari-find-file-in-project
+C-c C-c C-h                hide-all-blocks
+C-c C-c C-t                toggle-hiding-block
+C-c C-c C-o                comment-region
+C-c C-c C-u                uncomment-region
+C-c C-c C-g                goto-line
+</code></pre>
+
+</div>
+<br>
+<hr>
+
+<br>
+<br>
+<h1>版权声明：</h1>
+<p>
+  <a rel="licence" href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/"
+  target="_blank"><img src="http://i.creativecommons.org/l/by-nc-nd/2.5/cn/88x31.png"/></a>
+</p>
+
+
+<p>
+  本文采用 <a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/"
+  target="_blank" rel="licence">知识共享 署名-非商业性使用-禁止演绎 2.5 中国大陆(CC-BY-NC-ND)</a> 授权，任何形式的转载均需加入本授权协议链接（或文本）以及指向本站的链接。<br>
+  协议地址：http://creativecommons.org/licenses/by-nc-nd/2.5/cn/legalcode<br>
+</p>
+<br>
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>16 Dec 2012</span> &raquo; <a href="/2012/12/16/theory-to-real-life">理论到实践的距离</a></li>
+    
+      <li><span>09 Dec 2012</span> &raquo; <a href="/Journal/2012/12/09/sunflower-seed-theory">嗑瓜子理论</a></li>
+    
+      <li><span>25 Nov 2012</span> &raquo; <a href="/Journal/2012/11/25/my-fourth-marathon">记我的第四次马拉松</a></li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="footer">
+      <div class="contact">
+        <p>
+          <a href='mailto:gary.zzhang@gmail.com'>gary.zzhang@gmail.com</a>
+        </p>
+      </div>
+      <div class="contact">
+        <p>
+          <a href="http://github.com/zhangzhe/">github.com/zhangzhe</a><br />
+        </p>
+      </div>
+    </div>
+  </div>
+  <a href="http://github.com/zhangzhe"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+  
+</body>
+</html>
+

@@ -27,6 +27,11 @@ http://zhangzhe.github.com/DesignPattern/2012/05/21/design-patten-observer
 http://zhangzhe.github.com/Journal/2012/05/21/a-business-creed
 http://zhangzhe.github.com/DesignPattern/2012/05/18/design-patten-strategy
 http://zhangzhe.github.com/DesignPattern/2012/05/16/design-patten-template
+http://zhangzhe.github.com/2010/05/20/my-rails-test-environment
+http://zhangzhe.github.com/Rails/2010/05/17/solve-autotest-always-rerun-problem
+http://zhangzhe.github.com/Tool/2010/05/10/find-in-project-in-emacs
+http://zhangzhe.github.com/Rails/2010/04/28/solve-index-identifier-name-too-long-problem
+http://zhangzhe.github.com/Rails/2010/04/27/solve-single-table-inheritance---problem-with-view
 http://zhangzhe.github.com/Ruby/2010/04/16/difference-between-include-and-extend
 http://zhangzhe.github.com/Rails/2010/04/09/how-i-debug-ruby-code
 http://zhangzhe.github.com/Rails/2010/04/01/using-whenever-for-cron-job

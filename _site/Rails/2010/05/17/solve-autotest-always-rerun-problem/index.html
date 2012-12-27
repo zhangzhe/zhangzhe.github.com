@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>include 和 extend 的区别</title>
+   <title>solve autotest always rerun problem</title>
    <meta name="author" content="zhangzhe" />
    <!-- syntax highlighting CSS -->
    <link rel="stylesheet" href="/assets/themes/tom/css/syntax.css" type="text/css" />
@@ -28,52 +28,28 @@
 
     
 <div id="post">
-  <h1>include 和 extend 的区别</h1>
+  <h1>solve autotest always rerun problem</h1>
   <p class="meta">
-    16 April 2010
+    17 May 2010
     
   </p>
-  <p>请看下面的代码：</p>
+  <p>Run autospec，found even no change and save happens, autotest will rerun time and time...</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">module</span> <span class="nn">Gary</span>
-  <span class="k">def</span> <span class="nf">hello</span>
-    <span class="nb">puts</span> <span class="s2">&quot;hello&quot;</span>
-  <span class="k">end</span>
+<p>After research I found it happens because of a gem (idp_gem): after test, it will update file spec/spec_helper.rb, and this file will trigger next time's autotest. So endless loop</p>
 
-  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">world</span>
-    <span class="nb">puts</span> <span class="s2">&quot;world&quot;</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<p>The solution is easy，add to .autotest
+Autotest.add_hook :initialize do |at|
+  %w{spec/spec_helper.rb}.each {|exception| at.add_exception(exception)}
+end</p>
 
-<span class="k">class</span> <span class="nc">A</span> 
-  <span class="kp">include</span> <span class="no">Gary</span>
-<span class="k">end</span>
+<p>Problem solved:)</p>
 
-<span class="k">class</span> <span class="nc">B</span>
-  <span class="kp">extend</span> <span class="no">Gary</span>
-<span class="k">end</span>
-
-<span class="n">A</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">hello</span> <span class="c1">#=&gt; &quot;hello&quot;</span>
-<span class="n">B</span><span class="o">.</span><span class="n">hello</span> <span class="c1">#=&gt; &quot;hello&quot;</span>
-<span class="n">A</span><span class="o">.</span><span class="n">world</span> <span class="c1"># throw error: undefined method `world&#39; for A:Class (NoMethodError)</span>
-<span class="n">B</span><span class="o">.</span><span class="n">world</span> <span class="c1"># throw error: undefined method `world&#39; for B:Class (NoMethodError)</span>
-</code></pre>
-</div>
+<hr>
 
 
-
-
-<br>
-
-
-<p>结论是: <br></p>
-
-<ul>
-<li>include 让目标类可以以实例方法的形式调用包含的module中的实例方法;</li>
-<li>extend 让目标类可以以类方法的形式调用包含的module中的实例方法;</li>
-<li>include 和 extend 都无法调用包含的module中的类方法。</li>
-</ul>
-
+<p>PS,<br>
+<code>find ./ -cmin -1</code><br>
+This command will show all files that changed in last minute.</p>
 
 </div>
 <br>

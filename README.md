@@ -1,5 +1,5 @@
 jekyll --server
-rake post title="Textile WYSIWYG editor"
+rake post title="use helper methods in controller, model, and all Rails env"
 rake page name="about.md"
 
 git add .
