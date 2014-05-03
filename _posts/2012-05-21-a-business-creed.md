@@ -5,7 +5,7 @@ description: "一位朋友翻译并推荐的。目前已成为部门工作信条
 category: Journal
 tags: [信条]
 ---
-{% include JB/setup %}
+ 
 
 
 ## 注：一位朋友翻译并推荐的。目前已成为部门工作信条。

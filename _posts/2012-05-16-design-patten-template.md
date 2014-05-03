@@ -5,7 +5,7 @@ description: ""
 category: DesignPattern
 tags: [设计模式, Ruby]
 ---
-{% include JB/setup %}
+ 
 
 #模式描述
 `模版方法` 是一种行为型模式。

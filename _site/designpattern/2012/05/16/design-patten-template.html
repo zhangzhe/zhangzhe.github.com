@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>设计模式之'模版方法'</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Keep simple & live Strong</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>设计模式之'模版方法'</h2>
+<p class="meta">16 May 2012</p>
+
+<div class="post">
+<h1>模式描述</h1>
+
+<p><code>模版方法</code> 是一种行为型模式。
+（行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）</p>
+
+<p>基本描述：在一个方法里定义算法的骨架，将具体实现方法延迟到其子类。一次性实现算法的不变部分，将可变的行为留给子类。</p>
+
+<p>更多描述：通过继承把变和不变的部分分开。抽象类应当拥有的是行为组合和尽可能少的具体实现。算法骨架类的公共行为被提取出来集中到父类，要扩展新的功能，就创建新的子类并实现相应功能。</p>
+
+<hr>
+
+<p><br></p>
+
+<h1>实例1：各种格式的报表生成</h1>
+
+<p>案例描述：报表包括 开头、主干、结尾，但需要各种格式，如xml, yaml, json等。实现各类报表，要求各部分内容一致，但是输出格式不同。
+例如：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">文本格式:
+head: &quot;hello&quot;
+body: &quot;keep it simple&quot;
+end: &quot;I am strong&quot;
+
+xml格式:
+&lt;head&gt;
+  hello
+&lt;/head&gt;
+&lt;body&gt;
+  keep it simple
+&lt;/body&gt;
+&lt;end&gt;
+  I am strong
+&lt;/end&gt;
+
+yaml格式:
+head: hello
+body: keep it simple
+end: I am strong
+
+json格式:
+{&quot;head&quot;: &quot;hello&quot;, &quot;body&quot;: &quot;keep it simple&quot;, &quot;end&quot;: &quot;I am strong&quot;}
+</code></pre></div>
+<p>代码实现：</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Report</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">r_end</span><span class="p">)</span>
+    <span class="vi">@head</span> <span class="o">=</span> <span class="n">head</span>
+    <span class="vi">@body</span> <span class="o">=</span> <span class="n">body</span>
+    <span class="vi">@end</span> <span class="o">=</span> <span class="n">r_end</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">output</span>
+    <span class="s2">&quot;</span><span class="si">#{</span><span class="n">output_head</span><span class="si">}#{</span><span class="n">output_body</span><span class="si">}#{</span><span class="n">output_end</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">TextReport</span> <span class="o">&lt;</span> <span class="no">Report</span>
+  <span class="k">def</span> <span class="nf">output_head</span>
+    <span class="s2">&quot;head: </span><span class="si">#{</span><span class="vi">@head</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">output_body</span>
+    <span class="s2">&quot;body: </span><span class="si">#{</span><span class="vi">@body</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">output_end</span>
+    <span class="s2">&quot;end: </span><span class="si">#{</span><span class="vi">@end</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">XmlReport</span> <span class="o">&lt;</span> <span class="no">Report</span>
+  <span class="k">def</span> <span class="nf">output_head</span>
+    <span class="s2">&quot;&lt;head&gt;</span><span class="si">#{</span><span class="vi">@head</span><span class="si">}</span><span class="s2">&lt;/head&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">output_body</span>
+    <span class="s2">&quot;&lt;body&gt;</span><span class="si">#{</span><span class="vi">@body</span><span class="si">}</span><span class="s2">&lt;/body&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">output_end</span>
+    <span class="s2">&quot;&lt;end&gt;</span><span class="si">#{</span><span class="vi">@end</span><span class="si">}</span><span class="s2">&lt;/end&gt;&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">JsonReport</span> <span class="o">&lt;</span> <span class="no">Report</span>
+  <span class="k">def</span> <span class="nf">output_head</span>
+    <span class="sx">%Q{\{&quot;head&quot;: &quot;</span><span class="si">#{</span><span class="vi">@head</span><span class="si">}</span><span class="sx">&quot;, }</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">output_body</span>
+    <span class="sx">%Q{&quot;body&quot;: &quot;</span><span class="si">#{</span><span class="vi">@body</span><span class="si">}</span><span class="sx">&quot;, }</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">output_end</span>
+    <span class="sx">%Q{&quot;end&quot;: &quot;</span><span class="si">#{</span><span class="vi">@end</span><span class="si">}</span><span class="sx">&quot;\}}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">describe</span> <span class="s2">&quot;TextReport&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;should output well&quot;</span> <span class="k">do</span>
+    <span class="no">TextReport</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;keep it simple&quot;</span><span class="p">,</span> <span class="s2">&quot;I am strong&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+<span class="s2">&quot;head: hello</span><span class="se">\n</span><span class="s2">body: keep it simple</span><span class="se">\n</span><span class="s2">end: I am strong&quot;</span>
+  <span class="k">end</span> 
+<span class="k">end</span>
+
+<span class="n">describe</span> <span class="s2">&quot;XmlReport&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;should output well&quot;</span> <span class="k">do</span>
+    <span class="no">XmlReport</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;keep it simple&quot;</span><span class="p">,</span> <span class="s2">&quot;I am strong&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span>
+<span class="s2">&quot;&lt;head&gt;hello&lt;/head&gt;</span><span class="se">\n</span><span class="s2">&lt;body&gt;keep it simple&lt;/body&gt;</span><span class="se">\n</span><span class="s2">&lt;end&gt;I am strong&lt;/end&gt;&quot;</span>
+  <span class="k">end</span> 
+<span class="k">end</span>
+
+<span class="n">describe</span> <span class="s2">&quot;JsonReport&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;should output well&quot;</span> <span class="k">do</span>
+    <span class="no">JsonReport</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;keep it simple&quot;</span><span class="p">,</span> <span class="s2">&quot;I am strong&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+<span class="s1">&#39;{&quot;head&quot;: &quot;hello&quot;, &quot;body&quot;: &quot;keep it simple&quot;, &quot;end&quot;: &quot;I am strong&quot;}&#39;</span>
+  <span class="k">end</span> 
+<span class="k">end</span>
+</code></pre></div>
+
+<p><br></p>
+
+<hr>
+
+<p><br></p>
+
+<h1>实例2：制作电子产品</h1>
+
+<p>案例描述：电子产品的生产都要包括硬件、软件的设计和集成起来的调试步骤。但各具体产品的软硬件的具体生产方式和调试方法各不相同。</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">ElectronicProduct</span>
+  <span class="k">def</span> <span class="nf">generate</span>
+    <span class="n">generate_hardware</span>
+    <span class="n">generate_software</span>
+    <span class="n">debug</span>
+  <span class="k">end</span>
+ 
+  <span class="kp">private</span>
+  <span class="k">def</span> <span class="nf">generate_hardware</span>
+    <span class="nb">p</span> <span class="s2">&quot;generate_hardware&quot;</span>
+  <span class="k">end</span>
+ 
+  <span class="k">def</span> <span class="nf">generate_software</span>
+    <span class="nb">p</span> <span class="s2">&quot;generate_software&quot;</span>
+  <span class="k">end</span>
+ 
+  <span class="k">def</span> <span class="nf">debug</span>
+    <span class="nb">p</span> <span class="s2">&quot;debug&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Iphone</span> <span class="o">&lt;</span> <span class="no">ElectronicProduct</span>
+  <span class="kp">private</span>
+  <span class="k">def</span> <span class="nf">generate_hardware</span>
+    <span class="nb">p</span> <span class="s2">&quot;generate_hardware for Iphone&quot;</span>
+  <span class="k">end</span>
+ 
+  <span class="k">def</span> <span class="nf">generate_software</span>
+    <span class="nb">p</span> <span class="s2">&quot;generate_software for Iphone&quot;</span>
+  <span class="k">end</span>
+ 
+  <span class="k">def</span> <span class="nf">debug</span>
+    <span class="nb">p</span> <span class="s2">&quot;debugging Iphone&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Iphone</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">generate</span>
+
+<span class="k">class</span> <span class="nc">Ipad</span> <span class="o">&lt;</span> <span class="no">ElectronicProduct</span>
+  <span class="kp">private</span>
+  <span class="k">def</span> <span class="nf">generate_hardware</span>
+    <span class="nb">p</span> <span class="s2">&quot;generate_hardware for Ipad&quot;</span>
+  <span class="k">end</span>
+ 
+  <span class="k">def</span> <span class="nf">generate_software</span>
+    <span class="nb">p</span> <span class="s2">&quot;generate_software for Ipad&quot;</span>
+  <span class="k">end</span>
+ 
+  <span class="k">def</span> <span class="nf">debug</span>
+    <span class="nb">p</span> <span class="s2">&quot;debugging Ipad&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Ipad</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">generate</span>
+</code></pre></div>
+ 
+
+<p><br></p>
+
+<hr>
+
+<p>总结：模板方法实际上是利用多态这种晚绑定机制来将一些执行动作的定义延迟到子类。子类可以在不改变算法结构的情况下，调整算法的细节实现。
+除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你”的反向控制结构是模版方法的典型应用。</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Gary zhang<br />
+                gary.zzhang@gmail.com
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/zhangzhe">github.com/zhangzhe</a><br />
+                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a>
+              </p>
+            </div>
+          </div>
+        </div>
+    <a href="http://github.com/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+    </body>
+</html>

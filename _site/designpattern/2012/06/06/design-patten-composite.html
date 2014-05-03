@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>设计模式之'组合模式'</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Keep simple & live Strong</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>设计模式之'组合模式'</h2>
+<p class="meta">06 Jun 2012</p>
+
+<div class="post">
+<h1>模式描述</h1>
+
+<p><code>组合模式</code> 是一种结构型模式。</p>
+
+<p>基本描述： 其意图是将对象组合成树形结构以表示部分-整体的层次结构。</p>
+
+<p>详细描述：组合模式使得用户对单个对象和组合对象的使用具有一致性。
+组合模式模式的一个重要思想是递归组合，关键是一个抽象类，它既可以代表组合对象，又可以代表一个被组合的对象。</p>
+
+<p>关于组合模式的一个普遍性的例子是你每次使用电脑时所遇到的:文件系统。文件系统由目录和文件组成。每个目录都可以装内容。目录的内容可以是文件，也可以是目录。按照这种方式，计算机的文件系统就是以递归结构来组织的。</p>
+
+<h1>组合模式的适用场景</h1>
+
+<p>一类具有“容器特征”的对象——即他们在充当对象的同时，又是其他对象的容器的情况。
+想到组合模式就应该想到树形结构图。</p>
+
+<p><br></p>
+
+<hr>
+
+<p><br></p>
+
+<h1>实例1</h1>
+
+<h1>做晚餐包括准备蛋糕和酒。准备蛋糕和酒又分别包括：</h1>
+
+<ul>
+<li>准备蛋糕：准备奶油、准备干配料、准备液态配料、搅拌</li>
+<li>准备酒：准备可乐、准备伏特加、搅拌</li>
+</ul>
+
+<p><br></p>
+
+<h1>算法1</h1>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Task</span>
+  <span class="kp">attr_reader</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:sub_tasks</span>
+  
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+    <span class="vi">@sub_tasks</span> <span class="o">=</span> <span class="o">[]</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">add_sub_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="vi">@sub_tasks</span> <span class="o">&lt;&lt;</span> <span class="n">task</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">time_required</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span>
+    <span class="vi">@sub_tasks</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">time</span> <span class="o">+=</span> <span class="n">t</span><span class="o">.</span><span class="n">time_required</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">time</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">list_sub_tasks</span>
+    <span class="vi">@sub_tasks</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">sub_task</span><span class="o">|</span>
+      <span class="nb">p</span> <span class="n">sub_task</span><span class="o">.</span><span class="n">name</span>
+      <span class="k">if</span> <span class="n">sub_task</span><span class="o">.</span><span class="n">sub_tasks</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">sub_task</span><span class="o">.</span><span class="n">list_sub_tasks</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">AddDryIngredientsTask</span> <span class="o">&lt;</span> <span class="no">Task</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Add Dry Ingredients&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">time_required</span>
+    <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">AddLiquidsTask</span> <span class="o">&lt;</span> <span class="no">Task</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Add Liquids&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">time_required</span>
+    <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">MakeBatterTask</span> <span class="o">&lt;</span> <span class="no">Task</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Make Batter&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">time_required</span>
+    <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">MixTask</span> <span class="o">&lt;</span> <span class="no">Task</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Mix up&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">time_required</span>
+    <span class="mi">3</span><span class="o">.</span><span class="mi">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">MakeBatterCakeTask</span> <span class="o">&lt;</span> <span class="no">Task</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Make BatterCake&quot;</span><span class="p">)</span>
+    <span class="n">add_sub_task</span><span class="p">(</span><span class="no">MakeBatterTask</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+    <span class="n">add_sub_task</span><span class="p">(</span><span class="no">AddDryIngredientsTask</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+    <span class="n">add_sub_task</span><span class="p">(</span><span class="no">AddLiquidsTask</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+    <span class="n">add_sub_task</span><span class="p">(</span><span class="no">MixTask</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">AddCocaTask</span> <span class="o">&lt;</span> <span class="no">Task</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Add Coca&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">time_required</span>
+    <span class="mi">2</span><span class="o">.</span><span class="mi">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">AddVodkaTask</span> <span class="o">&lt;</span> <span class="no">Task</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Add Vodka&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">time_required</span>
+    <span class="mi">4</span><span class="o">.</span><span class="mi">0</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">MakeWineTask</span> <span class="o">&lt;</span> <span class="no">Task</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Make Wine&quot;</span><span class="p">)</span>
+    <span class="n">add_sub_task</span><span class="p">(</span><span class="no">AddCocaTask</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+    <span class="n">add_sub_task</span><span class="p">(</span><span class="no">AddVodkaTask</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+    <span class="n">add_sub_task</span><span class="p">(</span><span class="no">MixTask</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">MakeDinnerTask</span> <span class="o">&lt;</span> <span class="no">Task</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Make Dinner&quot;</span><span class="p">)</span>
+    <span class="n">add_sub_task</span><span class="p">(</span><span class="no">MakeBatterCakeTask</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+    <span class="n">add_sub_task</span><span class="p">(</span><span class="no">MakeWineTask</span><span class="o">.</span><span class="n">new</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">describe</span> <span class="s2">&quot;Task&quot;</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s2">&quot;should work&quot;</span> <span class="k">do</span>    
+    <span class="n">task</span> <span class="o">=</span> <span class="no">MakeDinnerTask</span><span class="o">.</span><span class="n">new</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">time_required</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">15</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">list_sub_tasks</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><br></p>
+
+<h1>算法2</h1>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Task</span>
+  <span class="kp">attr_accessor</span> <span class="ss">:sub_tasks</span>
+  <span class="kp">attr_reader</span> <span class="ss">:require_time</span><span class="p">,</span> <span class="ss">:name</span>
+  
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="o">=</span> <span class="s2">&quot;Task&quot;</span><span class="p">,</span> <span class="n">self_require_time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="vi">@self_require_time</span> <span class="o">=</span> <span class="n">self_require_time</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+    <span class="vi">@sub_tasks</span> <span class="o">=</span> <span class="o">[]</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">add_sub_task</span><span class="p">(</span><span class="n">sub_task</span><span class="p">)</span>
+    <span class="vi">@sub_tasks</span> <span class="o">&lt;&lt;</span> <span class="n">sub_task</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">require_time</span>
+    <span class="vi">@sub_tasks</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:require_time</span><span class="p">)</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="vi">@self_require_time</span><span class="p">){</span><span class="o">|</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">|</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">}</span>
+  <span class="k">end</span>
+  
+  <span class="k">def</span> <span class="nf">list_sub_tasks</span>
+    <span class="vi">@sub_tasks</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">sub_task</span><span class="o">|</span>
+      <span class="nb">p</span> <span class="n">sub_task</span><span class="o">.</span><span class="n">name</span>
+      <span class="k">if</span> <span class="n">sub_task</span><span class="o">.</span><span class="n">sub_tasks</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">sub_task</span><span class="o">.</span><span class="n">list_sub_tasks</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">describe</span> <span class="s2">&quot;Task&quot;</span> <span class="k">do</span>
+  <span class="n">before</span> <span class="ss">:all</span> <span class="k">do</span>
+    <span class="vi">@make_dinner</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Make Dinner&quot;</span><span class="p">)</span>
+    <span class="n">make_wine</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Make Wine&quot;</span><span class="p">)</span>
+    <span class="n">make_batter_cake</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Make BatterCake&quot;</span><span class="p">)</span>
+
+    <span class="n">make_batter</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Make Batter&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">add_dry_ingredients</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Add Dry Ingredients&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">add_liquids</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Add Liquids&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">add_coca</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Add Coca&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">add_vodka</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Add Vodka&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">mix_up</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Mix Up&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="vi">@make_dinner</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">make_wine</span><span class="p">)</span>
+    <span class="vi">@make_dinner</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">make_batter_cake</span><span class="p">)</span>
+
+    <span class="n">make_wine</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">add_coca</span><span class="p">)</span>
+    <span class="n">make_wine</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">add_vodka</span><span class="p">)</span>
+    <span class="n">make_wine</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">mix_up</span><span class="p">)</span>
+
+    <span class="n">make_batter_cake</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">make_batter</span><span class="p">)</span>
+    <span class="n">make_batter_cake</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">add_dry_ingredients</span><span class="p">)</span>
+    <span class="n">make_batter_cake</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">add_liquids</span><span class="p">)</span>
+    <span class="n">make_batter_cake</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">mix_up</span><span class="p">)</span>
+    
+  <span class="k">end</span>
+  
+  <span class="n">it</span> <span class="s2">&quot;should work&quot;</span> <span class="k">do</span>    
+    <span class="vi">@make_dinner</span><span class="o">.</span><span class="n">list_sub_tasks</span>
+    <span class="vi">@make_dinner</span><span class="o">.</span><span class="n">require_time</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">15</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><br></p>
+
+<hr>
+
+<p><br></p>
+
+<h1>实例2</h1>
+
+<h1>部门和子部门的预算管理：部门有自己的预算，子部门也有自己的预算；部门可以包括子部门，子部门也可以包含子部门；计算部门的整体预算。</h1>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Department</span>
+ <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">self_budget</span><span class="p">)</span>
+   <span class="vi">@sub_departments</span> <span class="o">=</span> <span class="o">[]</span>
+   <span class="vi">@self_budget</span> <span class="o">=</span> <span class="n">self_budget</span>
+ <span class="k">end</span>
+ 
+ <span class="k">def</span> <span class="nf">add_sub_department</span><span class="p">(</span><span class="n">sub_department</span><span class="p">)</span>
+   <span class="vi">@sub_departments</span> <span class="o">&lt;&lt;</span> <span class="n">sub_department</span>
+ <span class="k">end</span>
+ 
+ <span class="k">def</span> <span class="nf">remove_sub_department</span><span class="p">(</span><span class="n">sub_department</span><span class="p">)</span>
+   <span class="vi">@sub_departments</span><span class="o">.</span><span class="n">delete</span> <span class="n">sub_department</span>
+ <span class="k">end</span>
+   
+ <span class="k">def</span> <span class="nf">budget</span>
+   <span class="vi">@sub_departments</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:budget</span><span class="p">)</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="vi">@self_budget</span><span class="p">)</span>
+     <span class="p">{</span><span class="o">|</span><span class="n">self_budget</span><span class="p">,</span> <span class="n">budget</span><span class="o">|</span> <span class="n">self_budget</span><span class="o">+</span><span class="n">budget</span> <span class="p">}</span>
+ <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">describe</span> <span class="s2">&quot;Department&quot;</span> <span class="k">do</span>
+  <span class="n">before</span> <span class="ss">:all</span> <span class="k">do</span>
+    <span class="vi">@grandsoft</span> <span class="o">=</span> <span class="no">Department</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="no">Department</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+    <span class="n">ccd</span> <span class="o">=</span> <span class="no">Department</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">ced</span> <span class="o">=</span> <span class="no">Department</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+    <span class="vi">@grandsoft</span><span class="o">.</span><span class="n">add_sub_department</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+    <span class="n">cmd</span><span class="o">.</span><span class="n">add_sub_department</span><span class="p">(</span><span class="n">ccd</span><span class="p">)</span>
+    <span class="n">cmd</span><span class="o">.</span><span class="n">add_sub_department</span><span class="p">(</span><span class="n">ced</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="n">it</span> <span class="s2">&quot;should work&quot;</span> <span class="k">do</span>    
+    <span class="vi">@grandsoft</span><span class="o">.</span><span class="n">budget</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">6300</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><br></p>
+
+<hr>
+
+<p><br></p>
+
+<h1>总结</h1>
+
+<p>组合模式解耦了客户程序与复杂元素内部结构，从而使客户程序可以向处理简单元素一样来处理复杂元素。
+如果你想要创建层次结构，并可以在其中以相同的方式对待所有元素，那么组合模式就是最理想的选择。</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Gary zhang<br />
+                gary.zzhang@gmail.com
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/zhangzhe">github.com/zhangzhe</a><br />
+                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a>
+              </p>
+            </div>
+          </div>
+        </div>
+    <a href="http://github.com/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+    </body>
+</html>

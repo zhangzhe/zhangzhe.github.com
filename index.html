@@ -1,0 +1,18 @@
+---
+layout: default
+title: Keep simple & live Strong
+---
+
+<div id="home">
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+<br>
+<br>
+<img src="/images/portrait.jpg" alt="me" style="float:right;margin:0 5px 0 0;" />
+<p>My name is Gary Zhang(zhangzhe).</p>
+<p>I am a programmer living in Beijing, <br>who love beautiful code and try his best writing them,<br>
+who is also crazy about exercise including Triathlons, Ironman and Basketball.</p>
