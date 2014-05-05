@@ -1,11 +1,9 @@
 ---
 layout: post
 title: "设计模式之'组合模式'"
-description: ""
-category: DesignPattern
-tags: [设计模式, Ruby]
+categories: 设计模式学习
 ---
- 
+
 
 #模式描述
 
@@ -39,22 +37,22 @@ tags: [设计模式, Ruby]
 {% highlight ruby %}
 class Task
   attr_reader :name, :sub_tasks
-  
+
   def initialize(name)
     @name = name
     @sub_tasks = []
   end
-  
+
   def add_sub_task(task)
     @sub_tasks << task
   end
-  
+
   def time_required
     time = 0.0
     @sub_tasks.each { |t| time += t.time_required }
     return time
   end
-  
+
   def list_sub_tasks
     @sub_tasks.each do |sub_task|
       p sub_task.name
@@ -69,7 +67,7 @@ class AddDryIngredientsTask < Task
   def initialize
     super("Add Dry Ingredients")
   end
-  
+
   def time_required
     1.0
   end
@@ -79,7 +77,7 @@ class AddLiquidsTask < Task
   def initialize
     super("Add Liquids")
   end
-  
+
   def time_required
     1.0
   end
@@ -89,7 +87,7 @@ class MakeBatterTask < Task
   def initialize
     super("Make Batter")
   end
-  
+
   def time_required
     1.0
   end
@@ -99,7 +97,7 @@ class MixTask < Task
   def initialize
     super("Mix up")
   end
-  
+
   def time_required
     3.0
   end
@@ -119,7 +117,7 @@ class AddCocaTask < Task
   def initialize
     super("Add Coca")
   end
-  
+
   def time_required
     2.0
   end
@@ -129,7 +127,7 @@ class AddVodkaTask < Task
   def initialize
     super("Add Vodka")
   end
-  
+
   def time_required
     4.0
   end
@@ -153,7 +151,7 @@ class MakeDinnerTask < Task
 end
 
 describe "Task" do
-  it "should work" do    
+  it "should work" do
     task = MakeDinnerTask.new
     task.time_required.should == 15
     task.list_sub_tasks
@@ -171,21 +169,21 @@ end
 class Task
   attr_accessor :sub_tasks
   attr_reader :require_time, :name
-  
+
   def initialize(name= "Task", self_require_time=0)
     @self_require_time = self_require_time
     @name = name
     @sub_tasks = []
   end
-  
+
   def add_sub_task(sub_task)
     @sub_tasks << sub_task
   end
-  
+
   def require_time
     @sub_tasks.map(&:require_time).inject(@self_require_time){|i, j| i+j}
   end
-  
+
   def list_sub_tasks
     @sub_tasks.each do |sub_task|
       p sub_task.name
@@ -222,10 +220,10 @@ describe "Task" do
     make_batter_cake.add_sub_task(add_dry_ingredients)
     make_batter_cake.add_sub_task(add_liquids)
     make_batter_cake.add_sub_task(mix_up)
-    
+
   end
-  
-  it "should work" do    
+
+  it "should work" do
     @make_dinner.list_sub_tasks
     @make_dinner.require_time.should == 15
   end
@@ -248,15 +246,15 @@ class Department
    @sub_departments = []
    @self_budget = self_budget
  end
- 
+
  def add_sub_department(sub_department)
    @sub_departments << sub_department
  end
- 
+
  def remove_sub_department(sub_department)
    @sub_departments.delete sub_department
  end
-   
+
  def budget
    @sub_departments.map(&:budget).inject(@self_budget)
 	 {|self_budget, budget| self_budget+budget }
@@ -273,8 +271,8 @@ describe "Department" do
     cmd.add_sub_department(ccd)
     cmd.add_sub_department(ced)
   end
-  
-  it "should work" do    
+
+  it "should work" do
     @grandsoft.budget.should == 6300
   end
 end

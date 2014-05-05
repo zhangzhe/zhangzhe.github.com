@@ -62,22 +62,22 @@
 
 <div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Task</span>
   <span class="kp">attr_reader</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:sub_tasks</span>
-  
+
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
     <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
     <span class="vi">@sub_tasks</span> <span class="o">=</span> <span class="o">[]</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">add_sub_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
     <span class="vi">@sub_tasks</span> <span class="o">&lt;&lt;</span> <span class="n">task</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">time_required</span>
     <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span>
     <span class="vi">@sub_tasks</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="n">time</span> <span class="o">+=</span> <span class="n">t</span><span class="o">.</span><span class="n">time_required</span> <span class="p">}</span>
     <span class="k">return</span> <span class="n">time</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">list_sub_tasks</span>
     <span class="vi">@sub_tasks</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">sub_task</span><span class="o">|</span>
       <span class="nb">p</span> <span class="n">sub_task</span><span class="o">.</span><span class="n">name</span>
@@ -92,7 +92,7 @@
   <span class="k">def</span> <span class="nf">initialize</span>
     <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Add Dry Ingredients&quot;</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">time_required</span>
     <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
   <span class="k">end</span>
@@ -102,7 +102,7 @@
   <span class="k">def</span> <span class="nf">initialize</span>
     <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Add Liquids&quot;</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">time_required</span>
     <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
   <span class="k">end</span>
@@ -112,7 +112,7 @@
   <span class="k">def</span> <span class="nf">initialize</span>
     <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Make Batter&quot;</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">time_required</span>
     <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
   <span class="k">end</span>
@@ -122,7 +122,7 @@
   <span class="k">def</span> <span class="nf">initialize</span>
     <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Mix up&quot;</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">time_required</span>
     <span class="mi">3</span><span class="o">.</span><span class="mi">0</span>
   <span class="k">end</span>
@@ -142,7 +142,7 @@
   <span class="k">def</span> <span class="nf">initialize</span>
     <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Add Coca&quot;</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">time_required</span>
     <span class="mi">2</span><span class="o">.</span><span class="mi">0</span>
   <span class="k">end</span>
@@ -152,7 +152,7 @@
   <span class="k">def</span> <span class="nf">initialize</span>
     <span class="k">super</span><span class="p">(</span><span class="s2">&quot;Add Vodka&quot;</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">time_required</span>
     <span class="mi">4</span><span class="o">.</span><span class="mi">0</span>
   <span class="k">end</span>
@@ -176,7 +176,7 @@
 <span class="k">end</span>
 
 <span class="n">describe</span> <span class="s2">&quot;Task&quot;</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="s2">&quot;should work&quot;</span> <span class="k">do</span>    
+  <span class="n">it</span> <span class="s2">&quot;should work&quot;</span> <span class="k">do</span>
     <span class="n">task</span> <span class="o">=</span> <span class="no">MakeDinnerTask</span><span class="o">.</span><span class="n">new</span>
     <span class="n">task</span><span class="o">.</span><span class="n">time_required</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">15</span>
     <span class="n">task</span><span class="o">.</span><span class="n">list_sub_tasks</span>
@@ -191,21 +191,21 @@
 <div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Task</span>
   <span class="kp">attr_accessor</span> <span class="ss">:sub_tasks</span>
   <span class="kp">attr_reader</span> <span class="ss">:require_time</span><span class="p">,</span> <span class="ss">:name</span>
-  
+
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="o">=</span> <span class="s2">&quot;Task&quot;</span><span class="p">,</span> <span class="n">self_require_time</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="vi">@self_require_time</span> <span class="o">=</span> <span class="n">self_require_time</span>
     <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
     <span class="vi">@sub_tasks</span> <span class="o">=</span> <span class="o">[]</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">add_sub_task</span><span class="p">(</span><span class="n">sub_task</span><span class="p">)</span>
     <span class="vi">@sub_tasks</span> <span class="o">&lt;&lt;</span> <span class="n">sub_task</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">require_time</span>
     <span class="vi">@sub_tasks</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:require_time</span><span class="p">)</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="vi">@self_require_time</span><span class="p">){</span><span class="o">|</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">|</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">}</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">list_sub_tasks</span>
     <span class="vi">@sub_tasks</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">sub_task</span><span class="o">|</span>
       <span class="nb">p</span> <span class="n">sub_task</span><span class="o">.</span><span class="n">name</span>
@@ -242,10 +242,10 @@
     <span class="n">make_batter_cake</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">add_dry_ingredients</span><span class="p">)</span>
     <span class="n">make_batter_cake</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">add_liquids</span><span class="p">)</span>
     <span class="n">make_batter_cake</span><span class="o">.</span><span class="n">add_sub_task</span><span class="p">(</span><span class="n">mix_up</span><span class="p">)</span>
-    
+
   <span class="k">end</span>
-  
-  <span class="n">it</span> <span class="s2">&quot;should work&quot;</span> <span class="k">do</span>    
+
+  <span class="n">it</span> <span class="s2">&quot;should work&quot;</span> <span class="k">do</span>
     <span class="vi">@make_dinner</span><span class="o">.</span><span class="n">list_sub_tasks</span>
     <span class="vi">@make_dinner</span><span class="o">.</span><span class="n">require_time</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">15</span>
   <span class="k">end</span>
@@ -267,15 +267,15 @@
    <span class="vi">@sub_departments</span> <span class="o">=</span> <span class="o">[]</span>
    <span class="vi">@self_budget</span> <span class="o">=</span> <span class="n">self_budget</span>
  <span class="k">end</span>
- 
+
  <span class="k">def</span> <span class="nf">add_sub_department</span><span class="p">(</span><span class="n">sub_department</span><span class="p">)</span>
    <span class="vi">@sub_departments</span> <span class="o">&lt;&lt;</span> <span class="n">sub_department</span>
  <span class="k">end</span>
- 
+
  <span class="k">def</span> <span class="nf">remove_sub_department</span><span class="p">(</span><span class="n">sub_department</span><span class="p">)</span>
    <span class="vi">@sub_departments</span><span class="o">.</span><span class="n">delete</span> <span class="n">sub_department</span>
  <span class="k">end</span>
-   
+
  <span class="k">def</span> <span class="nf">budget</span>
    <span class="vi">@sub_departments</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:budget</span><span class="p">)</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="vi">@self_budget</span><span class="p">)</span>
      <span class="p">{</span><span class="o">|</span><span class="n">self_budget</span><span class="p">,</span> <span class="n">budget</span><span class="o">|</span> <span class="n">self_budget</span><span class="o">+</span><span class="n">budget</span> <span class="p">}</span>
@@ -292,8 +292,8 @@
     <span class="n">cmd</span><span class="o">.</span><span class="n">add_sub_department</span><span class="p">(</span><span class="n">ccd</span><span class="p">)</span>
     <span class="n">cmd</span><span class="o">.</span><span class="n">add_sub_department</span><span class="p">(</span><span class="n">ced</span><span class="p">)</span>
   <span class="k">end</span>
-  
-  <span class="n">it</span> <span class="s2">&quot;should work&quot;</span> <span class="k">do</span>    
+
+  <span class="n">it</span> <span class="s2">&quot;should work&quot;</span> <span class="k">do</span>
     <span class="vi">@grandsoft</span><span class="o">.</span><span class="n">budget</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">6300</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -317,13 +317,15 @@
             <div class="contact">
               <p>
                 Gary zhang<br />
-                gary.zzhang@gmail.com
+                Coder<br />
+                Triathlete<br />
               </p>
             </div>
             <div class="contact">
               <p>
                 <a href="https://github.com/zhangzhe">Github</a><br />
-                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a>
+                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a><br />
+                <a href="http://about.me/gary.zzhang">About me</a><br />
               </p>
             </div>
           </div>

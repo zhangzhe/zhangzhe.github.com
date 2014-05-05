@@ -74,7 +74,7 @@ json格式:
     <span class="vi">@body</span> <span class="o">=</span> <span class="n">body</span>
     <span class="vi">@end</span> <span class="o">=</span> <span class="n">r_end</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">output</span>
     <span class="s2">&quot;</span><span class="si">#{</span><span class="n">output_head</span><span class="si">}#{</span><span class="n">output_body</span><span class="si">}#{</span><span class="n">output_end</span><span class="si">}</span><span class="s2">&quot;</span>
   <span class="k">end</span>
@@ -84,11 +84,11 @@ json格式:
   <span class="k">def</span> <span class="nf">output_head</span>
     <span class="s2">&quot;head: </span><span class="si">#{</span><span class="vi">@head</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">output_body</span>
     <span class="s2">&quot;body: </span><span class="si">#{</span><span class="vi">@body</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">output_end</span>
     <span class="s2">&quot;end: </span><span class="si">#{</span><span class="vi">@end</span><span class="si">}</span><span class="s2">&quot;</span>
   <span class="k">end</span>
@@ -98,11 +98,11 @@ json格式:
   <span class="k">def</span> <span class="nf">output_head</span>
     <span class="s2">&quot;&lt;head&gt;</span><span class="si">#{</span><span class="vi">@head</span><span class="si">}</span><span class="s2">&lt;/head&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">output_body</span>
     <span class="s2">&quot;&lt;body&gt;</span><span class="si">#{</span><span class="vi">@body</span><span class="si">}</span><span class="s2">&lt;/body&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">output_end</span>
     <span class="s2">&quot;&lt;end&gt;</span><span class="si">#{</span><span class="vi">@end</span><span class="si">}</span><span class="s2">&lt;/end&gt;&quot;</span>
   <span class="k">end</span>
@@ -112,11 +112,11 @@ json格式:
   <span class="k">def</span> <span class="nf">output_head</span>
     <span class="sx">%Q{\{&quot;head&quot;: &quot;</span><span class="si">#{</span><span class="vi">@head</span><span class="si">}</span><span class="sx">&quot;, }</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">output_body</span>
     <span class="sx">%Q{&quot;body&quot;: &quot;</span><span class="si">#{</span><span class="vi">@body</span><span class="si">}</span><span class="sx">&quot;, }</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">output_end</span>
     <span class="sx">%Q{&quot;end&quot;: &quot;</span><span class="si">#{</span><span class="vi">@end</span><span class="si">}</span><span class="sx">&quot;\}}</span>
   <span class="k">end</span>
@@ -124,23 +124,23 @@ json格式:
 
 <span class="n">describe</span> <span class="s2">&quot;TextReport&quot;</span> <span class="k">do</span>
   <span class="n">it</span> <span class="s2">&quot;should output well&quot;</span> <span class="k">do</span>
-    <span class="no">TextReport</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;keep it simple&quot;</span><span class="p">,</span> <span class="s2">&quot;I am strong&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+    <span class="no">TextReport</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;keep it simple&quot;</span><span class="p">,</span> <span class="s2">&quot;I am strong&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span>
 <span class="s2">&quot;head: hello</span><span class="se">\n</span><span class="s2">body: keep it simple</span><span class="se">\n</span><span class="s2">end: I am strong&quot;</span>
-  <span class="k">end</span> 
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="n">describe</span> <span class="s2">&quot;XmlReport&quot;</span> <span class="k">do</span>
   <span class="n">it</span> <span class="s2">&quot;should output well&quot;</span> <span class="k">do</span>
     <span class="no">XmlReport</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;keep it simple&quot;</span><span class="p">,</span> <span class="s2">&quot;I am strong&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span>
 <span class="s2">&quot;&lt;head&gt;hello&lt;/head&gt;</span><span class="se">\n</span><span class="s2">&lt;body&gt;keep it simple&lt;/body&gt;</span><span class="se">\n</span><span class="s2">&lt;end&gt;I am strong&lt;/end&gt;&quot;</span>
-  <span class="k">end</span> 
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="n">describe</span> <span class="s2">&quot;JsonReport&quot;</span> <span class="k">do</span>
   <span class="n">it</span> <span class="s2">&quot;should output well&quot;</span> <span class="k">do</span>
-    <span class="no">JsonReport</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;keep it simple&quot;</span><span class="p">,</span> <span class="s2">&quot;I am strong&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+    <span class="no">JsonReport</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="s2">&quot;keep it simple&quot;</span><span class="p">,</span> <span class="s2">&quot;I am strong&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span>
 <span class="s1">&#39;{&quot;head&quot;: &quot;hello&quot;, &quot;body&quot;: &quot;keep it simple&quot;, &quot;end&quot;: &quot;I am strong&quot;}&#39;</span>
-  <span class="k">end</span> 
+  <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div>
 
@@ -160,16 +160,16 @@ json格式:
     <span class="n">generate_software</span>
     <span class="n">debug</span>
   <span class="k">end</span>
- 
+
   <span class="kp">private</span>
   <span class="k">def</span> <span class="nf">generate_hardware</span>
     <span class="nb">p</span> <span class="s2">&quot;generate_hardware&quot;</span>
   <span class="k">end</span>
- 
+
   <span class="k">def</span> <span class="nf">generate_software</span>
     <span class="nb">p</span> <span class="s2">&quot;generate_software&quot;</span>
   <span class="k">end</span>
- 
+
   <span class="k">def</span> <span class="nf">debug</span>
     <span class="nb">p</span> <span class="s2">&quot;debug&quot;</span>
   <span class="k">end</span>
@@ -180,11 +180,11 @@ json格式:
   <span class="k">def</span> <span class="nf">generate_hardware</span>
     <span class="nb">p</span> <span class="s2">&quot;generate_hardware for Iphone&quot;</span>
   <span class="k">end</span>
- 
+
   <span class="k">def</span> <span class="nf">generate_software</span>
     <span class="nb">p</span> <span class="s2">&quot;generate_software for Iphone&quot;</span>
   <span class="k">end</span>
- 
+
   <span class="k">def</span> <span class="nf">debug</span>
     <span class="nb">p</span> <span class="s2">&quot;debugging Iphone&quot;</span>
   <span class="k">end</span>
@@ -197,11 +197,11 @@ json格式:
   <span class="k">def</span> <span class="nf">generate_hardware</span>
     <span class="nb">p</span> <span class="s2">&quot;generate_hardware for Ipad&quot;</span>
   <span class="k">end</span>
- 
+
   <span class="k">def</span> <span class="nf">generate_software</span>
     <span class="nb">p</span> <span class="s2">&quot;generate_software for Ipad&quot;</span>
   <span class="k">end</span>
- 
+
   <span class="k">def</span> <span class="nf">debug</span>
     <span class="nb">p</span> <span class="s2">&quot;debugging Ipad&quot;</span>
   <span class="k">end</span>
@@ -209,7 +209,6 @@ json格式:
 
 <span class="no">Ipad</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">generate</span>
 </code></pre></div>
- 
 
 <p><br></p>
 
@@ -225,13 +224,15 @@ json格式:
             <div class="contact">
               <p>
                 Gary zhang<br />
-                gary.zzhang@gmail.com
+                Coder<br />
+                Triathlete<br />
               </p>
             </div>
             <div class="contact">
               <p>
                 <a href="https://github.com/zhangzhe">Github</a><br />
-                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a>
+                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a><br />
+                <a href="http://about.me/gary.zzhang">About me</a><br />
               </p>
             </div>
           </div>

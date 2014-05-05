@@ -1,11 +1,9 @@
 ---
 layout: post
 title: "设计模式之'模版方法'"
-description: ""
-category: DesignPattern
-tags: [设计模式, Ruby]
+categories: 设计模式学习
 ---
- 
+
 
 #模式描述
 `模版方法` 是一种行为型模式。
@@ -28,7 +26,7 @@ tags: [设计模式, Ruby]
     head: "hello"
     body: "keep it simple"
     end: "I am strong"
-    
+
     xml格式:
     <head>
       hello
@@ -39,12 +37,12 @@ tags: [设计模式, Ruby]
     <end>
       I am strong
     </end>
-    
+
     yaml格式:
     head: hello
     body: keep it simple
     end: I am strong
-    
+
     json格式:
     {"head": "hello", "body": "keep it simple", "end": "I am strong"}
 
@@ -59,7 +57,7 @@ class Report
     @body = body
     @end = r_end
   end
-  
+
   def output
     "#{output_head}#{output_body}#{output_end}"
   end
@@ -69,11 +67,11 @@ class TextReport < Report
   def output_head
     "head: #{@head}\n"
   end
-  
+
   def output_body
     "body: #{@body}\n"
   end
-  
+
   def output_end
     "end: #{@end}"
   end
@@ -83,11 +81,11 @@ class XmlReport < Report
   def output_head
     "<head>#{@head}</head>\n"
   end
-  
+
   def output_body
     "<body>#{@body}</body>\n"
   end
-  
+
   def output_end
     "<end>#{@end}</end>"
   end
@@ -97,11 +95,11 @@ class JsonReport < Report
   def output_head
     %Q{\{"head": "#{@head}", }
   end
-  
+
   def output_body
     %Q{"body": "#{@body}", }
   end
-  
+
   def output_end
     %Q{"end": "#{@end}"\}}
   end
@@ -109,23 +107,23 @@ end
 
 describe "TextReport" do
   it "should output well" do
-    TextReport.new("hello", "keep it simple", "I am strong").output.should == 
+    TextReport.new("hello", "keep it simple", "I am strong").output.should ==
 "head: hello\nbody: keep it simple\nend: I am strong"
-  end 
+  end
 end
 
 describe "XmlReport" do
   it "should output well" do
     XmlReport.new("hello", "keep it simple", "I am strong").output.should ==
 "<head>hello</head>\n<body>keep it simple</body>\n<end>I am strong</end>"
-  end 
+  end
 end
 
 describe "JsonReport" do
   it "should output well" do
-    JsonReport.new("hello", "keep it simple", "I am strong").output.should == 
+    JsonReport.new("hello", "keep it simple", "I am strong").output.should ==
 '{"head": "hello", "body": "keep it simple", "end": "I am strong"}'
-  end 
+  end
 end
 
 {% endhighlight %}
@@ -147,16 +145,16 @@ class ElectronicProduct
     generate_software
     debug
   end
- 
+
   private
   def generate_hardware
     p "generate_hardware"
   end
- 
+
   def generate_software
     p "generate_software"
   end
- 
+
   def debug
     p "debug"
   end
@@ -167,11 +165,11 @@ class Iphone < ElectronicProduct
   def generate_hardware
     p "generate_hardware for Iphone"
   end
- 
+
   def generate_software
     p "generate_software for Iphone"
   end
- 
+
   def debug
     p "debugging Iphone"
   end
@@ -184,11 +182,11 @@ class Ipad < ElectronicProduct
   def generate_hardware
     p "generate_hardware for Ipad"
   end
- 
+
   def generate_software
     p "generate_software for Ipad"
   end
- 
+
   def debug
     p "debugging Ipad"
   end
@@ -196,7 +194,7 @@ end
 
 Ipad.new.generate
 
-{% endhighlight %} 
+{% endhighlight %}
 
 <br>
 

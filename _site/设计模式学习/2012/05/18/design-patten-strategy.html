@@ -50,11 +50,11 @@
     <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
     <span class="vi">@pay_way</span> <span class="o">=</span> <span class="n">pay_way</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">name</span>
     <span class="vi">@name</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">pay</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
     <span class="vi">@pay_way</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
   <span class="k">end</span>
@@ -80,17 +80,17 @@
 
 <span class="n">describe</span> <span class="s2">&quot;Customer&quot;</span> <span class="k">do</span>
   <span class="n">it</span> <span class="s2">&quot;should pay with check&quot;</span> <span class="k">do</span>
-    <span class="no">Customer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;gary&quot;</span><span class="p">,</span> <span class="no">Check</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+    <span class="no">Customer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;gary&quot;</span><span class="p">,</span> <span class="no">Check</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span>
 <span class="s2">&quot;gary writes a check of 500!&quot;</span>
   <span class="k">end</span>
-  
+
   <span class="n">it</span> <span class="s2">&quot;should pay with cash&quot;</span> <span class="k">do</span>
-    <span class="no">Customer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;gary&quot;</span><span class="p">,</span> <span class="no">Cash</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+    <span class="no">Customer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;gary&quot;</span><span class="p">,</span> <span class="no">Cash</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span>
 <span class="s2">&quot;gary pays 500 cash!&quot;</span>
   <span class="k">end</span>
-  
+
   <span class="n">it</span> <span class="s2">&quot;should pay with credit card&quot;</span> <span class="k">do</span>
-    <span class="no">Customer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;gary&quot;</span><span class="p">,</span> <span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> 
+    <span class="no">Customer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;gary&quot;</span><span class="p">,</span> <span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><span class="o">.</span><span class="n">pay</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span>
 <span class="s2">&quot;gary pays 500 with Credit Card!&quot;</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -120,7 +120,7 @@
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
     <span class="vi">@product</span> <span class="o">=</span> <span class="n">product</span><span class="o">.</span><span class="n">new</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">generate</span>
     <span class="vi">@product</span><span class="o">.</span><span class="n">generate</span>
   <span class="k">end</span>
@@ -143,13 +143,15 @@
             <div class="contact">
               <p>
                 Gary zhang<br />
-                gary.zzhang@gmail.com
+                Coder<br />
+                Triathlete<br />
               </p>
             </div>
             <div class="contact">
               <p>
                 <a href="https://github.com/zhangzhe">Github</a><br />
-                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a>
+                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a><br />
+                <a href="http://about.me/gary.zzhang">About me</a><br />
               </p>
             </div>
           </div>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Textile WYSIWYG editor</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Keep simple & live Strong</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Textile WYSIWYG editor</h2>
+<p class="meta">01 Mar 2010</p>
+
+<div class="post">
+<p>Working on Textile &amp; WYSIWYG editor these days.
+What I need is a WYSIWYG editor for editing content with styles like bold, color, list, etc.. And I do not want to save HTML directly into database, so Textile seems a good choose.</p>
+
+<p>Check <a href="https://github.com/zhangzhe/g_editor" title="here">here</a> for more details.</p>
+
+<p>I would like to share some javascript regular expression code.
+After writing these code, I felt it is so lucky to working with Ruby.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">textilize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">html</span><span class="p">,</span> <span class="nx">escape</span><span class="p">){</span>
+        <span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;br ?\/?&gt;/gi</span><span class="p">,</span> <span class="s2">&quot;\n&quot;</span><span class="p">);</span>
+        <span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;(?:b|strong)&gt;((.|[\r\n])*?)&lt;\/(?:b|strong)&gt;/gi</span><span class="p">,</span> <span class="s1">&#39;*$1*&#39;</span><span class="p">);</span>
+        <span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;(?:i|em)&gt;((.|[\r\n])*?)&lt;\/(?:i|em)&gt;/gi</span><span class="p">,</span> <span class="s1">&#39;_$1_&#39;</span><span class="p">);</span>
+        <span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;(?:u|ins)&gt;((.|[\r\n])*?)&lt;\/(?:u|ins)&gt;/gi</span><span class="p">,</span> <span class="s1">&#39;+$1+&#39;</span><span class="p">);</span>
+        <span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;a href=&quot;(.*?)&quot;&gt;((.|[\r\n])*?)&lt;\/a&gt;/gi</span><span class="p">,</span> <span class="s1">&#39;&quot;$2&quot;:$1&#39;</span><span class="p">);</span>
+        <span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;font color=&quot;#0000ff&quot;.*?&gt;((.|[\r\n])*?)&lt;\/font&gt;/gi</span><span class="p">,</span>
+          <span class="s1">&#39;%{color:blue}$1%&#39;</span><span class="p">);</span>
+        <span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;font color=&quot;#FF0000&quot;.*?&gt;((.|[\r\n])*?)&lt;\/font&gt;/gi</span><span class="p">,</span>
+          <span class="s1">&#39;%{color:red}$1%&#39;</span><span class="p">);</span>
+        <span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;font color=&quot;#088A4B&quot;.*?&gt;((.|[\r\n])*?)&lt;\/font&gt;/gi</span><span class="p">,</span>
+          <span class="s1">&#39;%{color:green}$1%&#39;</span><span class="p">);</span>
+        <span class="c1">//list</span>
+        <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="sr">/([\s\S]*)&lt;ul&gt;([\s\S]*?)&lt;\/ul&gt;([\s\S]*)/</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">html</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="nx">p</span> <span class="o">=</span> <span class="nb">RegExp</span><span class="p">.</span><span class="nx">$1</span><span class="p">;</span>
+                <span class="nx">c</span> <span class="o">=</span> <span class="nb">RegExp</span><span class="p">.</span><span class="nx">$2</span><span class="p">;</span>
+                <span class="nx">e</span> <span class="o">=</span> <span class="nb">RegExp</span><span class="p">.</span><span class="nx">$3</span><span class="p">;</span>
+                <span class="nx">c</span> <span class="o">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">gsub</span><span class="p">(</span><span class="err">/&lt;li&gt;([\s\S]*?)&lt;/li&gt;/, &quot;* #{1}\n&quot;);</span>
+                <span class="nx">html</span> <span class="o">=</span> <span class="nx">p</span> <span class="o">+</span> <span class="s2">&quot;\n&quot;</span> <span class="o">+</span> <span class="nx">c</span> <span class="o">+</span> <span class="nx">e</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^[\r\n]+|[\r\n]+$/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">html</span><span class="p">;</span>
+    <span class="p">},</span>
+
+<span class="nx">htmlize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">textile</span><span class="p">,</span> <span class="nx">escape</span><span class="p">){</span>
+        <span class="c1">//escape</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="err">/\/gi, &quot;0142540974231612&quot;);</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\\_/gi</span><span class="p">,</span> <span class="s2">&quot;0750023893692338&quot;</span><span class="p">);</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\\*/gi</span><span class="p">,</span> <span class="s2">&quot;0643004879835027&quot;</span><span class="p">);</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\n/gi</span><span class="p">,</span> <span class="s1">&#39;&lt;br/&gt;&#39;</span><span class="p">);</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\*(.+?)\*/gi</span><span class="p">,</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">internetExplorer</span> <span class="o">?</span>
+        <span class="s1">&#39;&lt;strong&gt;$1&lt;/strong&gt;&#39;</span> <span class="o">:</span> <span class="s1">&#39;&lt;b&gt;$1&lt;/b&gt;&#39;</span><span class="p">));</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/_(.+?)_/gi</span><span class="p">,</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">internetExplorer</span> <span class="o">?</span>
+        <span class="s1">&#39;&lt;em&gt;$1&lt;/em&gt;&#39;</span> <span class="o">:</span> <span class="s1">&#39;&lt;i&gt;$1&lt;/i&gt;&#39;</span><span class="p">));</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/(.+?)/gi</span><span class="p">,</span> <span class="s1">&#39;&lt;u&gt;$1&lt;/u&gt;&#39;</span><span class="p">);</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&quot;(.+?)&quot;:([^\s\n&lt;]+)/gi</span><span class="p">,</span> <span class="s1">&#39;&lt;a href=&quot;$2&quot;&gt;$1&lt;/a&gt;&#39;</span><span class="p">);</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/%{color:blue}(.+?)%/gi</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;font color=&quot;#0000ff&quot;&gt;$1&lt;\/font&gt;&#39;</span><span class="p">);</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/%{color:red}(.+?)%/gi</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;font color=&quot;#FF0000&quot;&gt;$1&lt;\/font&gt;&#39;</span><span class="p">);</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/%{color:green}(.+?)%/gi</span><span class="p">,</span>
+        <span class="s1">&#39;&lt;font color=&quot;#088A4B&quot;&gt;$1&lt;\/font&gt;&#39;</span><span class="p">);</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="o">+</span><span class="s1">&#39;&lt;br\/&gt;&#39;</span><span class="p">;</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/&lt;p&gt;[\s\n]*&lt;\/p&gt;/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+        <span class="c1">//unescape</span>
+        <span class="nx">textile</span> <span class="o">=</span> <span class="nx">textile</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/0142540974231612/</span><span class="p">,</span> <span class="s2">&quot;\&quot;);</span>
+<span class="s2">        textile = textile.replace(/0750023893692338/, &quot;</span><span class="err">\\</span><span class="nx">_</span><span class="s2">&quot;);</span>
+<span class="s2">        textile = textile.replace(/0643004879835027/, &quot;</span><span class="err">\\</span><span class="o">*</span><span class="s2">&quot;);</span>
+<span class="s2">        //list</span>
+<span class="s2">        var r = /(&lt;br\/&gt;\* .*?&lt;br(\/)*&gt;)(?!\* )/;</span>
+<span class="s2">        while (r.test(&quot;</span><span class="o">&lt;</span><span class="nx">br</span><span class="o">/&gt;</span><span class="s2">&quot; + textile))</span>
+<span class="s2">            {</span>
+<span class="s2">                l = RegExp.leftContext;</span>
+<span class="s2">                m = RegExp.lastMatch;</span>
+<span class="s2">                e = RegExp.rightContext;</span>
+<span class="s2">                m = m.gsub(/\* (.*?)&lt;br(\/)*&gt;/, &quot;</span><span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="err">#</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li&gt;&quot;).gsub(&quot;&lt;br/</span><span class="o">&gt;</span><span class="s2">&quot;, &quot;&quot;);</span>
+<span class="s2">                textile = l + &quot;</span><span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span><span class="s2">&quot; + m + &quot;</span><span class="o">&lt;</span><span class="err">/ul&gt;&quot; + e;</span>
+            <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">textile</span><span class="p">;</span>
+    <span class="p">},</span>
+</code></pre></div>
+
+<p><strong>Importent</strong>:
+&quot;JavaScript and VBScript do not have an option to make the dot match line break characters. In those languages, you can use a character class such as [\s\S] to match any character.&quot;
+see <a href="http://www.regular-expressions.info/dlot.htm" title="here">here</a>  for more details.</p>
+
+<p>So when in Ruby we use:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="sr">/(.*)&lt;ul&gt;(.*?)&lt;\/ul&gt;(.*)/</span>
+</code></pre></div>
+
+<p>In Javascript we need code like:</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="sr">/([\s\S]*)&lt;ul&gt;([\s\S]*?)&lt;\/ul&gt;([\s\S]*)/</span>
+</code></pre></div>
+
+<p>What a pain ...</p>
+
+<hr>
+
+<p>Afterward<br>
+later on, I found a more light weight textile editor from Redmine. After simple modification, I got <a href="https://github.com/zhangzhe/geditor" title="this">this</a> . I would like to recommend this one unless editing very complex format.</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Gary zhang<br />
+                Coder<br />
+                Triathlete<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/zhangzhe">Github</a><br />
+                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a><br />
+                <a href="http://about.me/gary.zzhang">About me</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+    <a href="http://github.com/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+    </body>
+</html>

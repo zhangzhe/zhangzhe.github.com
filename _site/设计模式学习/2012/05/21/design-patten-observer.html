@@ -27,9 +27,9 @@
 <div class="post">
 <h1>模式描述</h1>
 
-<p><code>观察者模式</code> 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。） </p>
+<p><code>观察者模式</code> 是一种行为型模式。 （行为型模式描述类或对象如何交互及如何分配职责，它主要涉及通过合理的处理方法，达到使系统升级性和维护性提高的目的。）</p>
 
-<p>基本描述： 观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，让他们能够自动更新自己。 </p>
+<p>基本描述： 观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，让他们能够自动更新自己。</p>
 
 <p>详细描述：观察者模式有时又被称为发布-订阅（Publish/Subscribe）模式、模型-视图（Model/View）模式、源-收听者（Source/Listener）模式或从属者（Dependents）模式。 在这种模式中，一个目标对象管理所有相依于它的观察者对象，在它自身状态改变时主动通知其观察者对象。观察者模式通常被用来作事件处理系统。</p>
 
@@ -56,24 +56,24 @@
 <div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Article</span>
   <span class="kp">attr_accessor</span> <span class="ss">:title</span>
   <span class="vi">@subscribers</span> <span class="o">=</span> <span class="o">[]</span>
-  
+
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="vi">@title</span> <span class="o">=</span> <span class="n">title</span>
     <span class="n">notify_subscribers</span>
   <span class="k">end</span>
-    
+
   <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
     <span class="kp">attr_accessor</span> <span class="ss">:subscribers</span>
-    
+
     <span class="k">def</span> <span class="nf">add_subscriber</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span>
       <span class="vi">@subscribers</span> <span class="o">&lt;&lt;</span> <span class="n">subscriber</span>
     <span class="k">end</span>
-    
+
     <span class="k">def</span> <span class="nf">remove_subscriber</span><span class="p">(</span><span class="n">subscriber</span><span class="p">)</span>
       <span class="vi">@subscribers</span><span class="o">.</span><span class="n">delete</span> <span class="n">subscriber</span>
     <span class="k">end</span>
   <span class="k">end</span>
-  
+
   <span class="kp">private</span>
   <span class="k">def</span> <span class="nf">notify_subscribers</span>
     <span class="no">Article</span><span class="o">.</span><span class="n">subscribers</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">subscriber</span><span class="o">|</span>
@@ -90,7 +90,7 @@
     <span class="no">User</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span>
     <span class="k">class</span> <span class="nc">Reader</span>
       <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">notify_new_article</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
-        <span class="nb">p</span> <span class="s2">&quot;Yeah, there is a new article has been writen, </span>
+        <span class="nb">p</span> <span class="s2">&quot;Yeah, there is a new article has been writen,</span>
 <span class="s2">               title with &#39;</span><span class="si">#{</span><span class="n">article</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
       <span class="k">end</span>
     <span class="k">end</span>
@@ -102,22 +102,22 @@
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
-    
+
   <span class="n">describe</span> <span class="s2">&quot;add_subscriber&quot;</span> <span class="k">do</span>
     <span class="n">it</span> <span class="s2">&quot;add subscriber to Article&quot;</span> <span class="k">do</span>
-      <span class="n">expect</span> <span class="p">{</span> <span class="no">Article</span><span class="o">.</span><span class="n">add_subscriber</span><span class="p">(</span><span class="no">User</span><span class="p">)</span> <span class="p">}</span><span class="o">.</span><span class="n">to</span> 
+      <span class="n">expect</span> <span class="p">{</span> <span class="no">Article</span><span class="o">.</span><span class="n">add_subscriber</span><span class="p">(</span><span class="no">User</span><span class="p">)</span> <span class="p">}</span><span class="o">.</span><span class="n">to</span>
             <span class="n">change</span><span class="p">(</span><span class="no">Article</span><span class="o">.</span><span class="n">subscribers</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span><span class="o">.</span><span class="n">by</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
       <span class="no">Article</span><span class="o">.</span><span class="n">subscribers</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="no">User</span>
     <span class="k">end</span>
   <span class="k">end</span>
-  
+
  <span class="n">describe</span> <span class="s2">&quot;remove_subscriber&quot;</span> <span class="k">do</span>
    <span class="n">it</span> <span class="s2">&quot;remove subscriber to Article&quot;</span> <span class="k">do</span>
-     <span class="n">expect</span> <span class="p">{</span> <span class="no">Article</span><span class="o">.</span><span class="n">remove_subscriber</span><span class="p">(</span><span class="no">User</span><span class="p">)</span> <span class="p">}</span><span class="o">.</span><span class="n">to</span> 
+     <span class="n">expect</span> <span class="p">{</span> <span class="no">Article</span><span class="o">.</span><span class="n">remove_subscriber</span><span class="p">(</span><span class="no">User</span><span class="p">)</span> <span class="p">}</span><span class="o">.</span><span class="n">to</span>
          <span class="n">change</span><span class="p">(</span><span class="no">Article</span><span class="o">.</span><span class="n">subscribers</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span><span class="o">.</span><span class="n">by</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
    <span class="k">end</span>
  <span class="k">end</span>
- 
+
  <span class="n">describe</span> <span class="s2">&quot;if a new blog is created, all the subscribers get the message&quot;</span> <span class="k">do</span>
    <span class="n">it</span> <span class="k">do</span>
      <span class="no">Article</span><span class="o">.</span><span class="n">add_subscriber</span><span class="p">(</span><span class="no">Reader</span><span class="p">)</span>
@@ -145,39 +145,39 @@
 
 <div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">User</span>
   <span class="kp">attr_accessor</span> <span class="ss">:followers</span><span class="p">,</span> <span class="ss">:name</span>
-  
+
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
     <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
     <span class="vi">@followers</span> <span class="o">=</span> <span class="o">[]</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">create_a_weibo</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="nb">p</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2"> created weibo titles </span><span class="si">#{</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">notify_followers</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">follow</span><span class="p">(</span><span class="n">someone</span><span class="p">)</span>
     <span class="n">someone</span><span class="o">.</span><span class="n">add_follower</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">unfollow</span><span class="p">(</span><span class="n">someone</span><span class="p">)</span>
     <span class="n">someone</span><span class="o">.</span><span class="n">remove_follower</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">add_follower</span><span class="p">(</span><span class="n">someone</span><span class="p">)</span>
     <span class="vi">@followers</span> <span class="o">&lt;&lt;</span> <span class="n">someone</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">remove_follower</span><span class="p">(</span><span class="n">someone</span><span class="p">)</span>
     <span class="vi">@followers</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">someone</span><span class="p">)</span>
   <span class="k">end</span>
-    
+
   <span class="k">def</span> <span class="nf">notify_followers</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="n">followers</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">follower</span><span class="o">|</span>
       <span class="n">follower</span><span class="o">.</span><span class="n">notify_weibo</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
-  
+
   <span class="k">def</span> <span class="nf">notify_weibo</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="nb">p</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2"> konws </span><span class="si">#{</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span>
   <span class="k">end</span>
@@ -193,13 +193,13 @@
     <span class="vi">@andy</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="vi">@gary</span><span class="p">)</span>
     <span class="vi">@seven</span><span class="o">.</span><span class="n">follow</span><span class="p">(</span><span class="vi">@gary</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="n">it</span> <span class="s2">&quot;should follow someone and unfollow someone&quot;</span> <span class="k">do</span>
     <span class="vi">@gary</span><span class="o">.</span><span class="n">followers</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="o">[</span><span class="vi">@andy</span><span class="p">,</span> <span class="vi">@seven</span><span class="o">]</span>
     <span class="vi">@andy</span><span class="o">.</span><span class="n">unfollow</span><span class="p">(</span><span class="vi">@gary</span><span class="p">)</span>
     <span class="vi">@gary</span><span class="o">.</span><span class="n">followers</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="o">[</span><span class="vi">@seven</span><span class="o">]</span>
   <span class="k">end</span>
-  
+
   <span class="n">it</span> <span class="s2">&quot;should notify followers after create a weibo&quot;</span> <span class="k">do</span>
     <span class="vi">@seven</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:notify_weibo</span><span class="p">)</span><span class="o">.</span><span class="n">once</span>
     <span class="vi">@andy</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:notify_weibo</span><span class="p">)</span><span class="o">.</span><span class="n">once</span>
@@ -221,13 +221,15 @@
             <div class="contact">
               <p>
                 Gary zhang<br />
-                gary.zzhang@gmail.com
+                Coder<br />
+                Triathlete<br />
               </p>
             </div>
             <div class="contact">
               <p>
                 <a href="https://github.com/zhangzhe">Github</a><br />
-                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a>
+                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a><br />
+                <a href="http://about.me/gary.zzhang">About me</a><br />
               </p>
             </div>
           </div>

@@ -1,11 +1,9 @@
 ---
 layout: post
 title: "设计模式之'策略模式'"
-description: ""
-category: DesignPattern
-tags: [设计模式, Ruby]
+categories: 设计模式学习
 ---
- 
+
 
 #模式描述
 
@@ -33,11 +31,11 @@ class Customer
     @name = name
     @pay_way = pay_way
   end
-  
+
   def name
     @name
   end
-  
+
   def pay(number)
     @pay_way.pay(self, number)
   end
@@ -63,17 +61,17 @@ end
 
 describe "Customer" do
   it "should pay with check" do
-    Customer.new("gary", Check.new).pay(500).should == 
+    Customer.new("gary", Check.new).pay(500).should ==
 "gary writes a check of 500!"
   end
-  
+
   it "should pay with cash" do
-    Customer.new("gary", Cash.new).pay(500).should == 
+    Customer.new("gary", Cash.new).pay(500).should ==
 "gary pays 500 cash!"
   end
-  
+
   it "should pay with credit card" do
-    Customer.new("gary", CreditCard.new).pay(500).should == 
+    Customer.new("gary", CreditCard.new).pay(500).should ==
 "gary pays 500 with Credit Card!"
   end
 end
@@ -107,7 +105,7 @@ class ElectronicProduct
   def initialize(product)
     @product = product.new
   end
-  
+
   def generate
     @product.generate
   end
