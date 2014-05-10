@@ -1,7 +1,7 @@
 ---
 layout: post
 title: include 和 extend 的区别
-categories: 工作日志
+categories: "学习&实践&思考"
 ---
 
 请看下面的代码：

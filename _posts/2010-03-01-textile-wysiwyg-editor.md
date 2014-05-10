@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Textile WYSIWYG editor"
-categories: 开发及辅助工具
+categories: "学习&实践&思考"
 ---
 
 Working on Textile & WYSIWYG editor these days.

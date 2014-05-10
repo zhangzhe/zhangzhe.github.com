@@ -1,19 +1,19 @@
 ---
 layout: post
 title: "'find in project' for emacs"
-categories: 开发及辅助工具
+categories: "学习&实践&思考"
 ---
 
 
-Reference [Doug Alcorn's method](http://blog.lathi.net/articles/2007/11/07/navigating-your-projects-in-emacs "Doug Alcorn\'s method"). 
+Reference [Doug Alcorn's method](http://blog.lathi.net/articles/2007/11/07/navigating-your-projects-in-emacs "Doug Alcorn\'s method").
 
 #### 1. First install [exuberant ctags](http://ctags.sourceforge.net "exuberant ctags").
-                                                                
+
 
 #### 2. Then create rake task for creating tags.
 
 	{% highlight ruby %}
-	
+
 	module Tags
 	  RUBY_FILES = FileList['**/*.rb']
 	end
@@ -24,10 +24,10 @@ Reference [Doug Alcorn's method](http://blog.lathi.net/articles/2007/11/07/navig
 	  end
 	end
 	task :tags => ["tags:emacs"]
-	
+
 	{% endhighlight %}
-	
-    
+
+
 
 And run task
   `rake tags:emacs`
@@ -37,19 +37,19 @@ And run task
 #### 3. Now can use `tags-search` to search tags, and `tags-loop-continue` to loop the tags, cool:)
 
 It will be more handy using shortcut. So I config it as:
-	
-	
+
+
 	(global-set-key (kbd "C-c C-c C-s") 'tags-search)
 	(global-set-key (kbd "C-c C-c C-n") 'tags-loop-continue)
-	
+
 It works with all the *.rb files.
-	
+
 Two other very handy shortcut
-	
+
 	C-h w         where-is
 	C-h k         describe-key
-	
-  
+
+
 <br>
 <hr>
 <br>

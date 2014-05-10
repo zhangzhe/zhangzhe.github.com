@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "no need cheat sheet anymore"
-category: 开发及辅助工具
+category: "学习&实践&思考"
 ---
 
 

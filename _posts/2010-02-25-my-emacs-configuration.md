@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "my emacs configuration"
-categories: 开发及辅助工具
+categories: "学习&实践&思考"
 ---
 
 I used to use Eclipse and later Netbeans for development, 1 years ago switched to Emacs.

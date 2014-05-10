@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>关于使用脱机版的Rails API 和 guides</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Keep simple & live Strong</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>关于使用脱机版的Rails API 和 guides</h2>
+<p class="meta">27 Jun 2012</p>
+
+<div class="post">
+<p><a href="http://api.rubyonrails.org/" title="http://api.rubyonrails.org/">http://api.rubyonrails.org/</a> &amp; <a href="http://guides.rubyonrails.org/" title="http://guides.rubyonrails.org/">http://guides.rubyonrails.org/</a></p>
+
+<p>使用<code>Ruby On Rails</code>做开发对这两个网站一定不会陌生。相信不管是新手还是老鸟都能从上边找到自己需要的信息。</p>
+
+<p>当然我们可以通过访问上述网址在线查看，但是有时网速问题或无法上网还是最造成一些不变。那如果可以离线使用就太好了。</p>
+
+<p>下面介绍如何把这两个东西搞到你的本机上。</p>
+
+<h2>1. 离线 Rails Guides</h2>
+
+<p>首先新建一个rails应用，不妨就叫railsguides</p>
+
+<p><code>rails new railsguides</code></p>
+
+<p>接下来加入 RedCloth 到 Gemfile</p>
+
+<p><code>gem &#39;RedCloth&#39;</code></p>
+
+<p>运行 bundle 完成安装</p>
+
+<p>接下来运行下面的命令</p>
+
+<p><code>rake doc:guides</code></p>
+
+<p>现在去doc目录下找你的guides吧。
+<br>
+<br></p>
+
+<h2>2. 离线 Rails API</h2>
+
+<p>Rails为我们提供了生成doc的方法，但是我更喜欢这个方便查找的版本。
+直接去<a href="http://railsapi.com/" title="http://railsapi.com/">http://railsapi.com/</a>下载吧，同时附赠了Ruby API，还可以定制。
+<br>
+<br></p>
+
+<h2>结论</h2>
+
+<p>我个人喜欢把API和guides放到项目目录下，然后在浏览器为index建立书签，方便在开发同时查阅。(当然你更可以把他们搞到移动端，如<code>ipad</code>或<code>iphone</code>上。个人感觉使用<code>goodreader</code>查看guide效果很好，查API有些不方便。)</p>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Gary zhang<br />
+                Coder<br />
+                Triathlete<br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/zhangzhe">Github</a><br />
+                <a href="http://www.linkedin.com/in/garyzzhang">LinkedIn</a><br />
+                <a href="http://about.me/gary.zzhang">About me</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+    <a href="http://github.com/"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+    </body>
+</html>

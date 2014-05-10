@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 关于嗑瓜子理论
-categories: 工作日志
+categories: "学习&实践&思考"
 ---
 
 **在网上发现这个有趣的说法 “嗑瓜子理论”**

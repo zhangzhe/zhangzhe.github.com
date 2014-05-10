@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "关于使用脱机版的Rails API 和 guides"
-categories: 开发及辅助工具
+categories: "学习&实践&思考"
 ---
 
 [http://api.rubyonrails.org/](http://api.rubyonrails.org/ "http://api.rubyonrails.org/") & [http://guides.rubyonrails.org/](http://guides.rubyonrails.org/ "http://guides.rubyonrails.org/")

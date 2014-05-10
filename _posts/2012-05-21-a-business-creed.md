@@ -2,7 +2,7 @@
 layout: post
 title: "职业信条"
 description: "一位朋友翻译并推荐的。目前已成为部门工作信条。"
-categories: 工作日志
+categories: "学习&实践&思考"
 ---
 
 ## 注：一位朋友翻译并推荐的。目前已成为部门（广联达技术管理部）工作信条。
