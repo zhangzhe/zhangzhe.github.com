@@ -2,3 +2,4 @@ name: Keep simple & live Strong
 markdown: redcarpet
 pygments: true
 excerpt_separator: ""
+comments: true
