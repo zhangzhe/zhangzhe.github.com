@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "二分查找ruby实现"
+title: "二分查找的ruby实现"
 categories: 算法导论学习
 ---
 
