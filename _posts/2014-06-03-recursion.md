@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "递归算法应用的ruby实现"
+title: "递归算法的常用应用案例的ruby实现"
 categories: 算法导论学习
 ---
 
-# 乘方的递归实现：
+# 乘方的递归实现
 
 循环乘法的时间复杂度为O(n), 递归算法时间复杂度为 O(lg(n))。
 
@@ -33,9 +33,7 @@ end
 {% endhighlight %}
 
 
-
-<br><br><br>
-
+<br><br>
 
 # fibonacci的递归实现
 
@@ -86,7 +84,7 @@ class Fixnum
 end
 {% endhighlight %}
 
-<br><br><br>
+<br><br>
 
 # 二分查找
 
@@ -110,8 +108,7 @@ class Array
 end
 {% endhighlight %}
 
-<br><br><br>
-
+<br><br>
 
 # 合并排序
 
@@ -169,8 +166,30 @@ class Array
 end
 {% endhighlight %}
 
+<br><br>
 
+#快速排序
 
-
+{% highlight ruby %}
+class Array
+  def quick_sort
+    return self if self.size <= 1
+    left = []
+    right = []
+    pivots = []
+    pivot = self.sample
+    self.each do |e|
+      if e < pivot
+        left << e
+      elsif e > pivot
+        right << e
+      else
+        pivots << e
+      end
+    end
+    return (left.quick_sort + pivots + right.quick_sort)
+  end
+end
+{% endhighlight %}
 
 
